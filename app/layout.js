@@ -16,15 +16,15 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
       </head>
       <body className={inter.className}>
-        <div className="m-2">
-          <div className="navbar bg-primary rounded-xl">
-            <div className="flex-1">
+        <div className="p-2 bg-base-100 w-screen">
+          <div className="bg-primary rounded-xl lg:flex">
+            <div className="flex-cols lg:flex-1 justify-center text-center lg:text-left">
               <Link className="btn btn-ghost normal-case text-xl" href="/">
                 Rachit Khurana
               </Link>
             </div>
-            <div className="flex-none">
-              <ul className="menu menu-horizontal px-1">
+            <div className="flex lg:flex-none">
+              <ul className="menu menu-horizontal px-1 justify-center">
                 <li>
                   <a>About</a>
                 </li>
@@ -51,16 +51,18 @@ export default function RootLayout({ children }) {
           </div>
         </div>
         {children}
-        <div className="fixed mb-2 bottom-0 w-full bg-primary flex justify-center rounded-xl">
-          <div className="">
-            <ul className="flex">
-              <li className="mx-2">
-                <a>GitHub</a>
-              </li>
-              <li className="mx-2">
-                <a>LinkedIn</a>
-              </li>
-            </ul>
+        <div className="bg-base-100 fixed bottom-0 mb-3 w-full">
+          <div className="w-full bg-primary flex justify-center rounded-xl">
+            <div className="">
+              <ul className="flex">
+                <li className="mx-2">
+                  <a>GitHub</a>
+                </li>
+                <li className="mx-2">
+                  <a>LinkedIn</a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </body>
