@@ -18,6 +18,7 @@
     "postcss": "8.4.23",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-draggable": "^4.4.5",
     "react-particles": "^2.9.3",
     "tailwindcss": "3.3.2",
     "tsparticles-engine": "^2.9.3",

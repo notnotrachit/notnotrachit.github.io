@@ -3,6 +3,7 @@ import TypeIt from "typeit";
 import AOS from "aos";
 import { useEffect } from "react";
 import Image from "next/image";
+import Draggable, {DraggableCore} from 'react-draggable';
 
 export default function Home() {
   useEffect(() => {
@@ -115,45 +116,84 @@ export default function Home() {
       .pause(100)
       .type("r")
       .go();
-  }, []);
+
+
+
+    }, []);
 
   return (
-    <main className="bg-base-100">
-
+    <main className="bg-base-100 overflow-x-clip">
       <div className="flex justify-center py-5 bg-base-100" data-aos="zoom-in">
-        <div className="mockup-code text-xl w-screen mx-2 lg:w-1/2 border-primary/50 border">
-          <pre data-prefix="$" className="text-success"><code>python about_me.py</code></pre>
-          <div className="flex justify-center py-5" data-aos="zoom-in">
-        <div className="avatar hover:scale-110 transition-all ease-in-out">
-          <div className="w-24 lg:w-48 ring ring-primary ring-offset-base-100 ring-offset-2">
-            <Image
-              src="/profile.jpg"
-              alt="Rachit Khurana"
-              width={200}
-              height={200}
-              className=""
-            />
+        <Draggable handle="handle">
+          <div
+            className="absolute bg-neutral pb-5 text-neutral-content rounded-box text-xl w-screen mx-2 lg:w-1/2 border-primary/50 border"
+            id="window"
+          >
+            <handle>
+              <div className="w-full bg-primary/50 rounded-t-box cursor-move flex justify-end px-2 py-1" id="windowheader">
+              <div className="avatar placeholder mx-1">
+                <div className="bg-neutral-focus text-neutral-content rounded-full w-3">
+                  <span className="text-xs"></span>
+                </div>
+              </div>
+              <div className="avatar placeholder mx-1">
+                <div className="bg-warning text-neutral-content rounded-full w-3">
+                  <span className="text-xs"></span>
+                </div>
+              </div>
+              <div className="avatar placeholder mx-1">
+                <div className="bg-error text-neutral-content rounded-full w-3">
+                  <span className="text-xs"></span>
+                </div>
+              </div>
+              </div>
+            </handle>
+            <pre data-prefix="$" className="text-success ml-3">
+              <code>$  python about_me.py</code>
+            </pre>
+            <div className="flex justify-center py-5" data-aos="zoom-in">
+              <div className="avatar hover:scale-110 transition-all ease-in-out">
+                <div className="w-24 lg:w-48 ring ring-primary ring-offset-base-100 ring-offset-2">
+                  <Image
+                    src="/profile.jpg"
+                    alt="Rachit Khurana"
+                    width={200}
+                    height={200}
+                    className=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="flex w-full justify-center" data-aos="zoom-in">
+              <h1 className="text-3xl lg:text-8xl font-bold mx-12">
+                Rachit Khurana
+              </h1>
+            </div>
+            <div className="flex w-full justify-center" data-aos="zoom-in">
+              <p id="element" className="text-2xl italic"></p>
+            </div>
+            <p className="ml-5">
+              a.k.a DiluteWater & notnotrachit
+              <br />
+              I'm a passionate Full Stack Developer from India 🇮🇳
+              <br />
+              Also an open source enthusiast
+              <br />
+              Core Tech Team Member @{" "}
+              <a href="https://gdscbu.club" target="_blank" className="underline">
+                GDSC BU
+              </a>{" "}
+              &{" "}
+              <a
+                href="https://www.csi-bu.tech/"
+                target="_blank"
+                className="underline"
+              >
+                CSI BU
+              </a>
+            </p>
           </div>
-        </div>
-      </div>
-      <div
-        className="flex w-full justify-center"
-        data-aos="zoom-in"
-      >
-        <h1 className="text-3xl lg:text-8xl font-bold mx-12">Rachit Khurana</h1>
-      </div>
-      <div
-        className="flex w-full justify-center"
-        data-aos="zoom-in"
-      >
-        <p id="element" className="text-2xl italic"></p>
-      </div>
-          <p className="ml-5">
-          a.k.a DiluteWater & notnotrachit<br/>
-          I'm a passionate Full Stack Developer from India 🇮🇳<br/>
-          Also an open source enthusiast<br/>
-          Core Tech Team Member @ <a href="https://gdscbu.club" target="_blank" className="underline">GDSC BU</a> & <a href="https://www.csi-bu.tech/" target="_blank" className="underline">CSI BU</a></p>
-        </div>
+        </Draggable>
       </div>
     </main>
   );
