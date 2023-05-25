@@ -12,6 +12,9 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" data-theme="night">
+      <head>
+        <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+      </head>
       <body className={inter.className}>
         <div className="m-2">
           <div className="navbar bg-primary rounded-xl">
@@ -30,6 +33,15 @@ export default function RootLayout({ children }) {
                 </li>
                 <li>
                   <a>Experience</a>
+                </li>
+                <li>
+                  <a>Skills</a>
+                </li>
+                <li>
+                  <a>Education</a>
+                </li>
+                <li>
+                  <a>Blog</a>
                 </li>
                 <li>
                   <a>Contact</a>
