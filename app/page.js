@@ -175,7 +175,7 @@ export default function Home() {
             <p className="ml-5">
               a.k.a DiluteWater & notnotrachit
               <br />
-              I'm a passionate Full Stack Developer from India 🇮🇳
+              I&apos;m a passionate Full Stack Developer from India 🇮🇳
               <br />
               Also an open source enthusiast
               <br />
