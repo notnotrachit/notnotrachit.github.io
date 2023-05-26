@@ -36,7 +36,7 @@ export default function RootLayout({ children }) {
                   <a>Experience</a>
                 </li>
                 <li>
-                  <a>Skills</a>
+                  <Link href='/skills'>Skills</Link>
                 </li>
                 <li>
                   <a>Education</a>
@@ -55,19 +55,25 @@ export default function RootLayout({ children }) {
         <div className="bg-base-100 fixed bottom-0 mb-3 w-full">
           <div className="w-full bg-primary text-neutral flex justify-center rounded-xl">
             <div className="">
-              <ul className="flex">
-                <li className="mx-2 my-1">
-                  <p className="flex"><a href="https://github.com/notnotrachit" target="_blank" className="flex hover:scale-110 transition-all ease-in-out">GitHub <FaGithub size={'1.5rem'} className="mx-2" /></a>|</p> 
-                </li>
-                <li className="mx-2 my-1">
-                  <p className="flex"><a href="https://twitter.com/notnotrachit" target="_blank" className="flex hover:scale-110 transition-all ease-in-out">Twitter <FaTwitter size={'1.5rem'} className="mx-2" /></a>|</p> 
-                </li>
-                <li className="mx-2 my-1">
-                  <p className="flex"><a href="https://mastodon.social/@notnotrachit" target="_blank" className="flex hover:scale-110 transition-all ease-in-out">Mastodon <FaMastodon size={'1.5rem'} className="mx-2" /></a>|</p> 
-                </li>
-                <li className="mx-2 my-1">
-                  <p className="flex"><a href="https://www.linkedin.com/in/rachitkhurana1/" target="_blank" className="flex hover:scale-110 transition-all ease-in-out">LinkedIn <FaLinkedin size={'1.5rem'} className="mx-2" /></a></p>
-                </li>
+              <ul className="flex flex-wrap">
+                <div className="lg:flex">
+                  <li className="mx-2 my-1">
+                    <p className="flex"><a href="https://github.com/notnotrachit" target="_blank" className="flex hover:scale-110 transition-all ease-in-out">GitHub <FaGithub size={'1.5rem'} className="mx-2" /></a>|</p>
+                  </li>
+                  <hr className="border-neutral border-t-[0.5px] lg:hidden"/>
+                  <li className="mx-2 my-1">
+                    <p className="flex"><a href="https://twitter.com/notnotrachit" target="_blank" className="flex hover:scale-110 transition-all ease-in-out">Twitter <FaTwitter size={'1.5rem'} className="mx-2" /></a>|</p>
+                  </li>
+                </div>
+                <div className="lg:flex">
+                  <li className="mx-2 my-1">
+                    <p className="flex"><a href="https://mastodon.social/@notnotrachit" target="_blank" className="flex hover:scale-110 transition-all ease-in-out">Mastodon <FaMastodon size={'1.5rem'} className="mx-2" /></a><span className="hidden lg:inline">|</span></p>
+                  </li>
+                  <hr className="border-neutral border-t-[0.5px] lg:hidden"/>
+                  <li className="mx-2 my-1">
+                    <p className="flex"><a href="https://www.linkedin.com/in/rachitkhurana1/" target="_blank" className="flex hover:scale-110 transition-all ease-in-out">LinkedIn <FaLinkedin size={'1.5rem'} className="mx-2" /></a></p>
+                  </li>
+                </div>
               </ul>
             </div>
           </div>

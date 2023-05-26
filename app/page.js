@@ -3,6 +3,7 @@ import TypeIt from "typeit";
 import { useEffect } from "react";
 import Image from "next/image";
 import Draggable, {DraggableCore} from 'react-draggable';
+import Github_Graph from "@/components/gitgraph";
 
 export default function Home() {
   useEffect(() => {
@@ -149,26 +150,30 @@ export default function Home() {
             <pre data-prefix="$" className="text-success ml-3">
               <code>$  python about_me.py</code>
             </pre>
-            <div className="flex justify-center py-5" data-aos="zoom-in">
-              <div className="avatar hover:scale-110 transition-all ease-in-out">
-                <div className="w-24 lg:w-48 rounded-full hover:rounded-xl border-2 border-primary hover:border-none hover:ring ring-primary ring-offset-base-100 ring-offset-4 transition-all ease-in-out">
-                  <Image
-                    src="/profile.jpg"
-                    alt="Rachit Khurana"
-                    width={200}
-                    height={200}
-                    className=""
-                  />
+            <div className="lg:flex lg: px-8">
+              <div className="flex justify-center py-5" data-aos="zoom-in">
+                <div className="avatar hover:scale-110 transition-all ease-in-out">
+                  <div className="w-24 lg:w-48 rounded-full hover:rounded-xl border-2 border-primary hover:border-none hover:ring ring-primary ring-offset-base-100 ring-offset-4 transition-all ease-in-out">
+                    <Image
+                      src="/profile.jpg"
+                      alt="Rachit Khurana"
+                      width={150}
+                      height={150}
+                      className=""
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="flex w-full justify-center" data-aos="zoom-in">
-              <h1 className="text-3xl lg:text-8xl font-bold mx-12">
-                Rachit Khurana
-              </h1>
-            </div>
-            <div className="flex w-full justify-center" data-aos="zoom-in">
-              <p id="element" className="text-2xl italic"></p>
+              <div className="w-full h-full m-auto">
+                <div className="flex w-full justify-center" data-aos="zoom-in">
+                  <h1 className="text-3xl lg:text-6xl font-bold mx-12">
+                    Rachit Khurana
+                  </h1>
+                </div>
+                <div className="flex w-full justify-center" data-aos="zoom-in">
+                  <p id="element" className="text-2xl italic"></p>
+                </div>
+              </div>
             </div>
             <p className="ml-5">
               a.k.a DiluteWater & notnotrachit
@@ -190,6 +195,11 @@ export default function Home() {
                 CSI BU
               </a>
             </p>
+            <pre data-prefix="$" className="text-success ml-3">
+              <code>$  python contributions.py</code>
+            </pre>           
+             <Github_Graph/>
+
           </div>
         </Draggable>
       </div>
