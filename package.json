@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "aos": "^2.3.4",
+    "appwrite": "^11.0.0",
     "autoprefixer": "10.4.14",
     "daisyui": "^2.51.6",
     "eslint": "8.41.0",

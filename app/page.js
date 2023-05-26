@@ -1,13 +1,11 @@
 "use client";
 import TypeIt from "typeit";
-import AOS from "aos";
 import { useEffect } from "react";
 import Image from "next/image";
 import Draggable, {DraggableCore} from 'react-draggable';
 
 export default function Home() {
   useEffect(() => {
-    AOS.init({ duration: 500 });
     new TypeIt("#element", {
       lifeLike: false,
       speed: 0,
