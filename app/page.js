@@ -151,7 +151,7 @@ export default function Home() {
             </pre>
             <div className="flex justify-center py-5" data-aos="zoom-in">
               <div className="avatar hover:scale-110 transition-all ease-in-out">
-                <div className="w-24 lg:w-48 ring ring-primary ring-offset-base-100 ring-offset-2">
+                <div className="w-24 lg:w-48 rounded-full hover:rounded-xl border-2 border-primary hover:border-none hover:ring ring-primary ring-offset-base-100 ring-offset-4 transition-all ease-in-out">
                   <Image
                     src="/profile.jpg"
                     alt="Rachit Khurana"

@@ -9,7 +9,7 @@ client
 const databases = new Databases(client);
 const promise = databases.listDocuments('6470807cdd27a6f8e517', '6470808879eedd132bb6');
 promise.then(function (response) {
-  console.log(response.documents[0].Tech_stack);
+  console.log(response.documents[0].image_url);
 }, function (error) {
   console.log(error);
 });
@@ -23,9 +23,9 @@ export default async function projects() {
             <div className="text-5xl bg-base-100 font-bold py-5">Projects</div>
         </div>
         <div className="flex justify-center w-screen">
-          <div className="grid grid-cols-4 gap-y-16 gap-x-8" >
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-y-16 gap-x-8" >
             {(await promise).documents.map((project) => (
-              <ProjectCard key={project.name} name={project.name} description={project.description} techs={project.Tech_stack} />
+              <ProjectCard key={project.name} name={project.name} description={project.description} techs={project.Tech_stack} image_url={project.image_url}/>
             ))}
 
             <ProjectCard name="Proj1" />
