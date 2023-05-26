@@ -2,6 +2,7 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Link from "next/link";
 import AOSc from "@/components/aos";
+import { FaGithub, FaLinkedin, FaTwitter, FaMastodon } from 'react-icons/fa'
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -17,7 +18,7 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
       </head>
-      <body className={inter.className+" overflow-x-hidden"}>
+      <body className={inter.className+" overflow-x-hidden mb-12"}>
         <div className="p-2 sticky z-50 bg-base-100 top-0">
           <AOSc />
           <div className="bg-primary text-neutral rounded-xl md:flex w-[99.5%] mx-[1%]">
@@ -55,11 +56,17 @@ export default function RootLayout({ children }) {
           <div className="w-full bg-primary text-neutral flex justify-center rounded-xl">
             <div className="">
               <ul className="flex">
-                <li className="mx-2">
-                  <a>GitHub</a>
+                <li className="mx-2 my-1">
+                  <p className="flex"><a href="https://github.com/notnotrachit" target="_blank" className="flex hover:scale-110 transition-all ease-in-out">GitHub <FaGithub size={'1.5rem'} className="mx-2" /></a>|</p> 
                 </li>
-                <li className="mx-2">
-                  <a>LinkedIn</a>
+                <li className="mx-2 my-1">
+                  <p className="flex"><a href="https://twitter.com/notnotrachit" target="_blank" className="flex hover:scale-110 transition-all ease-in-out">Twitter <FaTwitter size={'1.5rem'} className="mx-2" /></a>|</p> 
+                </li>
+                <li className="mx-2 my-1">
+                  <p className="flex"><a href="https://mastodon.social/@notnotrachit" target="_blank" className="flex hover:scale-110 transition-all ease-in-out">Mastodon <FaMastodon size={'1.5rem'} className="mx-2" /></a>|</p> 
+                </li>
+                <li className="mx-2 my-1">
+                  <p className="flex"><a href="https://www.linkedin.com/in/rachitkhurana1/" target="_blank" className="flex hover:scale-110 transition-all ease-in-out">LinkedIn <FaLinkedin size={'1.5rem'} className="mx-2" /></a></p>
                 </li>
               </ul>
             </div>

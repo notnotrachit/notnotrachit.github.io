@@ -43,7 +43,7 @@ export default function ProjectCard(props) {
             ✕
           </label>
           <h3 className="text-3xl font-bold text-center">{props.name}</h3>
-          { props.allow_embed ? (
+          { props.allow_embed && (screen.width>	1024) ? (
           <label className="swap text-6xl" id={props.name+"swap"}>
             <div className="flex justify-center group swap-off">
               <div className="grid grid-cols-1 grid-rows-1">
@@ -95,7 +95,7 @@ export default function ProjectCard(props) {
           
           }
 
-          <p className="pt-16 pb-4">{props.long_description}</p>
+          <p className="pt-4 lg:pt-16 pb-4">{props.long_description}</p>
           <p className="font-bold text-lg">Tech Stack:</p>
           {props.techs &&
             props.techs.map((tech) => (
@@ -104,7 +104,7 @@ export default function ProjectCard(props) {
               </div>
             ))}
             <div className="flex justify-center">
-            <div className="btn-group btn-group-vertical lg:btn-group-horizontal">
+            <div className="btn-group btn-group-horizontal my-2">
                 { props.github_url && (
                 <a className="btn btn-sm btn-outline" href={props.github_url} target="_blank">GitHub</a>
                 )}
