@@ -43,7 +43,7 @@ export default function ProjectCard(props) {
             ✕
           </label>
           <h3 className="text-3xl font-bold text-center">{props.name}</h3>
-          { props.allow_embed && (screen.width>	1024) ? (
+          { props.allow_embed ? (
           <label className="swap text-6xl" id={props.name+"swap"}>
             <div className="flex justify-center group swap-off">
               <div className="grid grid-cols-1 grid-rows-1">
@@ -54,7 +54,7 @@ export default function ProjectCard(props) {
                   height={800}
                   className="place-self-center lg:w-5/6 p-2 group-hover:blur-sm transition-all ease-in-out rounded-xl row-start-1 row-end-1 col-start-1 col-end-1 z-[5] group-hover:z-[2]"
                 />
-                <div className="grid content-center justify-center row-start-1 row-end-1 col-start-1 col-end-1 h-full z-[4]">
+                <div className="lg:grid content-center justify-center row-start-1 row-end-1 col-start-1 col-end-1 h-full z-[4] hidden">
                   <button className="btn btn-primary bg-neutral/30 backdrop-blur-xl text-primary hover:text-neutral" onClick={() => swap_live(props.name)}>
                     Live preview
                   </button>

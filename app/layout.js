@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
       </head>
-      <body className={inter.className+" overflow-x-hidden mb-12"}>
+      <body className={inter.className+" overflow-x-hidden mb-24 lg:mb-12"}>
         <div className="p-2 sticky z-50 bg-base-100 top-0">
           <AOSc />
           <div className="bg-primary text-neutral rounded-xl md:flex w-[99.5%] mx-[1%]">
