@@ -195,7 +195,7 @@ export default function Home() {
                 CSI BU
               </a>
             </p>
-            <pre data-prefix="$" className="text-success ml-3">
+            <pre data-prefix="$" className="text-success ml-3 mt-5">
               <code>$  python contributions.py</code>
             </pre>           
              <Github_Graph/>
