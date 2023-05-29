@@ -10,6 +10,10 @@ const poppins = Poppins({ subsets: ["latin"],display: 'swap', weight: '500', sty
 export const metadata = {
   title: "Rachit Khurana",
   description: "Full Stack Developer",
+  image: "/profile.jpg",
+  type: "website",
+  siteName: "Rachit Khurana",
+  twitterUsername: "@notnotrachit",
 };
 
 export default function RootLayout({ children }) {

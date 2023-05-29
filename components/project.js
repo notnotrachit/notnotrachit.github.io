@@ -15,7 +15,7 @@ export default function ProjectCard(props) {
         {props.image_name ? (
           <Image
             src={"/projects/" + props.image_name}
-            alt="random"
+            alt={props.name}
             width={300}
             height={200}
             className="mt-8 rounded-xl border border-primary/50"
@@ -23,7 +23,7 @@ export default function ProjectCard(props) {
         ) : (
           <Image
             src={props.image_url}
-            alt="random"
+            alt={props.name}
             width={300}
             height={200}
             className="mt-8 rounded-xl border border-primary/50"
