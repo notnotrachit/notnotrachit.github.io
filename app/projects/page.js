@@ -20,6 +20,8 @@ promise.then(
   }
 );
 
+
+
 export default async function projects() {
   const all_projects = await promise;
   return (
@@ -40,6 +42,7 @@ export default async function projects() {
               live_url={project.URL}
               allow_embed={project.allow_embed}
               github_url={project.GitHub}
+              image_name={project.image_name}
             />
           ))}
         </div>

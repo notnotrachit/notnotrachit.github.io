@@ -1,7 +1,7 @@
 import Image from "next/image";
 export default function Education_Card() {
   return (
-    <ol className="relative border-l border-gray-200 dark:border-gray-700">
+    <ol className="relative border-l border-gray-200 dark:border-gray-700" data-aos="zoom-in-up">
       <li className="mb-10 ml-10">
         <span className="absolute flex p-2 items-center justify-center w-20 h-20 rounded-full -left-10 ring-8 ring-gray-900 bg-blue-900">
           <Image
