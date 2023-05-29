@@ -1,11 +1,11 @@
 import "./globals.css";
-import { Inter } from "next/font/google";
+import { Poppins } from "next/font/google";
 import Link from "next/link";
 import AOSc from "@/components/aos";
 import { FaGithub, FaLinkedin, FaTwitter, FaMastodon } from 'react-icons/fa'
 
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({ subsets: ["latin"],display: 'swap', weight: '500', style: 'normal' });
 
 export const metadata = {
   title: "Rachit Khurana",
@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
       </head>
-      <body className={inter.className+" overflow-x-hidden mb-24 lg:mb-12"}>
+      <body className={poppins.className+" overflow-x-hidden mb-24 lg:mb-12"}>
         <div className="p-2 sticky z-50 bg-base-100 top-0">
           <AOSc />
           <div className="bg-primary text-neutral rounded-xl md:flex w-[99.5%] mx-[1%]">
@@ -39,10 +39,10 @@ export default function RootLayout({ children }) {
                   <Link href='/skills'>Skills</Link>
                 </li>
                 <li>
-                  <a>Education</a>
+                  <Link href="/education">Education</Link>
                 </li>
                 <li>
-                  <a>Blog</a>
+                  <Link href="/blogs">Blog</Link>
                 </li>
                 <li>
                   <a>Contact</a>

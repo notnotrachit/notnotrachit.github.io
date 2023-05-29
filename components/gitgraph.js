@@ -3,7 +3,7 @@ import GitHubCalendar from "react-github-calendar";
 
 export default function Github_Graph() {
   return (
-    <div className="flex justify-center my-2">
+    <div className="flex justify-center my-2 mb-8 lg:mb-2">
       <div className="w-full m-2 lg:m-0 lg:w-3/4">
         <GitHubCalendar
           username="notnotrachit"
