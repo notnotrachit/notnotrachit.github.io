@@ -2,7 +2,7 @@ import { FaLinkedin, FaTwitter, FaMastodon } from "react-icons/fa";
 
 export default async function contact() {
   return (
-    <main>
+    <main data-aos="zoom-in">
       <div className="hero min-h-screen bg-base-200">
         <div className="hero-content flex-col lg:flex-row">
           <div className="text-center lg:text-center">
