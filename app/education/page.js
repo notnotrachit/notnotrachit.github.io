@@ -30,33 +30,33 @@ export default async function Education() {
           <h1 className="text-5xl font-bold">Education</h1>
         </div>
       </div>
-      <div className="flex justify-center mt-5 ml-4 lg:ml-0">
+      <div className="flex justify-center mt-5 ml-12 lg:ml-0">
+        <Education_Card />
+      </div>
+      <div className="flex justify-center mt-5">
         <div className="">
-          <Education_Card />
-          <div className="">
-            <div
-              className="flex justify-center w-full text-center"
-              data-aos="zoom-in"
-            >
-              <h1 className="text-3xl font-bold w-full text-center my-5">
-                Certifications
-              </h1>              
-            </div>
-            <div className="flex flex-wrap justify-center w-full">
+          <div
+            className="flex justify-center w-full text-center"
+            data-aos="zoom-in"
+          >
+            <h1 className="text-5xl font-bold w-full text-center my-5">
+              Certifications
+            </h1>
+          </div>
+          <div className="flex flex-wrap justify-center w-full">
             {(await promise).documents.map((certificate) => (
-            <Certificates
-              key={certificate.name}
-              name={certificate.name}
-              credetial_id={certificate.credetial_id}
-              credential_url={certificate.credential_url}
-              issued_on={certificate.issued_on}
-              issuing_authority={certificate.issuing_authority}
-              issuing_authority_url={certificate.issuing_authority_url}
-              image_url={certificate.image_url}
-              image_name={certificate.image_name}
-            />
-          ))}
-            </div>
+              <Certificates
+                key={certificate.name}
+                name={certificate.name}
+                credetial_id={certificate.credetial_id}
+                credential_url={certificate.credential_url}
+                issued_on={certificate.issued_on}
+                issuing_authority={certificate.issuing_authority}
+                issuing_authority_url={certificate.issuing_authority_url}
+                image_url={certificate.image_url}
+                image_name={certificate.image_name}
+              />
+            ))}
           </div>
         </div>
       </div>

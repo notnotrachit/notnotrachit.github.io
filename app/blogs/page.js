@@ -8,7 +8,7 @@ export default async function blogs() {
 
     return (
         <main className="bg-base-100">
-            <div className="text-5xl w-full text-center py-5 font-bold underline">Blogs</div>
+            <div className="text-5xl w-full text-center py-5 font-bold underline">My Blogs</div>
 
             <div className="flex w-full justify-center">
                 <div className="grid grid-cols-1 md:grid-cols-4 gap-y-16 gap-x-8">

@@ -33,9 +33,6 @@ export default function RootLayout({ children }) {
                   <Link href="/projects">Projects</Link>
                 </li>
                 <li>
-                  <a>Experience</a>
-                </li>
-                <li>
                   <Link href='/skills'>Skills</Link>
                 </li>
                 <li>
@@ -45,7 +42,7 @@ export default function RootLayout({ children }) {
                   <Link href="/blogs">Blog</Link>
                 </li>
                 <li>
-                  <a>Contact</a>
+                  <Link href="/contact">Contact</Link>
                 </li>
               </ul>
             </div>
