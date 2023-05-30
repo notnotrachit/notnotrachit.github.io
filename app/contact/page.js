@@ -43,6 +43,7 @@ export default async function contact() {
                     placeholder="your name"
                     name="name"
                     className="input input-bordered border-primary"
+                    required
                   />
                 </div>
                 <div className="form-control">
@@ -54,6 +55,7 @@ export default async function contact() {
                     placeholder="email"
                     name="email"
                     className="input input-bordered border-primary"
+                    required
                   />
                 </div>
                 <div className="form-control">
@@ -65,6 +67,7 @@ export default async function contact() {
                     placeholder="enter your message"
                     name="message"
                     className="input textarea h-24 input-bordered border-primary"
+                    required
                   />
                 </div>
                 <div className="form-control mt-6">
