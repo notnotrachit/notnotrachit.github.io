@@ -21,6 +21,8 @@ export default function RootLayout({ children }) {
     <html lang="en" data-theme="night">
       <head>
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+        <link rel="icon" href="/profile.jpg" sizes="any" />
+        <link rel="favicon" href="/profile.ico" sizes="any" />
         <Analytics />
       </head>
       <body className={poppins.className+" overflow-x-hidden mb-24 lg:mb-12"}>
