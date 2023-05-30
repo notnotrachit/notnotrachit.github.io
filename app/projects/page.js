@@ -47,6 +47,7 @@ export default async function projects() {
           ))}
         </div>
       </div>
+      <div className="flex justify-center py-10"><a href="https://github.com/notnotrachit"><button className="btn btn-primary">See all other projects at my Github</button></a></div>
     </main>
   );
 }
