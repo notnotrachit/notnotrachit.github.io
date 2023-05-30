@@ -3,7 +3,7 @@ import { Poppins } from "next/font/google";
 import Link from "next/link";
 import AOSc from "@/components/aos";
 import { FaGithub, FaLinkedin, FaTwitter, FaMastodon } from 'react-icons/fa'
-
+import Analytics from "@/components/analytics";
 
 const poppins = Poppins({ subsets: ["latin"],display: 'swap', weight: '500', style: 'normal' });
 
@@ -21,6 +21,7 @@ export default function RootLayout({ children }) {
     <html lang="en" data-theme="night">
       <head>
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+        <Analytics />
       </head>
       <body className={poppins.className+" overflow-x-hidden mb-24 lg:mb-12"}>
         <div className="p-2 sticky z-50 bg-base-100 top-0">

@@ -125,7 +125,7 @@ export default function Home() {
       <div className="flex justify-center py-5 bg-base-100" data-aos="zoom-in">
         <Draggable handle="handle">
           <div
-            className="absolute bg-neutral pb-5 text-neutral-content rounded-box text-xl w-screen mx-2 lg:w-1/2 border-primary/50 border"
+            className="absolute bg-neutral pb-5 text-neutral-content rounded-box text-xl w-11/12 mx-2 lg:w-1/2 border-primary/50 border"
             id="window"
           >
             <handle>
@@ -150,8 +150,8 @@ export default function Home() {
             <pre data-prefix="$" className="text-success ml-3">
               <code>$  python about_me.py</code>
             </pre>
-            <div className="lg:flex lg: px-8">
-              <div className="flex justify-center py-5" data-aos="zoom-in">
+            <div className="lg:flex lg:px-8">
+              <div className="flex justify-center lg:py-5" data-aos="zoom-in">
                 <div className="avatar hover:scale-110 transition-all ease-in-out">
                   <div className="w-24 lg:w-48 rounded-full hover:rounded-xl border-2 border-primary hover:border-none hover:ring ring-primary ring-offset-base-100 ring-offset-4 transition-all ease-in-out">
                     <Image
@@ -166,16 +166,16 @@ export default function Home() {
               </div>
               <div className="w-full h-full m-auto">
                 <div className="flex w-full justify-center" data-aos="zoom-in">
-                  <h1 className="text-3xl lg:text-6xl font-bold mx-12">
+                  <h1 className="text-2xl lg:text-6xl font-bold mx-12">
                     Rachit Khurana
                   </h1>
                 </div>
                 <div className="flex w-full justify-center" data-aos="zoom-in">
-                  <p id="element" className="text-2xl italic"></p>
+                  <p id="element" className="text-xl lg:text-2xl italic"></p>
                 </div>
               </div>
             </div>
-            <p className="ml-5">
+            <p className="ml-5 text-base lg:text-lg leading-tight">
               a.k.a DiluteWater & notnotrachit
               <br />
               I&apos;m a passionate Full Stack Developer from India 🇮🇳
