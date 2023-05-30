@@ -2,10 +2,10 @@ import { FaLinkedin, FaTwitter, FaMastodon } from "react-icons/fa";
 
 export default async function contact() {
   return (
-    <main data-aos="zoom-in">
-      <div className="hero min-h-screen bg-base-200">
+    <main>
+      <div className="hero bg-base-100">
         <div className="hero-content flex-col lg:flex-row">
-          <div className="text-center lg:text-center">
+          <div className="text-center lg:text-center" data-aos="zoom-in">
             <h1 className="text-5xl font-bold">Contact Me!</h1>
             <p className="py-6 text-center">
               You can send a message to me using this form.
@@ -31,7 +31,7 @@ export default async function contact() {
               </div>
             </div>
           </div>
-          <div className="card w-full max-w-sm shadow-2xl bg-base-100 border border-primary">
+          <div className="card w-full max-w-sm shadow-2xl bg-base-100 border border-primary" data-aos="zoom-in-up">
             <div className="card-body">
               <form id="contact" action="https://data.endpoint.space/cli98kcmn002108mjpyeeasp9" method="POST">
                 <div className="form-control">

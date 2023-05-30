@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
         <link rel="favicon" href="/profile.ico" sizes="any" />
         <Analytics />
       </head>
-      <body className={poppins.className+" overflow-x-hidden mb-24 lg:mb-12"}>
+      <body className={poppins.className+" overflow-x-hidden mb-24 lg:mb-12 text-white"}>
         <div className="p-2 sticky z-50 bg-base-100 top-0">
           <AOSc />
           <div className="bg-primary text-neutral rounded-xl md:flex w-[99.5%] mx-[1%]">
