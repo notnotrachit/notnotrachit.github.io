@@ -30,7 +30,7 @@ export default async function projects() {
         <div className="text-5xl bg-base-100 font-bold py-5">Projects</div>
       </div>
       <div className="flex justify-center w-full">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-y-8 lg:gap-y-16 gap-x-8">
+        <div className="flex flex-wrap justify-center mx-5 gap-y-8 lg:gap-y-16 gap-x-8">
           {(await promise).documents.map((project) => (
             <ProjectCard
               key={project.name}
