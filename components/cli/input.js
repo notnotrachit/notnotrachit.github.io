@@ -1,6 +1,9 @@
 "use client";
 import React from "react";
 import ReactDOM from "react-dom";
+import CliHelp from "./help";
+import CliAbout from "./about";
+
 export default function CLIInput() {
   function cli_input(e) {
     if (e.key == "Enter") {
@@ -12,8 +15,14 @@ export default function CLIInput() {
       switch (input) {
         case "help":
           console.log("help");
+          var new_div = document.createElement("div");
+          ReactDOM.render(<CliHelp />, new_div);
+          cli_body.append(new_div);
           break;
         case "about":
+          var new_div = document.createElement("div");
+          ReactDOM.render(<CliAbout />, new_div);
+          cli_body.append(new_div);
           console.log("about");
           break;
         case "contact":
@@ -32,6 +41,7 @@ export default function CLIInput() {
           console.log("experience");
           break;
         case "clear":
+          cli_body.innerHTML = "";
           console.log("clear");
           break;
         default:

@@ -2,7 +2,7 @@
 import Draggable from "react-draggable"
 import CLIInput from "@/components/cli/input";
 import React from "react";
-import ReactDOM from "react-dom";
+
 
 export default function Page() {
 
@@ -11,7 +11,7 @@ export default function Page() {
         <div className="flex bg-base-100 justify-center">
             <Draggable handle="handle">
           <div
-            className="absolute bg-neutral pb-5 text-neutral-content rounded-box text-xl w-11/12 mx-2 lg:w-1/2 border-primary/50 border"
+            className="absolute bg-neutral pb-5 text-neutral-content rounded-box text-xl w-11/12 mx-2 lg:w-1/2 border-primary/50 border h-2/3 lg:h-5/6"
             id="window"
           >
             <handle className="mb-5">
@@ -39,8 +39,10 @@ export default function Page() {
             <div id="cli_in">
 
             </div>
-            <div id="cli_body">
-              <CLIInput />
+            <div className="py-2 overflow-y-auto h-full">
+              <div id="cli_body" className="max-w-full h-full overflow-y-auto">
+                <CLIInput />
+              </div>
             </div>
           </div>
         </Draggable>
