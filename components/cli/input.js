@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import ReactDOM from "react-dom";
 export default function CLIInput() {
@@ -35,15 +36,16 @@ export default function CLIInput() {
           break;
         default:
           console.log("default");
-
-          var new_div = document.createElement("div");
-          ReactDOM.render(<CLIInput />, new_div);
-          cli_body.append(new_div);
-          var new_input = document.getElementById("in");
-          new_input.focus();
       }
+      var new_div = document.createElement("div");
+      ReactDOM.render(<CLIInput />, new_div);
+      cli_body.append(new_div);
+      var new_input = document.getElementById("in");
+      new_input.focus();
     }
-    return (
+  }
+  return (
+    <div>
       <pre data-prefix="rachit@fedora$" className="text-success ml-3">
         <code className="mr-5">rachit@portfolio$</code>
         <code>
@@ -57,6 +59,6 @@ export default function CLIInput() {
           />
         </code>
       </pre>
-    );
-  }
+    </div>
+  );
 }

@@ -1,12 +1,10 @@
 "use client";
 import Draggable from "react-draggable"
 import CLIInput from "@/components/cli/input";
-import CLI_Body from "@/components/cli/cli_body";
 import React from "react";
 import ReactDOM from "react-dom";
 
 export default function Page() {
-
 
 
     return (
@@ -41,9 +39,9 @@ export default function Page() {
             <div id="cli_in">
 
             </div>
-            <CLI_Body id="CLI_body_component">
+            <div id="cli_body">
               <CLIInput />
-            </CLI_Body>
+            </div>
           </div>
         </Draggable>
         </div>
