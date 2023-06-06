@@ -25,7 +25,7 @@ export default function Certificates(props) {
       </figure>
       <div className="card-body">
         <h2 className="card-title">{props.name}</h2>
-        <p class="text-gray-400">
+        <p class="text-neutral-content">
           Credential Id: {props.credetial_id}
           <br />
           Issued on: {date_string}

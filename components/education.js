@@ -1,7 +1,7 @@
 import Image from "next/image";
 export default function Education_Card() {
   return (
-    <ol className="relative border-l border-gray-200 dark:border-gray-700" data-aos="zoom-in-up">
+    <ol className="relative border-l border-gray-700" data-aos="zoom-in-up">
       <li className="mb-10 ml-10">
         <span className="absolute flex p-2 items-center justify-center w-20 h-20 rounded-full -left-10 ring-8 ring-gray-900 bg-blue-900">
           <Image
@@ -12,7 +12,7 @@ export default function Education_Card() {
             className="rounded-full"
           />
         </span>
-        <h3 className="flex ml-6 items-center mb-1 text-lg font-semibold text-white">
+        <h3 className="flex ml-6 items-center mb-1 text-lg font-semibold text-base-content">
           Bennett University{" "}
           <span className="  text-sm font-medium mr-2 px-2.5 py-0.5 rounded bg-blue-900 text-blue-300 ml-3">
             Ongoing
@@ -36,7 +36,7 @@ export default function Education_Card() {
           />
 
         </span>
-        <h3 className="mb-1 ml-6  text-lg font-semibold text-white">
+        <h3 className="mb-1 ml-6  text-lg font-semibold text-base-content">
           Sardar Patel Vidyalaya{" "}
         </h3>
         <time className="block mb-2 ml-6 text-sm font-normal leading-none text-gray-500">
@@ -57,7 +57,7 @@ export default function Education_Card() {
             alt="Apeejay"
           />
         </span>
-        <h3 className="ml-6 mb-1 text-lg font-semibold text-white">
+        <h3 className="ml-6 mb-1 text-lg font-semibold text-base-content">
           Apeejay School Noida{" "}
         </h3>
         <time className="ml-6 block mb-2 text-sm font-normal leading-none text-gray-500">

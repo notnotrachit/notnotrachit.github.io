@@ -8,7 +8,7 @@ export default function ProjectCard(props) {
 
   return (
     <div
-      className="card w-96 bg-neutral shadow-xl border border-primary"
+      className="card w-96 bg-neutral text-neutral-content shadow-xl border border-primary"
       data-aos="fade-up"
     >
       <figure>

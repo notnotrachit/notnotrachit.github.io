@@ -25,10 +25,10 @@ export default function RootLayout({ children }) {
         <link rel="favicon" href="/profile.ico" sizes="any" />
         <Analytics />
       </head>
-      <body className={poppins.className+" overflow-x-hidden mb-24 lg:mb-12 text-white"}>
+      <body className={poppins.className+" overflow-x-hidden mb-24 lg:mb-12 text-base-content"}>
         <div className="p-2 sticky z-50 bg-base-100 top-0">
           <AOSc />
-          <div className="bg-primary text-neutral rounded-xl md:flex w-[99.5%] mx-[1%]">
+          <div className="bg-primary text-primary-content rounded-xl md:flex w-[99.5%] mx-[1%]">
             <div className="flex-cols md:flex-1 justify-center text-center md:text-left">
               <Link className="btn btn-ghost normal-case text-xl" href="/">
                 Rachit Khurana
@@ -57,7 +57,7 @@ export default function RootLayout({ children }) {
         </div>
         {children}
         <div className="bg-base-100 fixed bottom-0 mb-3 w-full">
-          <div className="w-full bg-primary text-neutral flex justify-center rounded-xl">
+          <div className="w-full bg-primary flex justify-center rounded-xl text-primary-content">
             <div className="">
               <ul className="flex flex-wrap">
                 <div className="lg:flex">
