@@ -1,22 +1,21 @@
 import TypeIt from "typeit-react";
 
-export default function CliHelp() {
+export default function Cli404() {
   return (
     <div className="flex flex-wrap max-w-full">
       <pre
         data-prefix="rachit@fedora$"
-        className="text-neutral-content ml-3 text-wrap w-full flex flex-wrap"
+        className="ml-3 text-error text-wrap w-full flex flex-wrap"
         style={{ "text-wrap": "wrap" }}
       >
           <TypeIt className="text-base" 
                     options={{
                       speed: 5,
                       waitUntilVisible: true,
-                      cursor: false,
+                      cursor: false
                     }}
           >
-          Available commands: help, about, contact, projects, skills, education,
-          experience, clear
+          404 - Command not found. Enter <code className="italic">help</code> to see available commands.
         </TypeIt>
       </pre>
     </div>

@@ -1,3 +1,5 @@
+import TypeIt from "typeit-react";
+
 const raw_img = `
 <pre id="tiresult" style="font-size: 9px;line-height: 10px; font-weight: bold; padding: 4px 5px; --fs: 9px;"><b class="text-neutral">11010000101011000000101111111101000100100001001001111011010001110111011010101100</b>
 <b class="text-neutral">000010111000010001011000110101101101000</b><b style="color:#000101">1</b><b style="color:#090808">1</b><b style="color:#121110">1</b><b style="color:#1B1918">1</b><b style="color:#111110">0</b><b style="color:#0E0E0E">1</b><b style="color:#0D0E0E">0</b><b style="color:#080A0A">0</b><b style="color:#090A0B">0</b><b style="color:#08090A">1</b><b style="color:#030404">0</b><b style="color:#020202">00</b><b class="text-neutral">1001001010010101101000111101</b>
@@ -47,7 +49,7 @@ export default function CliAbout() {
     <div className="flex flex-wrap max-w-full">
       <pre
         data-prefix="rachit@fedora$"
-        className="text-neutral-content ml-3 text-wrap w-full flex flex-wrap"
+        className="text-info ml-3 text-wrap w-full flex flex-wrap"
         style={{ "text-wrap": "wrap" }}
       >
         <div className="lg:flex">
@@ -55,7 +57,13 @@ export default function CliAbout() {
             {console.log(raw_img)}
             <div dangerouslySetInnerHTML={{ __html: raw_img }} />
           </div>
-          <div className="text-base">
+          <TypeIt className="text-base" 
+                    options={{
+                      speed: 5,
+                      waitUntilVisible: true,
+                      cursor: false,
+                    }}
+          >
             Name: Rachit Khurana
             <br />
             Age: 19
@@ -66,7 +74,7 @@ export default function CliAbout() {
             <br />
                a.k.a DiluteWater & notnotrachit
               <br />
-              I&apos;m a passionate Full Stack Developer from India 🇮🇳
+              I&apos;m a passionate Full Stack Developer from India
               <br />
               Also an open source enthusiast
               <br />
@@ -82,7 +90,7 @@ export default function CliAbout() {
               >
                 CSI BU
               </a>
-          </div>
+          </TypeIt>
         </div>
       </pre>
     </div>

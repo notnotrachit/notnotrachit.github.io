@@ -1,6 +1,6 @@
 import TypeIt from "typeit-react";
 
-export default function CliHelp() {
+export default function CliSkills() {
   return (
     <div className="flex flex-wrap max-w-full">
       <pre
@@ -15,8 +15,7 @@ export default function CliHelp() {
                       cursor: false,
                     }}
           >
-          Available commands: help, about, contact, projects, skills, education,
-          experience, clear
+          WIP
         </TypeIt>
       </pre>
     </div>

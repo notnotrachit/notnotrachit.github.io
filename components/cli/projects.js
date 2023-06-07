@@ -1,0 +1,117 @@
+import React, { useEffect, useState } from "react";
+import TypeIt from "typeit";
+import { Client, Databases } from "appwrite";
+
+const client = new Client();
+client
+  .setEndpoint("https://cloud.appwrite.io/v1")
+  .setProject("64707ef1e67c12fddb64");
+
+const databases = new Databases(client);
+
+async function fetchProjects() {
+  try {
+    const response = await databases.listDocuments(
+      "6470807cdd27a6f8e517",
+      "6470808879eedd132bb6"
+    );
+    return response.documents;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+}
+
+export default function CliProjects() {
+  const [projects, setProjects] = useState([]);
+
+  useEffect(() => {
+    // const type_in = new TypeIt("#projects", {
+    //   speed: 5,
+    //   waitUntilVisible: true,
+    //   cursor: false,
+    // });
+    fetchProjects().then((data) => {
+      setProjects(data);
+      console.log(data);
+      // for (let i = 0; i < data.length; i++) {
+      //   type_in.type(data[i].name)
+      //     .type("\n")
+      //     .type(data[i].GitHub)
+      //     .type("\n")
+      //     .go();
+      // }
+
+      // projects.forEach((project) => {
+      //   type_in
+      //     .type("    ")
+      //     .type(project.name)
+      //     .type(" - ")
+      //     .type(project.description)
+      //     .break();
+      // });
+    });
+  }, []);
+
+  return (
+    <div className="flex flex-wrap max-w-full">
+      <pre
+        data-prefix="rachit@fedora$"
+        className="text-info ml-3 text-wrap w-full flex flex-wrap"
+        style={{ "text-wrap": "wrap" }}
+      >
+        <div className="lg:flex">
+          <div
+            className="text-info"
+            options={{
+              speed: 5,
+              waitUntilVisible: true,
+              cursor: false,
+            }}
+          >
+            <span className="text-lg">Projects:</span>
+            <br />
+            {projects.map((project) => (
+              <div key={project.name} style={{"line-height":"50%"}}>
+                <span className="text-lg font-bold">{project.name}</span>
+                <br />
+                <span className="text-base">{project.description}</span>
+                <br />
+                <span className="text-base">Tech Stack:</span>
+                <br />
+                {project.Tech_stack.map((tech) => (
+                  <span className="text-base" key={tech}>
+                    {" "}
+                    {tech}
+                  </span>
+                ))}
+
+                <div>
+                  {project.GitHub && (
+                    <a
+                      className="text-base underline"
+                      href={project.GitHub}
+                      target="_blank"
+                    >
+                      GitHub
+                    </a>
+                  )} {""}
+                  {project.URL && (
+                    <a
+                      className="text-base underline"
+                      href={project.URL}
+                      target="_blank"
+                    >
+                      URL
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
+            For all projects, visit my GitHub profile: <a href="https://github.com/notnotrachit">github.com/notnotrachit</a>
+          </div>
+        </div>
+      </pre>
+    </div>
+  );
+}
