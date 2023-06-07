@@ -7,6 +7,7 @@ import CliContact from "./contact";
 import Cli404 from "./c404";
 import CliProjects from "./projects";
 import CliSkills from "./skills";
+import Neofetch from "./neofetch";
 
 export default function CLIInput() {
   function cli_input(e) {
@@ -17,35 +18,34 @@ export default function CLIInput() {
       document.getElementById("in").setAttribute("id", "inactive");
       var cli_body = document.getElementById("cli_body");
       var new_div = document.createElement("div");
-      switch (input) {
-        case "help":
-          ReactDOM.render(<CliHelp />, new_div);
-          break;
-        case "about":
-          ReactDOM.render(<CliAbout />, new_div);
-          break;
-        case "contact":
-          ReactDOM.render(<CliContact />, new_div);
-          break;
-        case "projects":
-          ReactDOM.render(<CliProjects />, new_div);
-          break;
-        case "skills":
-          ReactDOM.render(<CliSkills />, new_div);
-          break;
-        case "education":
-          console.log("education");
-          break;
-        case "experience":
-          console.log("experience");
-          break;
-        case "clear":
-          cli_body.innerHTML = "";
-          console.log("clear");
-          break;
-        default:
-          ReactDOM.render(<Cli404 />, new_div);
-          console.log("default");
+      if (input == "help") {
+        ReactDOM.render(<CliHelp />, new_div);
+      } else if (input == "about") {
+        ReactDOM.render(<CliAbout />, new_div);
+      } else if (input == "contact") {
+        ReactDOM.render(<CliContact />, new_div);
+      } else if (input == "projects") {
+        ReactDOM.render(<CliProjects />, new_div);
+      } else if (input == "skills") {
+        ReactDOM.render(<CliSkills />, new_div);
+      } else if (input == "education") {
+        console.log("education");
+      } else if (input == "experience") {
+        console.log("experience");
+      } else if (input == "clear") {
+        cli_body.innerHTML = "";
+        console.log("clear");
+      } else if (input.startsWith("sudo")) {
+        console.log("sudo");
+        console.log(
+          " You are not in the sudoers file. This incident will be reported."
+        );
+      } else if (input == "neofetch") {
+        ReactDOM.render(<Neofetch />, new_div);
+      }
+      else {
+        ReactDOM.render(<Cli404 />, new_div);
+        console.log("default");
       }
 
       cli_body.append(new_div);
