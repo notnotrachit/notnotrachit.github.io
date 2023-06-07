@@ -56,7 +56,13 @@ export default function Neofetch() {
   }
   var RAM;
   if (navigator.deviceMemory) {
-    RAM = navigator.deviceMemory;
+    if (navigator.deviceMemory >= 8) {
+      RAM = "8 GB or more";
+    }
+    else{
+      RAM = navigator.deviceMemory + " GB";
+    }
+
   } else {
     RAM = undefined;
   }
@@ -77,7 +83,7 @@ if (gl) {
   renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
   console.log(renderer);
   if (renderer.includes("ANGLE")) {
-  GPU=renderer.substr(7, renderer.length-3);
+  GPU=renderer.substr(7, (renderer.length-2));
   } else {
     GPU=renderer;
   }
@@ -127,7 +133,7 @@ if (gl) {
             <br />
             {RAM && (
               <div>
-                <span className="text-success">RAM:</span> {RAM}GB
+                <span className="text-success">RAM:</span> {RAM}
                 <br />
               </div>
             )}

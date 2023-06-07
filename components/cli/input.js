@@ -8,6 +8,8 @@ import Cli404 from "./c404";
 import CliProjects from "./projects";
 import CliSkills from "./skills";
 import Neofetch from "./neofetch";
+import CliEdu from "./education";
+import CliSudo from "./sudo";
 
 export default function CLIInput() {
   function cli_input(e) {
@@ -29,17 +31,14 @@ export default function CLIInput() {
       } else if (input == "skills") {
         ReactDOM.render(<CliSkills />, new_div);
       } else if (input == "education") {
-        console.log("education");
+        ReactDOM.render(<CliEdu />, new_div);
       } else if (input == "experience") {
         console.log("experience");
       } else if (input == "clear") {
         cli_body.innerHTML = "";
         console.log("clear");
       } else if (input.startsWith("sudo")) {
-        console.log("sudo");
-        console.log(
-          " You are not in the sudoers file. This incident will be reported."
-        );
+        ReactDOM.render(<CliSudo />, new_div);
       } else if (input == "neofetch") {
         ReactDOM.render(<Neofetch />, new_div);
       }
@@ -59,11 +58,12 @@ export default function CLIInput() {
   return (
     <div>
       <pre data-prefix="rachit@fedora$" className="text-success ml-3">
-        <code className="mr-5">rachit@portfolio$</code>
+        <code className="mr-5" style={{"lineHeight":1, "margin": 0, "padding": 0}}>╭rachit @ portfolio ⎯⎯</code><br/>╰λ  
         <code>
+        <span style={{"lineHeight":1, "margin": 0}}></span>
           <input
             type="text"
-            className="bg-transparent text-base-content outline-none"
+            className="bg-transparent text-base-content outline-none ml-3"
             autoFocus
             id="in"
             onKeyDown={cli_input}
