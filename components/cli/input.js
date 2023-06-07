@@ -6,6 +6,7 @@ import CliAbout from "./about";
 import CliContact from "./contact";
 import Cli404 from "./c404";
 import CliProjects from "./projects";
+import CliSkills from "./skills";
 
 export default function CLIInput() {
   function cli_input(e) {
@@ -25,13 +26,12 @@ export default function CLIInput() {
           break;
         case "contact":
           ReactDOM.render(<CliContact />, new_div);
-          console.log("contact");
           break;
         case "projects":
           ReactDOM.render(<CliProjects />, new_div);
           break;
         case "skills":
-          console.log("skills");
+          ReactDOM.render(<CliSkills />, new_div);
           break;
         case "education":
           console.log("education");
