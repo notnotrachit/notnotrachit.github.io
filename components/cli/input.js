@@ -55,6 +55,7 @@ export default function CLIInput() {
       new_input.focus();
     }
   }
+
   return (
     <div>
       <pre data-prefix="rachit@fedora$" className="text-success ml-3">

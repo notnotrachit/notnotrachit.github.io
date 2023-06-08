@@ -2,7 +2,7 @@
 import Draggable from "react-draggable"
 import CLIInput from "@/components/cli/input";
 import React from "react";
-
+import CliIntro from "@/components/cli/intro";
 
 export default function Page() {
 
@@ -41,6 +41,7 @@ export default function Page() {
             </div>
             <div className="py-2 overflow-y-auto h-full">
               <div id="cli_body" className="max-w-full h-full overflow-y-auto">
+                <CliIntro />
                 <CLIInput />
               </div>
             </div>
