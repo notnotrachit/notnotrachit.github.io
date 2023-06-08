@@ -15,7 +15,7 @@ export default function CliHelp() {
                       cursor: false,
                     }}
           >
-          Available commands: help, about, contact, projects, skills, clear
+          Available commands: help, about, contact, projects, education, skills, clear
         </TypeIt>
       </pre>
     </div>
