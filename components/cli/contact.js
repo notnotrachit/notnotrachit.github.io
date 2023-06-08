@@ -15,12 +15,11 @@ export default function CliContact() {
                       cursor: false
                     }}
           >
-          <span className="text-lg">Contact:</span><br/>
-          <span className="text-base">    Twitter: <a href="https://twitter.com/notnotrachit" target="_blank">@notnotrachit</a></span><br/>
-          <span className="text-base">    GitHub: <a href="https://github.com/notnotrachit" target="_blank">notnotrachit</a></span><br/>
-          <span className="text-base">    LinkedIn: <a href="https://linkedin.com/in/rachitkhurana1" target="_blank">rachitkhurana1</a></span><br/>
-          <span className="text-base">    Instagram: <a href="https://instagram.com/notnotrachit" target="_blank">notnotrachit</a></span><br/>
-          <span className="text-base">    Email: <a href="mailto:notnotrachit@gmail.com" target="_blank">notnotrachit@gmail.com</a></span>
+          <span className="text-base"><span className="text-success">Twitter:</span> <a href="https://twitter.com/notnotrachit" target="_blank">@notnotrachit</a></span><br/>
+          <span className="text-base"><span className="text-success">GitHub:</span> <a href="https://github.com/notnotrachit" target="_blank">notnotrachit</a></span><br/>
+          <span className="text-base"><span className="text-success">LinkedIn:</span> <a href="https://linkedin.com/in/rachitkhurana1" target="_blank">rachitkhurana1</a></span><br/>
+          <span className="text-base"><span className="text-success">Instagram:</span> <a href="https://instagram.com/notnotrachit" target="_blank">notnotrachit</a></span><br/>
+          <span className="text-base"><span className="text-success">Email:</span> <a href="mailto:notnotrachit@gmail.com" target="_blank">notnotrachit@gmail.com</a></span>
         </TypeIt>
       </pre>
     </div>

@@ -15,18 +15,17 @@ export default function CliEdu() {
                       cursor: false,
                     }}
           >
-          <span className="text-lg font-bold">Education:</span><br/>
-          <span className="text-base font-bold"> Schooling: </span><br/>
-          <span className="text-base font-bold"> {" "} Apeejay School Noida</span><br/>
+          <span className="text-base font-semibold text-success"> Schooling: </span><br/>
+          <span className="text-base text-info"> {" "} Apeejay School Noida</span><br/>
           <span className="text-base"> {" "} 2008-2020</span><br/>
           <span className="text-base"> {" "} Nursery - Class X </span><br/>
           <span className="text-base"> {" "} Class X Boards - 90.2% </span><br/>
-          <span className="text-base font-bold"> {" "} Sardar Patel Vidyalaya </span><br/>
+          <span className="text-base text-info"> {" "} Sardar Patel Vidyalaya </span><br/>
           <span className="text-base"> {" "} 2020-2022</span><br/>
           <span className="text-base"> {" "} Class XI - Class XII </span><br/>
           <span className="text-base"> {" "} Class XII Boards - 84.8% </span><br/>
-          <span className="text-base font-bold"> College: </span><br/>
-          <span className="text-base font-bold"> {" "} Bennett University </span><br/>
+          <span className="text-base font-semibold text-success"> College: </span><br/>
+          <span className="text-base text-info"> {" "} Bennett University </span><br/>
           <span className="text-base"> {" "} 2022-2026</span><br/>
           <span className="text-base"> {" "} B.Tech. Computer Science </span><br/>
           <span className="text-base"> {" "} (Ongoing) </span><br/>

@@ -64,13 +64,13 @@ export default function CliAbout() {
                       cursor: false,
                     }}
           >
-            Name: Rachit Khurana
+            <span className="text-success">Name:</span> Rachit Khurana
             <br />
-            Age: 19
+            <span className="text-success">Age:</span> 19
             <br />
             Location: Noida,India
             <br />
-            Bio:
+            <span className="text-success">Bio:</span>
             <br />
                a.k.a DiluteWater & notnotrachit
               <br />

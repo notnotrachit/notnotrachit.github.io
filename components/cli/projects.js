@@ -69,15 +69,13 @@ export default function CliProjects() {
               cursor: false,
             }}
           >
-            <span className="text-lg">Projects:</span>
-            <br />
             {projects.map((project) => (
-              <div key={project.name} style={{"line-height":"50%"}}>
-                <span className="text-lg font-bold">{project.name}</span>
+              <div key={project.name} style={{"line-height":"50%"}} className="mb-2">
+                <span className="text-lg text-success">{project.name}</span>
                 <br />
                 <span className="text-base">{project.description}</span>
                 <br />
-                <span className="text-base">Tech Stack:</span>
+                <span className="text-base text-warning">Tech Stack:</span>
                 <br />
                 {project.Tech_stack.map((tech) => (
                   <span className="text-base" key={tech}>
@@ -106,9 +104,10 @@ export default function CliProjects() {
                     </a>
                   )}
                 </div>
+                <hr className="mt-2 border border-success"/>
               </div>
             ))}
-            For all projects, visit my GitHub profile: <a href="https://github.com/notnotrachit">github.com/notnotrachit</a>
+            <span className="text-success text-base">For all projects, visit my GitHub profile: <a href="https://github.com/notnotrachit" className="text-info">github.com/notnotrachit</a></span>
           </div>
         </div>
       </pre>
