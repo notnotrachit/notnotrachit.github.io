@@ -10,7 +10,7 @@ export default function Cli404() {
       >
           <TypeIt className="text-base" 
                     options={{
-                      speed: 5,
+                      speed: 5 ,
                       waitUntilVisible: true,
                       cursor: false
                     }}
