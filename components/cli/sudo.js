@@ -15,9 +15,8 @@ export default function CliSudo() {
                       cursor: false,
                     }}
           >
-          You are not in the sudoers file. This incident will be reported.
-
-          Reporting incident <br/><br/>
+          You are not in the sudoers file.<br/> This incident will be reported.<br/>
+          Reporting incident ....
           </TypeIt>
       </pre>
     </div>

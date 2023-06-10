@@ -12,7 +12,7 @@ export default function CliIntro() {
         style={{ "text-wrap": "wrap" }}
       >
           <div className="text-base flex justify-center w-full text-success" >
-<p className="" style={{'lineHeight':'10px'}}>
+<p className="hidden lg:block" style={{'lineHeight':'10px'}}>
 ╔═══════════════════════════════════════════════════╗<br/>
 ║                                                   ║<br/>
 ║                                                   ║<br/>
@@ -22,6 +22,17 @@ export default function CliIntro() {
 ║                                                   ║<br/>
 ║                                                   ║<br/>
 ╚═══════════════════════════════════════════════════╝<br/>
+</p>
+<p className="lg:hidden" style={{'lineHeight':'15px'}}>
+╔════════════════════════════════╗<br/>
+║                                ║<br/>
+║ Welcome to Rachit&apos;s Portfolio  ║<br/>
+║ CLI Terminal                   ║<br/>
+║                                ║<br/>
+║ Type <i>help</i> to see a list        ║<br/>
+║  of commands available         ║<br/>
+║                                ║<br/>
+╚════════════════════════════════╝<br/>
 </p>
         </div>
       </pre>

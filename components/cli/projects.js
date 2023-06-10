@@ -46,7 +46,9 @@ export default function CliProjects() {
               cursor: false,
             }}
           >
+            <span id="loading" className="text-base text-info">Loading projects...<br/></span>
             {projects.map((project) => (
+              document.getElementById("loading").innerHTML = "",
               <div key={project.name} style={{"line-height":"50%"}} className="mb-2">
                 <span className="text-lg text-success">{project.name}</span>
                 <br />
