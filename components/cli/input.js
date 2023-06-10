@@ -46,7 +46,7 @@ function cli_input(e) {
     input_history.push(input);
     console.log(input_history);
     current_position = input_history.length - 1;
-    if (input == "help" || input == "h") {
+    if (input == "help" || input == "h" || input == "ls" || input == "man") {
       ReactDOM.render(<CliHelp />, new_div);
     } else if (input == "about") {
       ReactDOM.render(<CliAbout />, new_div);
