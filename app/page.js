@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import Image from "next/image";
 import Draggable, {DraggableCore} from 'react-draggable';
 import Github_Graph from "@/components/gitgraph";
+import Link from "next/link";
 
 export default function Home() {
   useEffect(() => {
@@ -199,6 +200,9 @@ export default function Home() {
               <code>$  python contributions.py</code>
             </pre>           
              <Github_Graph/>
+             <div className="text-base text-center">
+              Feeling Techy enough? Check out the <Link href="/cli" className="italic underline">CLI version</Link>
+             </div>
 
           </div>
         </Draggable>
