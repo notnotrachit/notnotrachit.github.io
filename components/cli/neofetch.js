@@ -34,7 +34,8 @@ export default function Neofetch() {
   var browser;
   if (navigator.userAgentData) {
     platform = navigator.userAgentData.platform;
-    browser = navigator.userAgentData.brands[navigator.userAgentData.brands.length-1];
+    browser =
+      navigator.userAgentData.brands[navigator.userAgentData.brands.length - 1];
   } else {
     platform = navigator.platform;
   }
@@ -42,36 +43,38 @@ export default function Neofetch() {
   if (navigator.deviceMemory) {
     if (navigator.deviceMemory >= 8) {
       RAM = "8 GB or more";
-    }
-    else{
+    } else {
       RAM = navigator.deviceMemory + " GB";
     }
-
   } else {
     RAM = undefined;
   }
 
-  var canvas = document.createElement('canvas');
-var gl;
-var debugInfo;
-var vendor_g;
-var renderer;
-var GPU;
-try {
-  gl = canvas.getContext('webgl', { powerPreference: "high-performance" }) || canvas.getContext('experimental-webgl', { powerPreference: "high-performance" });} catch (e) {
-}
+  var canvas = document.createElement("canvas");
+  var gl;
+  var debugInfo;
+  var vendor_g;
+  var renderer;
+  var GPU;
+  try {
+    gl =
+      canvas.getContext("webgl", { powerPreference: "high-performance" }) ||
+      canvas.getContext("experimental-webgl", {
+        powerPreference: "high-performance",
+      });
+  } catch (e) {}
 
-if (gl) {
-  debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
-  vendor_g = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL);
-  renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
-  console.log(renderer);
-  if (renderer.includes("ANGLE")) {
-  GPU=renderer.substr(7, (renderer.length-2));
-  } else {
-    GPU=renderer;
+  if (gl) {
+    debugInfo = gl.getExtension("WEBGL_debug_renderer_info");
+    vendor_g = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL);
+    renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+    console.log(renderer);
+    if (renderer.includes("ANGLE")) {
+      GPU = renderer.substr(7, renderer.length - 2);
+    } else {
+      GPU = renderer;
+    }
   }
-}
 
   return (
     <div className="flex flex-wrap max-w-full">
@@ -100,20 +103,27 @@ if (gl) {
             <br />
             <span className="text-success">Your Host System:</span> {platform}
             <br />
-            <span className="text-success">Kernel:</span> 251.bnZyIGdvbm5hIGdpdmUgdSB1cA==
+            <span className="text-success">Kernel:</span>{" "}
+            251.bnZyIGdvbm5hIGdpdmUgdSB1cA==
             <br />
             {browser && (
               <div>
                 <span className="text-success">Browser:</span> {browser.brand}
                 <br />
-                <span className="text-success">Browser Version:</span> {browser.version}
+                <span className="text-success">Browser Version:</span>{" "}
+                {browser.version}
               </div>
             )}
-            <span className="text-success">Resolution:</span> {window.screen.width}<span className="text-success">x</span>{window.screen.height}
+            <span className="text-success">Resolution:</span>{" "}
+            {window.screen.width}
+            <span className="text-success">x</span>
+            {window.screen.height}
             <br />
-            <span className="text-success">Your Default Language:</span> {navigator.language}
+            <span className="text-success">Your Default Language:</span>{" "}
+            {navigator.language}
             <br />
-            <span className="text-success">Your Default Timezone:</span> {Intl.DateTimeFormat().resolvedOptions().timeZone}
+            <span className="text-success">Your Default Timezone:</span>{" "}
+            {Intl.DateTimeFormat().resolvedOptions().timeZone}
             <br />
             {RAM && (
               <div>
@@ -121,7 +131,8 @@ if (gl) {
                 <br />
               </div>
             )}
-            <span className="text-success">CPU Cores:</span> {navigator.hardwareConcurrency}
+            <span className="text-success">CPU Cores Available:</span>{" "}
+            {navigator.hardwareConcurrency}
             <br />
             <span className="text-success">GPU being used:</span> {GPU}
           </TypeIt>

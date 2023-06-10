@@ -67,13 +67,19 @@ function cli_input(e) {
       window.location.href = "/";
     } else if (input.startsWith("sudo rm -rf")) {
       console.log("sudo rm -rf");
-      if(confirm("Are you sure you want to delete everything?")) {
+      if (confirm("Are you sure you want to delete everything?")) {
         if (confirm("Are you really sure?")) {
           if (confirm("Are you really really sure?")) {
             if (confirm("Are you really really really sure?")) {
               if (confirm("Are you really really really really sure?")) {
-                if (confirm("Are you really really really really really sure?")) {
-                  if (confirm("Are you really really really really really really sure?")) {
+                if (
+                  confirm("Are you really really really really really sure?")
+                ) {
+                  if (
+                    confirm(
+                      "Are you really really really really really really sure?"
+                    )
+                  ) {
                     alert("Sorry, I can't let you do that.");
                   }
                 }
@@ -82,56 +88,87 @@ function cli_input(e) {
           }
         }
       }
-    }
-    else if (input.startsWith("kill")){
-      ReactDOM.render(<CliBase text="Don't be a killer!!! Everything has feelings..." />, new_div);
-    }
-    else if (input.startsWith("echo")) {
-      ReactDOM.render(<CliBase text="I'm not a parrot, I won't repeat what you say..." />, new_div);
-    }
-    else if (input.startsWith("cat")) {
-      ReactDOM.render(<CliBase text="I'm not a cat, I won't meow..." />, new_div);
-    }
-    else if (input.startsWith("rm")) {
-      ReactDOM.render(<CliBase text="I'm not a garbage collector, I won't delete your files..." />, new_div);
-    } 
-    else if (input.startsWith("mv")) {
-      ReactDOM.render(<CliBase text="I'm not a mover, I won't move your files..." />, new_div);
-    }
-    else if (input.startsWith("cp")) {
-      ReactDOM.render(<CliBase text="I'm not a xerox machine, I won't copy your files..." />, new_div);
-    }
-    else if (input.startsWith("mkdir")) {
-      ReactDOM.render(<CliBase text="I'm not a clerk, I won't create a folder for you..." />, new_div);
-    }
-    else if (input.startsWith("touch")) {
-      ReactDOM.render(<CliBase text="I respect your privacy, I won't touch your files..." />, new_div);
-    }
-    else if (input.startsWith("chmod")) {
-      ReactDOM.render(<CliBase text="I'm not a hacker, I won't change your file permissions..." />, new_div);      
-    }
-    else if (input.startsWith("chown")) {
-      ReactDOM.render(<CliBase text="I'm not a hacker, I won't change your file ownership..." />, new_div);
-    }
-    else if (input.startsWith("chgrp")) {
-      ReactDOM.render(<CliBase text="I'm not a hacker, I won't change your file group ownership..." />, new_div);
-    }
-    else if (input.startsWith("ln")) {
-      ReactDOM.render(<CliBase text="I'm not a hacker, I won't create a link for you..." />, new_div);
-    }
-    else if (input.startsWith("grep")) {
-      ReactDOM.render(<CliBase text="I'm not a detective, I won't search for a pattern in your files..." />, new_div);
-    }
-    else if (input.startsWith("find")) {
-      ReactDOM.render(<CliBase text="I'm not a detective, I won't find your files..." />, new_div);
-    }
-    else if (input.startsWith("locate")) {
-      ReactDOM.render(<CliBase text="I'm not a detective, I won't locate your files..." />, new_div);
-    }
-    else if (input.startsWith("cd")) {
-      ReactDOM.render(<CliBase text="I'm not a navigator, I won't change your directory..." />, new_div);
-    }
-    else if (input == "sudo su") {
+    } else if (input.startsWith("kill")) {
+      ReactDOM.render(
+        <CliBase text="Don't be a killer!!! Everything has feelings..." />,
+        new_div
+      );
+    } else if (input.startsWith("echo")) {
+      ReactDOM.render(
+        <CliBase text="I'm not a parrot, I won't repeat what you say..." />,
+        new_div
+      );
+    } else if (input.startsWith("cat")) {
+      ReactDOM.render(
+        <CliBase text="I'm not a cat, I won't meow..." />,
+        new_div
+      );
+    } else if (input.startsWith("rm")) {
+      ReactDOM.render(
+        <CliBase text="I'm not a garbage collector, I won't delete your files..." />,
+        new_div
+      );
+    } else if (input.startsWith("mv")) {
+      ReactDOM.render(
+        <CliBase text="I'm not a mover, I won't move your files..." />,
+        new_div
+      );
+    } else if (input.startsWith("cp")) {
+      ReactDOM.render(
+        <CliBase text="I'm not a xerox machine, I won't copy your files..." />,
+        new_div
+      );
+    } else if (input.startsWith("mkdir")) {
+      ReactDOM.render(
+        <CliBase text="I'm not a clerk, I won't create a folder for you..." />,
+        new_div
+      );
+    } else if (input.startsWith("touch")) {
+      ReactDOM.render(
+        <CliBase text="I respect your privacy, I won't touch your files..." />,
+        new_div
+      );
+    } else if (input.startsWith("chmod")) {
+      ReactDOM.render(
+        <CliBase text="I'm not a hacker, I won't change your file permissions..." />,
+        new_div
+      );
+    } else if (input.startsWith("chown")) {
+      ReactDOM.render(
+        <CliBase text="I'm not a hacker, I won't change your file ownership..." />,
+        new_div
+      );
+    } else if (input.startsWith("chgrp")) {
+      ReactDOM.render(
+        <CliBase text="I'm not a hacker, I won't change your file group ownership..." />,
+        new_div
+      );
+    } else if (input.startsWith("ln")) {
+      ReactDOM.render(
+        <CliBase text="I'm not a hacker, I won't create a link for you..." />,
+        new_div
+      );
+    } else if (input.startsWith("grep")) {
+      ReactDOM.render(
+        <CliBase text="I'm not a detective, I won't search for a pattern in your files..." />,
+        new_div
+      );
+    } else if (input.startsWith("find")) {
+      ReactDOM.render(
+        <CliBase text="I'm not a detective, I won't find your files..." />,
+        new_div
+      );
+    } else if (input.startsWith("locate")) {
+      ReactDOM.render(
+        <CliBase text="I'm not a detective, I won't locate your files..." />,
+        new_div
+      );
+    } else if (input.startsWith("cd")) {
+      ReactDOM.render(
+        <CliBase text="I'm not a navigator, I won't change your directory..." />,
+        new_div
+      );
+    } else if (input == "sudo su") {
       ReactDOM.render(<CliSudoSu />, new_div);
       playAudio();
     } else if (input == "st0p") {
@@ -145,13 +182,12 @@ function cli_input(e) {
       console.log("default");
     }
 
-    cli_body.append(new_div); 
+    cli_body.append(new_div);
     var new_div = document.createElement("div");
     ReactDOM.render(<CLIInput />, new_div);
     cli_body.append(new_div);
     var new_input = document.getElementById("in");
     new_input.focus();
-    
   } else if (e.key == "ArrowUp") {
     e.preventDefault();
     var new_input = document.getElementById("in");
