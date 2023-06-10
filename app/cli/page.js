@@ -11,7 +11,7 @@ export default function Page() {
         <div className="flex bg-base-100 justify-center">
             <Draggable handle="handle">
           <div
-            className="absolute bg-neutral pb-5 text-neutral-content rounded-box text-xl w-11/12 mx-2 lg:w-1/2 border-primary/50 border h-2/3 lg:h-5/6"
+            className="absolute bg-neutral pb-5 text-neutral-content rounded-box text-xl w-11/12 mx-2 lg:w-3/4 xl:w-1/2 border-primary/50 border h-2/3 lg:h-5/6"
             id="window"
           >
             <handle className="mb-5">

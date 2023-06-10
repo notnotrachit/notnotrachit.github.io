@@ -12,14 +12,9 @@ export default function CliSkills() {
         className="text-neutral-content ml-3 text-wrap w-full flex flex-wrap"
         style={{ "text-wrap": "wrap" }}
       >
-          <TypeIt className="text-base" 
-                    options={{
-                      speed: 5,
-                      waitUntilVisible: true,
-                      cursor: false,
-                    }}
+          <div className="text-base"
           >
-            <span className="text-lg text-success">Languages & Frameworks:</span>
+            <span className="text-lg text-success">Languages & Databases:</span>
             <br />
             <div className="flex flex-wrap">
               <span className="flex gap-x-1"><FaPython size={'1rem'} className="mt-1 text-info"/>Python <span className="text-info">| </span> </span>
@@ -51,7 +46,7 @@ export default function CliSkills() {
               <span className="flex gap-x-1"><SiDocker size={'1rem'} className="mt-1 text-info"/>Docker <span className="text-info">| </span> </span>
               <span className="flex gap-x-1"><SiGithub size={'1rem'} className="mt-1 text-info"/>GitHub</span>
             </div>
-        </TypeIt>
+        </div>
       </pre>
     </div>
   );

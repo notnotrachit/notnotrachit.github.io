@@ -18,7 +18,7 @@ export default function CliIntro() {
 ║                                                   ║<br/>
 ║  Welcome to Rachit&apos;s Portfolio CLI Terminal       ║<br/>
 ║                                                   ║<br/>
-║  Type `help` to see a list of commands available  ║<br/>
+║  Type <i>help</i> to see a list of commands available    ║<br/>
 ║                                                   ║<br/>
 ║                                                   ║<br/>
 ╚═══════════════════════════════════════════════════╝<br/>

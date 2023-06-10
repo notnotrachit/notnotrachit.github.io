@@ -8,7 +8,7 @@ export default function Cli404() {
         className="ml-3 text-error text-wrap w-full flex flex-wrap"
         style={{ "text-wrap": "wrap" }}
       >
-          <TypeIt className="text-base" 
+          <div className="text-base" 
                     options={{
                       speed: 5 ,
                       waitUntilVisible: true,
@@ -16,7 +16,7 @@ export default function Cli404() {
                     }}
           >
           404 - Command not found. Enter <code className="italic">help</code> to see available commands.
-        </TypeIt>
+        </div>
       </pre>
     </div>
   );

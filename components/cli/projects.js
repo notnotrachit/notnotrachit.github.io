@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import TypeIt from "typeit";
 import { Client, Databases } from "appwrite";
 
 const client = new Client();
@@ -26,30 +25,8 @@ export default function CliProjects() {
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
-    // const type_in = new TypeIt("#projects", {
-    //   speed: 5,
-    //   waitUntilVisible: true,
-    //   cursor: false,
-    // });
     fetchProjects().then((data) => {
       setProjects(data);
-      console.log(data);
-      // for (let i = 0; i < data.length; i++) {
-      //   type_in.type(data[i].name)
-      //     .type("\n")
-      //     .type(data[i].GitHub)
-      //     .type("\n")
-      //     .go();
-      // }
-
-      // projects.forEach((project) => {
-      //   type_in
-      //     .type("    ")
-      //     .type(project.name)
-      //     .type(" - ")
-      //     .type(project.description)
-      //     .break();
-      // });
     });
   }, []);
 

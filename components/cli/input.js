@@ -13,23 +13,23 @@ import CliSudo from "./sudo";
 import CliSudoSu from "./sudosu";
 import { useEffect, useState } from "react";
 
-try{
+try {
   var audio = new Audio("/audio.mp3");
-  var playing=false;
+  var playing = false;
 } catch (e) {
   console.log(e);
 }
 
 function playAudio() {
-  if (playing==false) {
+  if (playing == false) {
     audio.play();
-    playing=true;
+    playing = true;
   }
 }
 function pauseAudio() {
-  if (playing==true) {
+  if (playing == true) {
     audio.pause();
-    playing=false;
+    playing = false;
   }
 }
 
@@ -46,7 +46,7 @@ function cli_input(e) {
     input_history.push(input);
     console.log(input_history);
     current_position = input_history.length - 1;
-    if (input == "help") {
+    if (input == "help" || input == "h") {
       ReactDOM.render(<CliHelp />, new_div);
     } else if (input == "about") {
       ReactDOM.render(<CliAbout />, new_div);
@@ -66,16 +66,13 @@ function cli_input(e) {
     } else if (input == "sudo su") {
       ReactDOM.render(<CliSudoSu />, new_div);
       playAudio();
-    }
-    else if (input == "st0p") {
+    } else if (input == "st0p") {
       pauseAudio();
-    }
-    else if (input.startsWith("sudo")) {
+    } else if (input.startsWith("sudo")) {
       ReactDOM.render(<CliSudo />, new_div);
     } else if (input == "neofetch") {
       ReactDOM.render(<Neofetch />, new_div);
-    }
-    else {
+    } else {
       ReactDOM.render(<Cli404 />, new_div);
       console.log("default");
     }
@@ -86,26 +83,25 @@ function cli_input(e) {
     cli_body.append(new_div);
     var new_input = document.getElementById("in");
     new_input.focus();
-  }
-  else if (e.key == "ArrowUp") {
+    
+  } else if (e.key == "ArrowUp") {
     e.preventDefault();
     var new_input = document.getElementById("in");
     if (input_history.length > 0) {
       new_input.setAttribute("value", input_history[current_position]);
       if (current_position > 0) {
-      current_position = current_position - 1;
+        current_position = current_position - 1;
       }
     }
-  }
-  else if (e.key == "ArrowDown") {
+  } else if (e.key == "ArrowDown") {
     e.preventDefault();
     var new_input = document.getElementById("in");
     if (input_history.length > 0) {
-      if (input_history[current_position+1] == undefined) {
+      if (input_history[current_position + 1] == undefined) {
         new_input.setAttribute("value", "");
+      } else {
+        new_input.setAttribute("value", input_history[current_position + 1]);
       }
-      else{
-      new_input.setAttribute("value", input_history[current_position+1]);}
       if (current_position < input_history.length - 1) {
         current_position = current_position + 1;
       }
@@ -114,16 +110,16 @@ function cli_input(e) {
 }
 
 export default function CLIInput() {
-  
-
-
-
   return (
     <div>
       <pre data-prefix="rachit@fedora$" className="text-success ml-3">
-        <code className="mr-5" style={{"lineHeight":1, "margin": 0, "padding": 0}}>╭rachit @ portfolio ⎯⎯</code><br/>╰λ  
+        <code className="mr-5" style={{ lineHeight: 1, margin: 0, padding: 0 }}>
+          ╭rachit @ portfolio ⎯⎯
+        </code>
+        <br />
+        ╰λ
         <code>
-        <span style={{"lineHeight":1, "margin": 0}}></span>
+          <span style={{ lineHeight: 1, margin: 0 }}></span>
           <input
             type="text"
             className="bg-transparent text-base-content outline-none ml-3"
