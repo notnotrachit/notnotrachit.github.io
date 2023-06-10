@@ -98,7 +98,7 @@ export default function CliAbout() {
             <br />
             <span className="text-success">Age:</span> 19
             <br />
-            Location: Noida,India
+            <span className="text-success">Location:</span> Noida,India
             <br />
             <span className="text-success">Bio:</span>
             <br />
