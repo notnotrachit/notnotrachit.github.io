@@ -31,6 +31,8 @@ export default function CliHelp() {
               <br />
               <span>sudo su</span>
               <br />
+              <span>clear</span>
+              <br />
             </div>
           </div>
         </div>
