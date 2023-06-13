@@ -30,7 +30,7 @@ export default function Certificates(props) {
           <br />
           Issued on: {date_string}
           <br />
-          Issuing By: {props.issuing_authority}
+          Issued By: {props.issuing_authority}
         </p>
 
         <div className="card-actions justify-center">
