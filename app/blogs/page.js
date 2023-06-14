@@ -1,3 +1,4 @@
+"use client"
 import BlogCard from "@/components/blog";
 export default async function blogs() {
     const response = await fetch("https://dev.to/api/articles?username=dilutewater");
