@@ -11,7 +11,7 @@ export default async function blogs() {
             <div className="text-5xl w-full text-center py-5 font-bold underline">My Blogs</div>
 
             <div className="flex w-full justify-center">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-y-16 gap-x-8">
+                <div className="flex flex-wrap gap-y-16 gap-x-8 justify-center">
                     {/* {blogs.map((blog) => (
                         <div key={blog.id}>
                         <div className="flex justify-center">

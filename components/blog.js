@@ -27,7 +27,7 @@ export default function BlogCard(props) {
         <h2 className="card-title">{props.title}</h2>
         <p>{props.description}</p>
         <div className="card-actions">
-          <a className="bg-primary rounded-xl px-4 py-2 hover:bg-inherit hover:border-primary hover:border hover:scale-110 transition-all ease-in-out" href={props.url} target="_blank">Read</a>
+          <a className="bg-primary rounded-xl px-4 py-2 hover:bg-inherit hover:border-primary hover:border hover:scale-110 transition-all ease-in-out text-primary-content hover:text-primary" href={props.url} target="_blank">Read</a>
         </div>
       </div>
     </div>
