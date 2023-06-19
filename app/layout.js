@@ -23,9 +23,18 @@ export default function RootLayout({ children }) {
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
         <link rel="icon" href="/profile.jpg" sizes="any" />
         <link rel="favicon" href="/profile.ico" sizes="any" />
+        <meta
+          name="google-site-verification"
+          content="zqYE4zRgKDrWS1JQzTGYub-w6p8EsdBN71nyGr_Mpb8"
+        />
         <Analytics />
       </head>
-      <body className={poppins.className+" overflow-x-hidden mb-24 lg:mb-12 text-base-content"}>
+      <body
+        className={
+          poppins.className +
+          " overflow-x-hidden mb-24 lg:mb-12 text-base-content"
+        }
+      >
         <div className="p-2 sticky z-50 bg-base-100 top-0">
           <AOSc />
           <div className="bg-primary text-primary-content rounded-xl md:flex w-[99.5%] mx-[1%]">
@@ -40,7 +49,7 @@ export default function RootLayout({ children }) {
                   <Link href="/projects">Projects</Link>
                 </li>
                 <li>
-                  <Link href='/skills'>Skills</Link>
+                  <Link href="/skills">Skills</Link>
                 </li>
                 <li>
                   <Link href="/education">Education</Link>
@@ -62,20 +71,55 @@ export default function RootLayout({ children }) {
               <ul className="flex flex-wrap">
                 <div className="lg:flex">
                   <li className="mx-2 my-1">
-                    <p className="flex"><a href="https://github.com/notnotrachit" target="_blank" className="flex hover:scale-110 transition-all ease-in-out">GitHub <FaGithub size={'1.5rem'} className="mx-2" /></a>|</p>
+                    <p className="flex">
+                      <a
+                        href="https://github.com/notnotrachit"
+                        target="_blank"
+                        className="flex hover:scale-110 transition-all ease-in-out"
+                      >
+                        GitHub <FaGithub size={"1.5rem"} className="mx-2" />
+                      </a>
+                      |
+                    </p>
                   </li>
-                  <hr className="border-neutral border-t-[0.5px] lg:hidden"/>
+                  <hr className="border-neutral border-t-[0.5px] lg:hidden" />
                   <li className="mx-2 my-1">
-                    <p className="flex"><a href="https://twitter.com/notnotrachit" target="_blank" className="flex hover:scale-110 transition-all ease-in-out">Twitter <FaTwitter size={'1.5rem'} className="mx-2" /></a>|</p>
+                    <p className="flex">
+                      <a
+                        href="https://twitter.com/notnotrachit"
+                        target="_blank"
+                        className="flex hover:scale-110 transition-all ease-in-out"
+                      >
+                        Twitter <FaTwitter size={"1.5rem"} className="mx-2" />
+                      </a>
+                      |
+                    </p>
                   </li>
                 </div>
                 <div className="lg:flex">
                   <li className="mx-2 my-1">
-                    <p className="flex"><a href="https://mastodon.social/@notnotrachit" target="_blank" className="flex hover:scale-110 transition-all ease-in-out">Mastodon <FaMastodon size={'1.5rem'} className="mx-2" /></a><span className="hidden lg:inline">|</span></p>
+                    <p className="flex">
+                      <a
+                        href="https://mastodon.social/@notnotrachit"
+                        target="_blank"
+                        className="flex hover:scale-110 transition-all ease-in-out"
+                      >
+                        Mastodon <FaMastodon size={"1.5rem"} className="mx-2" />
+                      </a>
+                      <span className="hidden lg:inline">|</span>
+                    </p>
                   </li>
-                  <hr className="border-neutral border-t-[0.5px] lg:hidden"/>
+                  <hr className="border-neutral border-t-[0.5px] lg:hidden" />
                   <li className="mx-2 my-1">
-                    <p className="flex"><a href="https://www.linkedin.com/in/rachitkhurana1/" target="_blank" className="flex hover:scale-110 transition-all ease-in-out">LinkedIn <FaLinkedin size={'1.5rem'} className="mx-2" /></a></p>
+                    <p className="flex">
+                      <a
+                        href="https://www.linkedin.com/in/rachitkhurana1/"
+                        target="_blank"
+                        className="flex hover:scale-110 transition-all ease-in-out"
+                      >
+                        LinkedIn <FaLinkedin size={"1.5rem"} className="mx-2" />
+                      </a>
+                    </p>
                   </li>
                 </div>
               </ul>

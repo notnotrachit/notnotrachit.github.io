@@ -35,7 +35,7 @@
   },
   "git": {
     "scripts": {
-      "pre-push": "npm run build && surge out --domain rachit.surge.sh && surge out --domain rachit.is-a-fullstack.dev && surge out --domain rachit.is-a-good.dev"
+      "pre-push": "npm run build && surge out --domain rachit.surge.sh && surge out --domain https://rachit.is-a-fullstack.dev && surge out --domain https://rachit.is-a-good.dev"
     }
   }
 }
