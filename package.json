@@ -28,5 +28,14 @@
     "tsparticles-engine": "^2.9.3",
     "typeit": "^8.7.1",
     "typeit-react": "^2.6.4"
+  },
+  "devDependencies": {
+    "git-scripts": "^0.6.4",
+    "surge": "^0.23.1"
+  },
+  "git": {
+  "scripts": {
+    "pre-push": "npm run build && surge out --domain rachit.surge.sh && surge out --domain rachit.is-a-fullstack.dev"
   }
+}
 }
