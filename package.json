@@ -34,8 +34,8 @@
     "surge": "^0.23.1"
   },
   "git": {
-  "scripts": {
-    "pre-push": "npm run build && surge out --domain rachit.surge.sh && surge out --domain rachit.is-a-fullstack.dev"
+    "scripts": {
+      "pre-push": "npm run build && surge out --domain rachit.surge.sh && surge out --domain rachit.is-a-fullstack.dev && surge out --domain rachit.is-a-good.dev"
+    }
   }
-}
 }
