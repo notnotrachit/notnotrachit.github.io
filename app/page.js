@@ -201,7 +201,7 @@ export default function Home() {
             </pre>           
              <Github_Graph/>
              <div className="text-base text-center">
-              Feeling Techy enough? Check out the <Link href="/cli" className="italic underline">CLI version</Link>
+              Feeling Techy enough? Check out the <Link href="/cli" className="italic underline">CLI version</Link> of my portfolio.
              </div>
 
           </div>
