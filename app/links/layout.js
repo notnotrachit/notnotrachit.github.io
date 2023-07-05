@@ -1,14 +1,11 @@
 import "app/(main)/globals.css";
 import { Poppins } from "next/font/google";
-import Link from "next/link";
-import AOSc from "@/components/aos";
-import { FaGithub, FaLinkedin, FaTwitter, FaMastodon } from 'react-icons/fa'
 import Analytics from "@/components/analytics";
 
 const poppins = Poppins({ subsets: ["latin"],display: 'swap', weight: '500', style: 'normal' });
 
 export const metadata = {
-  title: "Rachit Khurana",
+  title: "Rachit Khurana Links",
   description: "Full Stack Developer",
   image: "/profile.jpg",
   type: "website",
