@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
       <body
         className={
           poppins.className +
-          " overflow-x-hidden mb-24 lg:mb-12 text-base-content"
+          " overflow-x-hidden mb-24 lg:mb-12 text-base-content w-screen"
         }
       >
 
