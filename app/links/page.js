@@ -41,7 +41,7 @@ export default async function links() {
   const all_links = (await promise).documents;
   return (
     <>
-      <div className="flex justify-center bg-base-100 overflow-x-hidden overflow-y-visible">
+      <div className="flex justify-center bg-base-100 overflow-x-hidden overflow-y-hidden">
         <div>
           <Image
             src="/profile.jpg"
@@ -257,7 +257,7 @@ export default async function links() {
         </div>
       </div>
 
-      <div className="flex justify-center text-left bg-base-100 overflow-x-hidden overflow-y-visible">
+      <div className="flex justify-center text-left bg-base-100 overflow-x-hidden overflow-y-hidden">
         <div className="text-4xl">Links</div>
       </div>
       <div className="bg-base-100 overflow-x-hidden overflow-y-visible">
