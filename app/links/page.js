@@ -13,6 +13,7 @@ import {
   FaReddit,
   FaGlobe,
   FaSpotify,
+  FaQrcode
 } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import { SiHashnode, SiKofi, SiBuymeacoffee } from "react-icons/si";
@@ -276,6 +277,17 @@ export default async function links() {
           >
             <button className="hover:bg-primary hover:text-primary-content rounded-xl transition-all ease-in-out p-2 text-5xl">
               <SiBuymeacoffee className="mx-auto" />
+            </button>
+          </a>
+
+          <a
+            href="upi://pay?pa=rachitkhurana@pingpay&cu=INR"
+            className="tooltip tooltip-bottom tooltip-primary"
+            target="_blank"
+            data-tip="UPI: rachitkhurana@pingpay"
+          >
+            <button className="hover:bg-primary hover:text-primary-content rounded-xl transition-all ease-in-out p-2 text-5xl">
+              <FaQrcode className="mx-auto" />
             </button>
           </a>
         </div>
