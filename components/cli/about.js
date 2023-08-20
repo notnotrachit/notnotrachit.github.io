@@ -84,15 +84,22 @@ export default function CliAbout() {
         <div className="lg:flex">
           <div>
             {console.log(raw_img)}
-            <div dangerouslySetInnerHTML={{ __html: raw_img }} className="hidden lg:block"/>
-            <div dangerouslySetInnerHTML={{ __html: raw_mobile }} className="lg:hidden"/>
+            <div
+              dangerouslySetInnerHTML={{ __html: raw_img }}
+              className="hidden lg:block"
+            />
+            <div
+              dangerouslySetInnerHTML={{ __html: raw_mobile }}
+              className="lg:hidden"
+            />
           </div>
-          <TypeIt className="text-base" 
-                    options={{
-                      speed: 5,
-                      waitUntilVisible: true,
-                      cursor: false,
-                    }}
+          <TypeIt
+            className="text-base"
+            options={{
+              speed: 5,
+              waitUntilVisible: true,
+              cursor: false,
+            }}
           >
             <span className="text-success">Name:</span> Rachit Khurana
             <br />
@@ -102,24 +109,22 @@ export default function CliAbout() {
             <br />
             <span className="text-success">Bio:</span>
             <br />
-               a.k.a DiluteWater & notnotrachit
+              a.k.a DiluteWater & notnotrachit
               <br />
-              I&apos;m a passionate Full Stack Developer from India
+              I&apos;m a passionate Full Stack Developer from India 🇮🇳
               <br />
               Also an open source enthusiast
               <br />
-              Core Tech Team Member @{" "}
-              <a href="https://gdscbu.club" target="_blank" className="underline">
-                GDSC BU
-              </a>{" "}
-              &{" "}
+              Web Dev Intern @ Clearmind AI
+              <br />
+              Chief Technical Officer @{" "}
               <a
-                href="https://www.csi-bu.tech/"
+                href="https://www.csi-bu.live/"
                 target="_blank"
                 className="underline"
               >
                 CSI BU
-              </a>
+              </a>            
           </TypeIt>
         </div>
       </pre>

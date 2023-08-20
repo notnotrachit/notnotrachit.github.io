@@ -63,17 +63,17 @@ export default function ProjectCard(props) {
                     <Image
                       src={"/projects/" + props.image_name}
                       alt="project_image"
-                      width={1000}
+                      width={500}
                       height={800}
-                      className="place-self-center lg:w-5/6 p-2 group-hover:blur-sm transition-all ease-in-out rounded-xl row-start-1 row-end-1 col-start-1 col-end-1 z-[5] group-hover:z-[2]"
+                      className="place-self-center lg:w-96 p-2 group-hover:blur-sm transition-all ease-in-out rounded-xl row-start-1 row-end-1 col-start-1 col-end-1 z-[5] group-hover:z-[2]"
                     />
                   ) : (
                     <Image
                       src={props.image_url}
                       alt="project_image"
-                      width={1000}
+                      width={500}
                       height={800}
-                      className="place-self-center lg:w-5/6 p-2 group-hover:blur-sm transition-all ease-in-out rounded-xl row-start-1 row-end-1 col-start-1 col-end-1 z-[5] group-hover:z-[2]"
+                      className="place-self-center lg:w-96 p-2 group-hover:blur-sm transition-all ease-in-out rounded-xl row-start-1 row-end-1 col-start-1 col-end-1 z-[5] group-hover:z-[2]"
                     />
                   )}
                   <div className="lg:grid content-center justify-center row-start-1 row-end-1 col-start-1 col-end-1 h-full z-[4] hidden">
@@ -122,7 +122,7 @@ export default function ProjectCard(props) {
                   alt="project_image"
                   width={1000}
                   height={800}
-                  className="place-self-center lg:w-5/6 p-2 group-hover:blur-sm transition-all ease-in-out rounded-xl row-start-1 row-end-1 col-start-1 col-end-1 z-[5] group-hover:z-[2]"
+                  className="place-self-center lg:w-[30rem] lg:max-w-96 p-2 group-hover:blur-sm transition-all ease-in-out rounded-xl row-start-1 row-end-1 col-start-1 col-end-1 z-[5] group-hover:z-[2]"
                 />
               ) : (
                 <Image
@@ -130,7 +130,7 @@ export default function ProjectCard(props) {
                   alt="project_image"
                   width={1000}
                   height={800}
-                  className="place-self-center lg:w-5/6 p-2 group-hover:blur-sm transition-all ease-in-out rounded-xl row-start-1 row-end-1 col-start-1 col-end-1 z-[5] group-hover:z-[2]"
+                  className="place-self-center lg:w-[30rem] p-2 group-hover:blur-sm transition-all ease-in-out rounded-xl row-start-1 row-end-1 col-start-1 col-end-1 z-[5] group-hover:z-[2]"
                 />
               )}
             </div>

@@ -81,10 +81,10 @@ export default async function links() {
           </a>
 
           <a
-            href="https://twitter.com/notnotrachit"
+            href="https://x.com/notnotrachit"
             className="tooltip tooltip-bottom tooltip-primary"
             target="_blank"
-            data-tip="Twitter: notnotrachit"
+            data-tip="Twitter/𝕏: notnotrachit"
           >
             <button className="hover:bg-primary hover:text-primary-content rounded-xl transition-all ease-in-out p-2 text-5xl">
               <FaTwitter className="mx-auto" />

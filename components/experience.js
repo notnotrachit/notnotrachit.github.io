@@ -25,34 +25,11 @@ export default function ExperienceCard() {
         <time className="block mb-2 ml-6 text-sm font-normal leading-none text-gray-500">
           From June 2023
         </time>
-        <p className="text-base ml-6 font-normal text-gray-500 dark:text-gray-400">
-          NextJS Developer Intern
+        <p className="text-xl ml-6 font-normal text-gray-500 dark:text-gray-400">
+          Web Developer Intern
         </p>
       </li>
-      <li className="mb-10 ml-10">
-        <span className="absolute p-2 flex items-center justify-center w-20 h-20  rounded-full -left-10 ring-8 ring-gray-900 bg-blue-900">
-          <Image
-            src={gdsc}
-            width={100}
-            height={100}
-            className="rounded-full"
-            alt="GDSC"
-          />
-        </span>
-        <h3 className="mb-1 ml-6  text-lg font-semibold text-base-content">
-          GDSC Bennett University{" "}
-          <span className="  text-sm font-medium mr-2 px-2.5 py-0.5 rounded bg-blue-900 text-blue-300 ml-3">
-            Ongoing
-          </span>
-        </h3>
-        <time className="block mb-2 ml-6 text-sm font-normal leading-none text-gray-500">
-          From November 2022
-        </time>
-        <p className="text-base ml-6 font-normal text-gray-400">
-          Tech Team Member
-        </p>
-      </li>
-      <li className="ml-10">
+      <li className="mb-5 ml-10">
         <span className="absolute flex p-2 items-center justify-center w-20 h-20 rounded-full -left-10 ring-8 ring-gray-900 bg-blue-900">
           <Image
             src={csi}
@@ -68,10 +45,36 @@ export default function ExperienceCard() {
             Ongoing
           </span>
         </h3>
-        <time className="ml-6 block mb-2 text-sm font-normal leading-none text-gray-500">
-          From November 2022
+        <time className="ml-6 block text-sm font-normal leading-none text-gray-500">
+          August 2023 - Present
+        </time>
+        <p className="ml-6 mb-4 text-xl font-normal text-gray-400">
+          Chief Technical Officer
+        </p>
+        <time className="ml-6 block text-sm font-normal leading-none text-gray-500">
+          November 2022 - August 2023
         </time>
         <p className="ml-6 text-base font-normal text-gray-400">
+          Tech Team Member
+        </p>
+      </li>
+      <li className="ml-10">
+        <span className="absolute p-2 flex items-center justify-center w-20 h-20  rounded-full -left-10 ring-8 ring-gray-900 bg-blue-900">
+          <Image
+            src={gdsc}
+            width={100}
+            height={100}
+            className="rounded-full"
+            alt="GDSC"
+          />
+        </span>
+        <h3 className="mb-1 ml-6  text-lg font-semibold text-base-content">
+          GDSC Bennett University{" "}
+        </h3>
+        <time className="block mb-2 ml-6 text-sm font-normal leading-none text-gray-500">
+          November 2022 - August 2023
+        </time>
+        <p className="text-base ml-6 font-normal text-gray-400">
           Tech Team Member
         </p>
       </li>

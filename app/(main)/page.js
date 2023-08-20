@@ -183,13 +183,11 @@ export default function Home() {
               <br />
               Also an open source enthusiast
               <br />
-              Core Tech Team Member @{" "}
-              <a href="https://gdscbu.club" target="_blank" className="underline">
-                GDSC BU
-              </a>{" "}
-              &{" "}
+              Web Dev Intern @ Clearmind AI
+              <br/>
+              Chief Technical Officer @{" "}
               <a
-                href="https://www.csi-bu.tech/"
+                href="https://www.csi-bu.live/"
                 target="_blank"
                 className="underline"
               >
