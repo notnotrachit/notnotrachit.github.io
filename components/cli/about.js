@@ -115,7 +115,11 @@ export default function CliAbout() {
               <br />
               Also an open source enthusiast
               <br />
-              Web Dev Intern @ Clearmind AI
+              Ex Intern @ Clearmind AI
+              <br />
+              Microsoft Learn Student Ambassador
+              <br />
+              Postman Student Expert
               <br />
               Chief Technical Officer @{" "}
               <a

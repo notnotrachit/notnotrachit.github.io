@@ -2,7 +2,7 @@
 import TypeIt from "typeit";
 import { useEffect } from "react";
 import Image from "next/image";
-import Draggable, {DraggableCore} from 'react-draggable';
+import Draggable, { DraggableCore } from "react-draggable";
 import Github_Graph from "@/components/gitgraph";
 import Link from "next/link";
 
@@ -116,10 +116,7 @@ export default function Home() {
       .pause(100)
       .type("r")
       .go();
-
-
-
-    }, []);
+  }, []);
 
   return (
     <main className="bg-base-100 overflow-x-clip">
@@ -130,26 +127,29 @@ export default function Home() {
             id="window"
           >
             <handle>
-              <div className="w-full bg-primary/50 rounded-t-box cursor-move flex justify-end px-2 py-1" id="windowheader">
-              <div className="avatar placeholder mx-1">
-                <div className="bg-neutral-focus text-neutral-content rounded-full w-3">
-                  <span className="text-xs"></span>
+              <div
+                className="w-full bg-primary/50 rounded-t-box cursor-move flex justify-end px-2 py-1"
+                id="windowheader"
+              >
+                <div className="avatar placeholder mx-1">
+                  <div className="bg-neutral-focus text-neutral-content rounded-full w-3">
+                    <span className="text-xs"></span>
+                  </div>
                 </div>
-              </div>
-              <div className="avatar placeholder mx-1">
-                <div className="bg-warning text-neutral-content rounded-full w-3">
-                  <span className="text-xs"></span>
+                <div className="avatar placeholder mx-1">
+                  <div className="bg-warning text-neutral-content rounded-full w-3">
+                    <span className="text-xs"></span>
+                  </div>
                 </div>
-              </div>
-              <div className="avatar placeholder mx-1">
-                <div className="bg-error text-neutral-content rounded-full w-3">
-                  <span className="text-xs"></span>
+                <div className="avatar placeholder mx-1">
+                  <div className="bg-error text-neutral-content rounded-full w-3">
+                    <span className="text-xs"></span>
+                  </div>
                 </div>
-              </div>
               </div>
             </handle>
             <pre data-prefix="$" className="text-success ml-3">
-              <code>$  python about_me.py</code>
+              <code>$ python about_me.py</code>
             </pre>
             <div className="lg:flex lg:px-8">
               <div className="flex justify-center lg:py-5" data-aos="zoom-in">
@@ -183,8 +183,12 @@ export default function Home() {
               <br />
               Also an open source enthusiast
               <br />
-              Web Dev Intern @ Clearmind AI
-              <br/>
+              Ex Intern @ Clearmind AI
+              <br />
+              Microsoft Learn Student Ambassador
+              <br />
+              Postman Student Expert
+              <br />
               Chief Technical Officer @{" "}
               <a
                 href="https://www.csi-bu.live/"
@@ -195,13 +199,16 @@ export default function Home() {
               </a>
             </p>
             <pre data-prefix="$" className="text-success ml-3 mt-5">
-              <code>$  python contributions.py</code>
-            </pre>           
-             <Github_Graph/>
-             <div className="text-base text-center">
-              Feeling Techy enough? Check out the <Link href="/cli" className="italic underline">CLI version</Link> of my portfolio.
-             </div>
-
+              <code>$ python contributions.py</code>
+            </pre>
+            <Github_Graph />
+            <div className="text-base text-center">
+              Feeling Techy enough? Check out the{" "}
+              <Link href="/cli" className="italic underline">
+                CLI version
+              </Link>{" "}
+              of my portfolio.
+            </div>
           </div>
         </Draggable>
       </div>
