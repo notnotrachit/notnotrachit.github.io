@@ -177,19 +177,16 @@ export default function Home() {
               </div>
             </div>
             <p className="ml-5 text-base lg:text-lg leading-tight">
-              a.k.a DiluteWater & notnotrachit
+              a.k.a DiluteWater & notnotrachit, 
+              a passionate Full Stack Developer from India 🇮🇳
               <br />
-              I&apos;m a passionate Full Stack Developer from India 🇮🇳
-              <br />
-              Also an open source enthusiast
+              Open source enthusiast, Pythonista, Linux lover
               <br />
               Ex Intern @ Clearmind AI
               <br />
-              Microsoft Learn Student Ambassador
+              Microsoft Learn Student Ambassador,  Postman Student Expert
               <br />
-              Postman Student Expert
-              <br />
-              Chief Technical Officer @{" "}
+              Chief of Tech @{" "}
               <a
                 href="https://www.csi-bu.live/"
                 target="_blank"
