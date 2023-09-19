@@ -4,10 +4,46 @@ import gdsc from "../public/gdsc.svg";
 import gdsc_srcasw from "../public/gdsc_srcasw.jpg";
 import csi from "../public/csi.jpg";
 import bc3 from "../public/bc3.jpg";
+import mlsa from "../public/mlsa.png";
 
 export default function ExperienceCard() {
   return (
     <ol className="relative border-l border-gray-700" data-aos="zoom-in-up">
+      <li className="mb-10 ml-10">
+        <span className="absolute flex items-center justify-center w-20 h-20 rounded-full -left-10 ring-8 ring-gray-900 bg-neutral border-2 border-blue-900">
+          <Image
+            src={mlsa}
+            alt="MLSA"
+            width={100}
+            height={100}
+            className="rounded-full"
+          />
+        </span>
+        <h3 className="flex ml-6 items-center mb-1 text-lg font-semibold text-base-content">
+          Microsoft Learn Student Ambassador{" "}
+          <span className="  text-sm font-medium mr-2 px-2.5 py-0.5 rounded bg-blue-900 text-blue-300 ml-3">
+            Ongoing
+          </span>
+        </h3>
+        <time className="block mb-1 ml-6 text-sm font-normal leading-none text-gray-500">
+          14nd September, 2023
+        </time>
+        <p className="text-xl mb-2 ml-6 font-normal text-gray-500 dark:text-gray-400">
+          Beta MLSA
+        </p>
+        <time className="block mb-1 ml-6 text-sm font-normal leading-none text-gray-500">
+          2nd September, 2023
+        </time>
+        <p className="text-l mb-2 ml-6 font-normal text-gray-500 dark:text-gray-400">
+          Alpha MLSA
+        </p>
+        <time className="block mb-1 ml-6 text-sm font-normal leading-none text-gray-500">
+          31st August, 2023
+        </time>
+        <p className="text-l ml-6 font-normal text-gray-500 dark:text-gray-400">
+          Selected as a new MLSA
+        </p>
+      </li>
       <li className="mb-5 ml-10">
         <span className="absolute flex border border-blue-900 items-center justify-center w-20 h-20 rounded-full -left-10 ring-8 ring-gray-900 bg-blue-900">
           <Image
