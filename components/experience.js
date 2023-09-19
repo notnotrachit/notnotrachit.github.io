@@ -26,7 +26,7 @@ export default function ExperienceCard() {
           </span>
         </h3>
         <time className="block mb-1 ml-6 text-sm font-normal leading-none text-gray-500">
-          14nd September, 2023
+          14th September, 2023
         </time>
         <p className="text-xl mb-2 ml-6 font-normal text-gray-500 dark:text-gray-400">
           Beta MLSA
