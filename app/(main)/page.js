@@ -123,7 +123,7 @@ export default function Home() {
       <div className="flex justify-center py-5 bg-base-100" data-aos="zoom-in">
         <Draggable handle="handle">
           <div
-            className="absolute bg-neutral pb-5 text-neutral-content rounded-box text-xl w-11/12 mx-2 lg:w-1/2 border-primary/50 border"
+            className="md:absolute bg-neutral pb-5 text-neutral-content rounded-box text-xl w-11/12 mx-2 lg:w-1/2 border-primary/50 border"
             id="window"
           >
             <handle>
