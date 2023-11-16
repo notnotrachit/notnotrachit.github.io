@@ -15,6 +15,7 @@ import {
   FaSpotify,
   FaQrcode
 } from "react-icons/fa";
+import { FaSquareXTwitter } from "react-icons/fa6";
 import { MdEmail } from "react-icons/md";
 import { SiHashnode, SiKofi, SiBuymeacoffee } from "react-icons/si";
 import { BsMedium } from "react-icons/bs";
@@ -87,7 +88,7 @@ export default async function links() {
             data-tip="Twitter/𝕏: notnotrachit"
           >
             <button className="hover:bg-primary hover:text-primary-content rounded-xl transition-all ease-in-out p-2 text-5xl">
-              <FaTwitter className="mx-auto" />
+              <FaSquareXTwitter className="mx-auto" />
             </button>
           </a>
 

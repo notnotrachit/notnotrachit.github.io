@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import Link from "next/link";
 import AOSc from "@/components/aos";
 import { FaGithub, FaLinkedin, FaTwitter, FaMastodon } from 'react-icons/fa'
+import { FaSquareXTwitter } from "react-icons/fa6";
 import Analytics from "@/components/analytics";
 
 const poppins = Poppins({ subsets: ["latin"],display: 'swap', weight: '500', style: 'normal' });
@@ -93,7 +94,8 @@ export default function RootLayout({ children }) {
                         target="_blank"
                         className="flex hover:scale-110 transition-all ease-in-out"
                       >
-                        Twitter <FaTwitter size={"1.5rem"} className="mx-2" />
+                        Twitter{" "}
+                        <FaSquareXTwitter size={"1.5rem"} className="mx-2" />
                       </a>
                       |
                     </p>
