@@ -31,9 +31,16 @@ export default async function contact() {
               </div>
             </div>
           </div>
-          <div className="card w-full max-w-sm shadow-2xl bg-base-100 border border-primary" data-aos="zoom-in-up">
+          <div
+            className="card w-full max-w-sm shadow-2xl bg-base-100 border border-primary"
+            data-aos="zoom-in-up"
+          >
             <div className="card-body">
-              <form id="contact" action="https://data.endpoint.space/cli98kcmn002108mjpyeeasp9" method="POST">
+              <form
+                id="contact"
+                action="https://formsubmit.co/ab67aa233df9a8bfec0dcf587bb733fb"
+                method="POST"
+              >
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text">Name</span>
@@ -71,7 +78,12 @@ export default async function contact() {
                   />
                 </div>
                 <div className="form-control mt-6">
-                  <input type="submit" className="btn btn-primary" value="Send Message" name="submit"/>
+                  <input
+                    type="submit"
+                    className="btn btn-primary"
+                    value="Send Message"
+                    name="submit"
+                  />
                 </div>
               </form>
             </div>
