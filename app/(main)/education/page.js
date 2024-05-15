@@ -43,7 +43,7 @@ export default async function Education() {
               Certifications
             </h1>
           </div>
-          <div className="flex flex-wrap justify-center w-full">
+          <div className="flex flex-wrap justify-center w-full gap-4">
             {(await promise).documents.map((certificate) => (
               <Certificates
                 key={certificate.name}
