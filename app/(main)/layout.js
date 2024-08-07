@@ -5,6 +5,9 @@ import AOSc from "@/components/aos";
 import { FaGithub, FaLinkedin, FaTwitter, FaMastodon } from 'react-icons/fa'
 import { FaSquareXTwitter } from "react-icons/fa6";
 import Analytics from "@/components/analytics";
+import RetroGrid from "@/components/magicui/retro-grid";
+
+
 
 const poppins = Poppins({ subsets: ["latin"],display: 'swap', weight: '500', style: 'normal' });
 
@@ -33,12 +36,12 @@ export default function RootLayout({ children }) {
       <body
         className={
           poppins.className +
-          " overflow-x-hidden mb-24 lg:mb-12 text-base-content"
+          " overflow-x-hidden mb-24 lg:mb-12 text-base-content bg-base-100"
         }
       >
-        <div className="p-2 sticky z-50 bg-base-100 top-0">
+        <div className="p-2 sticky z-50 top-0 bg-transparent">
           <AOSc />
-          <div className="bg-primary text-primary-content rounded-xl md:flex w-[99.5%] mx-[1%]">
+          <div className="text-primary rounded-xl md:flex w-full px-[1%] backdrop-blur-2xl shadow-2xl shadow-primary border-2 border-primary">
             <div className="flex-cols md:flex-1 justify-center text-center md:text-left">
               <Link className="btn btn-ghost normal-case text-xl" href="/">
                 Rachit Khurana
@@ -69,68 +72,71 @@ export default function RootLayout({ children }) {
           </div>
         </div>
         {children}
-        <div className="bg-base-100 fixed bottom-0 mb-3 w-full">
-          <div className="w-full bg-primary flex justify-center rounded-xl text-primary-content">
-            <div className="">
-              <ul className="flex flex-wrap">
-                <div className="lg:flex">
-                  <li className="mx-2 my-1">
-                    <p className="flex">
-                      <a
-                        href="https://github.com/notnotrachit"
-                        target="_blank"
-                        className="flex hover:scale-110 transition-all ease-in-out"
-                      >
-                        GitHub <FaGithub size={"1.5rem"} className="mx-2" />
-                      </a>
-                      |
-                    </p>
-                  </li>
-                  <hr className="border-neutral border-t-[0.5px] lg:hidden" />
-                  <li className="mx-2 my-1">
-                    <p className="flex">
-                      <a
-                        href="https://twitter.com/notnotrachit"
-                        target="_blank"
-                        className="flex hover:scale-110 transition-all ease-in-out"
-                      >
-                        Twitter{" "}
-                        <FaSquareXTwitter size={"1.5rem"} className="mx-2" />
-                      </a>
-                      |
-                    </p>
-                  </li>
-                </div>
-                <div className="lg:flex">
-                  <li className="mx-2 my-1">
-                    <p className="flex">
-                      <a
-                        href="https://mastodon.social/@notnotrachit"
-                        target="_blank"
-                        className="flex hover:scale-110 transition-all ease-in-out"
-                      >
-                        Mastodon <FaMastodon size={"1.5rem"} className="mx-2" />
-                      </a>
-                      <span className="hidden lg:inline">|</span>
-                    </p>
-                  </li>
-                  <hr className="border-neutral border-t-[0.5px] lg:hidden" />
-                  <li className="mx-2 my-1">
-                    <p className="flex">
-                      <a
-                        href="https://www.linkedin.com/in/rachitkhurana1/"
-                        target="_blank"
-                        className="flex hover:scale-110 transition-all ease-in-out"
-                      >
-                        LinkedIn <FaLinkedin size={"1.5rem"} className="mx-2" />
-                      </a>
-                    </p>
-                  </li>
-                </div>
-              </ul>
+        <div className="w-full px-[1%] flex justify-center">
+          <div className="backdrop-blur-2xl shadow-2xl shadow-primary border-2 border-primary fixed bottom-0 mb-3 w-auto rounded-xl p-2             ">
+            <div className="w-full flex justify-center rounded-xl text-primary">
+              <div className="">
+                <ul className="flex flex-wrap">
+                  <div className="lg:flex">
+                    <li className="mx-2 my-1">
+                      <p className="flex">
+                        <a
+                          href="https://github.com/notnotrachit"
+                          target="_blank"
+                          className="flex hover:scale-110 transition-all ease-in-out"
+                        >
+                          GitHub <FaGithub size={"1.5rem"} className="mx-2" />
+                        </a>
+                        |
+                      </p>
+                    </li>
+                    <hr className="border-neutral border-t-[0.5px] lg:hidden" />
+                    <li className="mx-2 my-1">
+                      <p className="flex">
+                        <a
+                          href="https://twitter.com/notnotrachit"
+                          target="_blank"
+                          className="flex hover:scale-110 transition-all ease-in-out"
+                        >
+                          Twitter{" "}
+                          <FaSquareXTwitter size={"1.5rem"} className="mx-2" />
+                        </a>
+                        |
+                      </p>
+                    </li>
+                  </div>
+                  <div className="lg:flex">
+                    <li className="mx-2 my-1">
+                      <p className="flex">
+                        <a
+                          href="https://mastodon.social/@notnotrachit"
+                          target="_blank"
+                          className="flex hover:scale-110 transition-all ease-in-out"
+                        >
+                          Mastodon <FaMastodon size={"1.5rem"} className="mx-2" />
+                        </a>
+                        <span className="hidden lg:inline">|</span>
+                      </p>
+                    </li>
+                    <hr className="border-neutral border-t-[0.5px] lg:hidden" />
+                    <li className="mx-2 my-1">
+                      <p className="flex">
+                        <a
+                          href="https://www.linkedin.com/in/rachitkhurana1/"
+                          target="_blank"
+                          className="flex hover:scale-110 transition-all ease-in-out"
+                        >
+                          LinkedIn <FaLinkedin size={"1.5rem"} className="mx-2" />
+                        </a>
+                      </p>
+                    </li>
+                  </div>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
+        <RetroGrid />
       </body>
     </html>
   );
