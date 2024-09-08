@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@radix-ui/react-hover-card": "^1.1.1",
+    "@tabler/icons-react": "^3.14.0",
     "aos": "^2.3.4",
     "appwrite": "^11.0.0",
     "autoprefixer": "10.4.14",
@@ -17,18 +19,19 @@
     "daisyui": "^2.51.6",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.3",
-    "framer-motion": "^11.3.21",
+    "framer-motion": "^11.5.4",
     "lucide-react": "^0.424.0",
     "next": "13.4.3",
     "nextjs-google-analytics": "^2.3.3",
     "postcss": "8.4.23",
+    "qss": "^3.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-draggable": "^4.4.5",
     "react-github-calendar": "^4.0.0",
     "react-icons": "^4.12.0",
     "react-particles": "^2.9.3",
-    "tailwind-merge": "^2.4.0",
+    "tailwind-merge": "^2.5.2",
     "tailwindcss": "3.3.2",
     "tailwindcss-animate": "^1.0.7",
     "tsparticles-engine": "^2.9.3",
@@ -36,8 +39,11 @@
     "typeit-react": "^2.6.4"
   },
   "devDependencies": {
+    "@types/node": "^22.1.0",
+    "@types/react": "^18.3.3",
     "git-scripts": "^0.6.4",
-    "surge": "^0.23.1"
+    "surge": "^0.23.1",
+    "typescript": "^5.5.4"
   },
   "git": {
     "scripts": {

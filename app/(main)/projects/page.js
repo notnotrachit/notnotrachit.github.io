@@ -1,3 +1,4 @@
+import { ProjectCards } from "@/components/cards";
 import ProjectCard from "@/components/project";
 import { Client, Databases } from "appwrite";
 const client = new Client();
@@ -29,6 +30,7 @@ export default async function projects() {
       <div className="flex justify-center" data-aos="zoom-in">
         <div className="text-5xl bg-base-100 font-bold py-5">Projects</div>
       </div>
+      <ProjectCards />
       <div className="flex justify-center w-full">      
         <div className="flex flex-wrap justify-center mx-5 gap-y-8 lg:gap-y-16 gap-x-8">
           {(await promise).documents.map((project) => (

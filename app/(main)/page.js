@@ -5,8 +5,24 @@ import Image from "next/image";
 import Draggable, { DraggableCore } from "react-draggable";
 import Github_Graph from "@/components/gitgraph";
 import Link from "next/link";
+import BlurIn from "@/components/magicui/blur-in";
+import ShineBorder from "@/components/magicui/shine-border";
+import ExperienceCard from "@/components/experience";
+import {ExperienceTimeLine} from "@/components/ExpTimeline";
+
+import { Chakra_Petch, Press_Start_2P, Source_Code_Pro } from "next/font/google";
+
+// const petch = Chakra_Petch({ subsets: ["latin"], display: 'swap', weight: '500', style: 'normal' });
+const petch = Source_Code_Pro({
+  subsets: ["latin"],
+  display: "swap",
+  weight: "400",
+  style: "normal",
+});
 
 export default function Home() {
+
+
   useEffect(() => {
     new TypeIt("#element", {
       lifeLike: false,
@@ -119,96 +135,138 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="bg-base-100 overflow-x-clip">
-      <div className="flex justify-center py-5 bg-base-100" data-aos="zoom-in">
-        <Draggable handle="handle">
-          <div
-            className="md:absolute bg-neutral pb-5 text-neutral-content rounded-box text-xl w-11/12 mx-2 lg:w-1/2 border-primary/50 border"
-            id="window"
-          >
-            <handle>
-              <div
-                className="w-full bg-primary/50 rounded-t-box cursor-move flex justify-end px-2 py-1"
-                id="windowheader"
-              >
-                <div className="avatar placeholder mx-1">
-                  <div className="bg-neutral-focus text-neutral-content rounded-full w-3">
-                    <span className="text-xs"></span>
-                  </div>
-                </div>
-                <div className="avatar placeholder mx-1">
-                  <div className="bg-warning text-neutral-content rounded-full w-3">
-                    <span className="text-xs"></span>
-                  </div>
-                </div>
-                <div className="avatar placeholder mx-1">
-                  <div className="bg-error text-neutral-content rounded-full w-3">
-                    <span className="text-xs"></span>
-                  </div>
-                </div>
-              </div>
-            </handle>
-            <pre data-prefix="$" className="text-success ml-3">
-              <code>$ python about_me.py</code>
-            </pre>
-            <div className="lg:flex lg:px-8">
-              <div className="flex justify-center lg:py-5" data-aos="zoom-in">
-                <div className="avatar hover:scale-110 transition-all ease-in-out">
-                  <div className="w-24 lg:w-48 rounded-full hover:rounded-xl border-2 border-primary hover:border-none hover:ring ring-primary ring-offset-base-100 ring-offset-4 transition-all ease-in-out">
-                    <Image
-                      src="/profile.jpg"
-                      alt="Rachit Khurana"
-                      width={150}
-                      height={150}
-                      className=""
-                    />
-                  </div>
-                </div>
-              </div>
-              <div className="w-full h-full m-auto">
-                <div className="flex w-full justify-center" data-aos="zoom-in">
-                  <h1 className="text-2xl lg:text-6xl font-bold mx-12">
-                    Rachit Khurana
-                  </h1>
-                </div>
-                <div className="flex w-full justify-center" data-aos="zoom-in">
-                  <p id="element" className="text-xl lg:text-2xl italic"></p>
-                </div>
-              </div>
-            </div>
-            <p className="ml-5 text-base lg:text-lg leading-tight">
-              a.k.a DiluteWater & notnotrachit, 
-              a passionate Full Stack Developer from India 🇮🇳
-              <br />
-              Open source enthusiast, Pythonista, Linux lover
-              <br />
-              Ex Intern @ Clearmind AI
-              <br />
-              Microsoft Learn Student Ambassador,  Postman Student Expert
-              <br />
-              Chief of Tech @{" "}
-              <a
-                href="https://www.csi-bu.live/"
-                target="_blank"
-                className="underline"
-              >
-                CSI BU
-              </a>
-            </p>
-            <pre data-prefix="$" className="text-success ml-3 mt-5">
-              <code>$ python contributions.py</code>
-            </pre>
-            <Github_Graph />
-            <div className="text-base text-center">
-              Feeling Techy enough? Check out the{" "}
-              <Link href="/cli" className="italic underline">
-                CLI version
-              </Link>{" "}
-              of my portfolio.
+    <div className="bg-opacity-0">
+      <div className="flex justify-center py-16 bg-opacity-0 bg-white ">
+        <div className="flex flex-col lg:flex-row">
+          <div className="flex justify-center">
+            <Image
+              src="/profile.jpg"
+              alt="Rachit Khurana"
+              width={300}
+              height={300}
+              className="rounded-full outline outline-primary outline-offset-4 hover:outline-offset-0 transition-all ease-in-out hover:scale-125 drop-shadow-2xl w-36 lg:w-48 h-auto hover:rotate-[360deg] duration-500"
+            />
+          </div>
+          <div className="flex flex-col h-full justify-center">
+            <BlurIn
+              word="Rachit Khurana"
+              className="text-2xl lg:text-6xl font-bold mx-12 my-3"
+            />
+            <BlurIn
+              word="a.k.a DiluteWater/notnotrachit"
+              className="text-md mx-12 mb-8"
+            />
+            <div className="flex w-full ml-10" data-aos="zoom-in">
+              <p
+                id="element"
+                className={"text-xl lg:text-3xl font-bold " + petch.className}
+              ></p>
             </div>
           </div>
-        </Draggable>
+
+          {/* <div class="relative flex justify-center items-center h-screen w-screen">
+            <div
+              class="h-24 w-[400%] bg-indigo-500 
+            rounded-t-full"
+            ></div>
+          </div> */}
+          {/* <div className="curved-div w-screen h-24 backdrop-blur-md bg-primary/10 -mt-8 z-[9999]"></div> */}
+        </div>
       </div>
-    </main>
+      <div className="flex justify-center">
+        <div className="backdrop-blur-sm border border-primary rounded-xl w-full lg:w-[48rem] p-5">
+          {/* <Github_Graph /> */}
+          <div className="text-center w-full text-2xl font-semibold">
+            About Me
+          </div>
+          <div className="">
+            Hello there
+            <span className="inline-flex">
+              <picture className="mx-1">
+                <source
+                  srcset="https://fonts.gstatic.com/s/e/notoemoji/latest/1f44b/512.webp"
+                  type="image/webp"
+                />
+                <img
+                  src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f44b/512.gif"
+                  alt="👋"
+                  width="20"
+                  height="20"
+                />
+              </picture>
+            </span>
+            , I am Rachit Khurana, a full stack developer. Currently pursuing
+            BTech CSE at Bennett University (2022-2026){" "}
+            <span className="inline-flex">
+              <source
+                srcset="https://fonts.gstatic.com/s/e/notoemoji/latest/1f393/512.webp"
+                type="image/webp"
+              />
+              <img
+                src="https://fonts.gstatic.com/s/e/notoemoji/latest/1f393/512.gif"
+                alt="🎓"
+                width="20"
+                height="20"
+              />
+            </span>
+            . I am also a Microsoft Learn Student Ambassador
+            <span className="inline-flex">
+              <img src="./mlsa.png" alt="🎓" width="20" height="20" />
+            </span>
+            . Currently exploring the cloud computing field ☁️. I am also a FOSS
+            enthusiast.
+            <br />
+            <br />I love to build stuff and learn new technologies.
+          </div>
+        </div>
+      </div>
+
+      <section className="py-16" id="experience">
+        <div className="text-5xl w-full text-center font-bold underline underline-offset-2">
+          Experience
+        </div>
+        <div className="text-3xl w-full text-center my-4">Work Experience</div>
+        <div className="my-8">
+          <div className="flex justify-center">
+            <ShineBorder color="#38BCF8">
+              <div className="backdrop-blur-sm rounded-xl w-full lg:w-[48rem] p-5 flex gap-4 border-[0.3px] border-primary/50">
+                <div>
+                  <Image
+                    src="/clearai.jpeg"
+                    alt="ClearMind AI"
+                    width={250}
+                    height={250}
+                    className="rounded-full"
+                  />
+                </div>
+                <div>
+                  <div className="w-full text-2xl font-semibold">
+                    ClearMind AI
+                  </div>
+                  <div>
+                    <span className="text-lg">
+                      Role: Full Stack Developer Intern{" "}
+                    </span>
+                  </div>
+                  <div className="">
+                    As a full stack intern I engineered the entire ClearMind
+                    Journaling Web App, leveraging NextJS and tailwind
+                    frameworks to seamlessly integrate OpenAI and Microsoft
+                    Azure APIs, scaled from nil to more than 45k+ registered
+                    users
+                  </div>
+                </div>
+              </div>
+            </ShineBorder>
+          </div>
+        </div>
+
+        <div className="text-3xl w-full text-center my-4">Community Experience</div>
+        <div className="-mt-20 flex justify-center">
+            {/* <ExperienceCard /> */}
+            <ExperienceTimeLine />
+        </div>
+      </section>
+    </div>
   );
 }

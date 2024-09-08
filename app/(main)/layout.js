@@ -6,6 +6,8 @@ import { FaGithub, FaLinkedin, FaTwitter, FaMastodon } from 'react-icons/fa'
 import { FaSquareXTwitter } from "react-icons/fa6";
 import Analytics from "@/components/analytics";
 import RetroGrid from "@/components/magicui/retro-grid";
+import FooterDock from "@/components/footer";
+
 
 
 
@@ -36,7 +38,7 @@ export default function RootLayout({ children }) {
       <body
         className={
           poppins.className +
-          " overflow-x-hidden mb-24 lg:mb-12 text-base-content bg-base-100"
+          " overflow-x-hidden mb-24 lg:mb-12 text-base-content"
         }
       >
         <div className="p-2 sticky z-50 top-0 bg-transparent">
@@ -72,71 +74,10 @@ export default function RootLayout({ children }) {
           </div>
         </div>
         {children}
-        <div className="w-full px-[1%] flex justify-center">
-          <div className="backdrop-blur-2xl shadow-2xl shadow-primary border-2 border-primary fixed bottom-0 mb-3 w-auto rounded-xl p-2             ">
-            <div className="w-full flex justify-center rounded-xl text-primary">
-              <div className="">
-                <ul className="flex flex-wrap">
-                  <div className="lg:flex">
-                    <li className="mx-2 my-1">
-                      <p className="flex">
-                        <a
-                          href="https://github.com/notnotrachit"
-                          target="_blank"
-                          className="flex hover:scale-110 transition-all ease-in-out"
-                        >
-                          GitHub <FaGithub size={"1.5rem"} className="mx-2" />
-                        </a>
-                        |
-                      </p>
-                    </li>
-                    <hr className="border-neutral border-t-[0.5px] lg:hidden" />
-                    <li className="mx-2 my-1">
-                      <p className="flex">
-                        <a
-                          href="https://twitter.com/notnotrachit"
-                          target="_blank"
-                          className="flex hover:scale-110 transition-all ease-in-out"
-                        >
-                          Twitter{" "}
-                          <FaSquareXTwitter size={"1.5rem"} className="mx-2" />
-                        </a>
-                        |
-                      </p>
-                    </li>
-                  </div>
-                  <div className="lg:flex">
-                    <li className="mx-2 my-1">
-                      <p className="flex">
-                        <a
-                          href="https://mastodon.social/@notnotrachit"
-                          target="_blank"
-                          className="flex hover:scale-110 transition-all ease-in-out"
-                        >
-                          Mastodon <FaMastodon size={"1.5rem"} className="mx-2" />
-                        </a>
-                        <span className="hidden lg:inline">|</span>
-                      </p>
-                    </li>
-                    <hr className="border-neutral border-t-[0.5px] lg:hidden" />
-                    <li className="mx-2 my-1">
-                      <p className="flex">
-                        <a
-                          href="https://www.linkedin.com/in/rachitkhurana1/"
-                          target="_blank"
-                          className="flex hover:scale-110 transition-all ease-in-out"
-                        >
-                          LinkedIn <FaLinkedin size={"1.5rem"} className="mx-2" />
-                        </a>
-                      </p>
-                    </li>
-                  </div>
-                </ul>
-              </div>
-            </div>
-          </div>
+        <div className="fixed top-0 left-0 w-full h-full -z-20">
+          <RetroGrid />
         </div>
-        <RetroGrid />
+        <FooterDock />
       </body>
     </html>
   );

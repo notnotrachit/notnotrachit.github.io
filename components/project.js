@@ -1,6 +1,9 @@
 "use client";
 import Image from "next/image";
+import { useState } from "react";
+
 export default function ProjectCard(props) {
+  const [isOpen, setIsOpen] = useState(false);
   function swap_live(name) {
     const swap = document.getElementById(name + "swap");
     swap.classList.toggle("swap-active");
@@ -8,8 +11,10 @@ export default function ProjectCard(props) {
 
   return (
     <div
-      className="card w-96 bg-neutral text-neutral-content shadow-xl border border-primary"
-      data-aos="fade-up"
+      className={
+        `card ${isOpen ? 'w-[30rem] absolute' : 'w-96'} bg-neutral text-neutral-content shadow-xl border border-primary`
+      }
+      // data-aos="fade-up"
     >
       <figure>
         {props.image_name ? (
@@ -41,11 +46,15 @@ export default function ProjectCard(props) {
               </div>
             ))}
         </div>
-        <label htmlFor={props.name} className="btn btn-primary mt-2">
+        <button
+          htmlFor={props.name}
+          className="btn btn-primary mt-2"
+          onClick={() => setIsOpen(!isOpen)}
+        >
           View Project
-        </label>
+        </button>
       </div>
-      <input type="checkbox" id={props.name} className="modal-toggle" />
+      {/* <input type="checkbox" id={props.name} className="modal-toggle" /> */}
       <div className="modal w-[98%] lg:w-full transition-all ease-in-out">
         <div className="relative border border-primary bg-neutral p-1 lg:p-5 rounded-xl w-full lg:w-1/2">
           <label
