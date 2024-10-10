@@ -11,6 +11,7 @@ import ExperienceCard from "@/components/experience";
 import {ExperienceTimeLine} from "@/components/ExpTimeline";
 
 import { Chakra_Petch, Press_Start_2P, Source_Code_Pro } from "next/font/google";
+import { ProjectCards } from "@/components/cards";
 
 // const petch = Chakra_Petch({ subsets: ["latin"], display: 'swap', weight: '500', style: 'normal' });
 const petch = Source_Code_Pro({
@@ -265,6 +266,9 @@ export default function Home() {
         <div className="-mt-20 flex justify-center">
             {/* <ExperienceCard /> */}
             <ExperienceTimeLine />
+        </div>
+        <div className="mx-10 lg:mx-40">
+          <ProjectCards />
         </div>
       </section>
     </div>

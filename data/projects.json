@@ -1,0 +1,191 @@
+{
+  "total": 14,
+  "documents": [
+    {
+      "name": "Re-Dcrypt",
+      "GitHub": "https://github.com/Re-Dcrypt/redcrypt",
+      "URL": "https://redcrypt.azurewebsites.net/",
+      "description": "A full stack web platform for organising cryptic hunt",
+      "image_url": null,
+      "long_description": "A full stack web platform for organising cryptic hunt",
+      "allow_embed": true,
+      "image_name": "redcrypt.png",
+      "Tech_stack": [
+        "Python",
+        "Django",
+        "HTML",
+        "CSS",
+        "Tailwind",
+        "Javascript"
+      ]
+    },
+    {
+      "name": "Cryptforces",
+      "GitHub": "https://github.com/itsnishitjain/cryptforces",
+      "URL": "https://www.cryptforces.xyz/",
+      "description": "A platform that helps people learn cryptic hunting.",
+      "image_url": "/projects/cryptforces.png",
+      "long_description": "A platform that helps people learn cryptic hunting.",
+      "allow_embed": false,
+      "image_name": "cryptforces.png",
+      "Tech_stack": ["Python", "Django", "HTML", "CSS", "Tailwind"]
+    },
+    {
+      "name": "Google Week Event Page",
+      "GitHub": "https://github.com/notnotrachit/google-week-gdsc",
+      "URL": "https://googleweek.gdscbu.club/",
+      "description": "Landing page for the Google Week event",
+      "image_url": "https://cloud.appwrite.io/v1/storage/buckets/647080af0e056dcab189/files/64750f62bee6b7730313/view?project=64707ef1e67c12fddb64&mode=admin",
+      "long_description": "This is the event page for the week long technical event organised by GDSC BU",
+      "allow_embed": true,
+      "image_name": null,
+      "Tech_stack": ["HTML", "CSS", "Tailwind"]
+    },
+    {
+      "name": "Re-Dcrypt Companion Discord Bot",
+      "GitHub": "https://github.com/Re-Dcrypt/bot",
+      "URL": null,
+      "description": "Companion bot for Re-Dcrypt Cryptic Hunt ",
+      "image_url": "https://cloud.appwrite.io/v1/storage/buckets/647080af0e056dcab189/files/64750fa9658db9c880e8/view?project=64707ef1e67c12fddb64&mode=admin",
+      "long_description": "A companion discord bot for Re-Dcrypt Cryptic Hunt that includes many features like verify user connection, update levels on roles, leaderboard, profile, stats, easter egg claiming, ",
+      "allow_embed": null,
+      "image_name": "",
+      "Tech_stack": ["Python", "FastAPI", "Discord.py", "interactions.py"]
+    },
+    {
+      "name": "Trivia Quizzz",
+      "GitHub": "https://github.com/notnotrachit/triviaquiz",
+      "URL": null,
+      "description": "A trivia quiz web app made using Django. ",
+      "image_url": "https://cloud.appwrite.io/v1/storage/buckets/647080af0e056dcab189/files/647512143b1ae15b9605/view?project=64707ef1e67c12fddb64&mode=admin",
+      "long_description": "A trivia quiz web app made using Django.  ",
+      "allow_embed": null,
+      "image_name": null,
+      "Tech_stack": ["Python", "Django", "HTML", "CSS", "Bootstrap"]
+    },
+    {
+      "name": "Re-Dcrypt Cipher Discord Bot",
+      "GitHub": "https://github.com/Re-Dcrypt/Re-Dcrypt-Bot",
+      "URL": null,
+      "description": "Re-Dcrypt is a bot that will help you decode many ciphers like caesar, base64, A1Z26, atbash etc",
+      "image_url": "https://cloud.appwrite.io/v1/storage/buckets/647080af0e056dcab189/files/6475146690bd32832751/view?project=64707ef1e67c12fddb64&mode=admin",
+      "long_description": "Re-Dcrypt is a bot that will help you decode many ciphers like caesar, base64, A1Z26, atbash etc",
+      "allow_embed": null,
+      "image_name": null,
+      "Tech_stack": ["Python", "Discord.py"]
+    },
+    {
+      "name": "YouLearn",
+      "GitHub": "https://github.com/notnotrachit/youlearn",
+      "URL": "https://deta.space/discovery/@dilutewater/learnrack",
+      "description": "Youlearn is a platform for you to study from any youtube playlist like a course without distractions",
+      "image_url": "https://cloud.appwrite.io/v1/storage/buckets/647080af0e056dcab189/files/647514ddcface9d04703/view?project=64707ef1e67c12fddb64&mode=admin",
+      "long_description": "YouTube is a popular platform that many people use to access educational resources, but it was not designed specifically for learning. One of the drawbacks of using YouTube for learning is that it does not offer features to track progress in real-time or provide visual motivation through tools like bar graphs. Additionally, the suggested videos that appear on the side of the page can be a distraction and disrupt the learner's focus. YouLearn is a platform that was created to address these issues and enhance the learning experience. It is specifically designed to optimize the learning process and provide a more focused, effective and enjoyable way to study.",
+      "allow_embed": null,
+      "image_name": null,
+      "Tech_stack": ["Python", "Flask", "Javascript", "HTML", "CSS", "Tailwind"]
+    },
+    {
+      "name": "DStreamer Real-Time Video Streaming Application",
+      "GitHub": "https://github.com/notnotrachit/dstreamer",
+      "URL": null,
+      "description": "Realtime live video streaming platform",
+      "image_url": "https://cloud.appwrite.io/v1/storage/buckets/647080af0e056dcab189/files/64751633bd9d4df448ff/view?project=64707ef1e67c12fddb64&mode=admin",
+      "long_description": "This is a web application that allows users to stream live video and watch live video streams from other users. It uses WebSockets and the MediaStream API to capture and transmit live video and audio data between the clients and the server.",
+      "allow_embed": null,
+      "image_name": null,
+      "Tech_stack": ["Python", "Django", "Django Channels", "Javascript"]
+    },
+    {
+      "name": "Portfolio Website",
+      "GitHub": "https://github.com/notnotrachit/notnotrachit.github.io",
+      "URL": "https://rachit.is-a.dev/",
+      "description": "My portfolio website made using NextJS",
+      "image_url": "https://cloud.appwrite.io/v1/storage/buckets/647080af0e056dcab189/files/6475aef062894b7e6544/view?project=64707ef1e67c12fddb64&mode=admin",
+      "long_description": "My portfolio website made using NextJS",
+      "allow_embed": true,
+      "image_name": null,
+      "Tech_stack": [
+        "Javascript",
+        "NextJS",
+        "HTML",
+        "CSS",
+        "Tailwind",
+        "DaisyUI"
+      ]
+    },
+    {
+      "name": "UniMart",
+      "GitHub": "https://github.com/notnotrachit/unimart",
+      "URL": null,
+      "description": "The student marketplace to buy, sell & rent second hand things without postage or packaging.",
+      "image_url": "https://i.imgur.com/ZpDMSxu.png",
+      "long_description": "The student marketplace to buy, sell & rent second hand things without postage or packaging..",
+      "allow_embed": null,
+      "image_name": "",
+      "Tech_stack": ["Django", "Python", "HTML", "CSS", "Tailwind", "JS"]
+    },
+    {
+      "name": "Dish Discover",
+      "GitHub": "https://github.com/notnotrachit/DishDiscovery",
+      "URL": "https://dish-discovery.vercel.app/",
+      "description": "A platform for discovering and sharing interesting recipes.",
+      "image_url": "https://cloud.appwrite.io/v1/storage/buckets/647080af0e056dcab189/files/64905017c4010712133e/view?project=64707ef1e67c12fddb64&mode=admin",
+      "long_description": "A platform for discovering and sharing interesting recipes.",
+      "allow_embed": true,
+      "image_name": null,
+      "Tech_stack": [
+        "Python",
+        "Django",
+        "HTML",
+        "CSS",
+        "Tailwind",
+        "Javascript",
+        "DaisyUI"
+      ]
+    },
+    {
+      "name": "ClubKonnect",
+      "GitHub": "https://github.com/notnotrachit/ClubKonnect",
+      "URL": "https://clubkonnect.vercel.app/",
+      "description": "A complete platform for recruiting members for a club or community",
+      "image_url": "https://i.imgur.com/GNSoGVa.png",
+      "long_description": "A complete platform for recruiting members for a club or community. It's features include Github, LinkedIN oauth connection mandatory for specific forms. ",
+      "allow_embed": false,
+      "image_name": null,
+      "Tech_stack": ["Python", "Django", "HTML", "CSS", "Tailwind"]
+    },
+    {
+      "name": "DevCompete",
+      "GitHub": "https://github.com/notnotrachit/devcompete",
+      "URL": "https://devcompete.azurewebsites.net/",
+      "description": "A 1v1 Coding Contest Platform",
+      "image_url": "https://cloud.appwrite.io/v1/storage/buckets/647080af0e056dcab189/files/656f04bc080d4cf614d6/view?project=64707ef1e67c12fddb64&mode=admin",
+      "long_description": "A 1v1 Coding Contest Platform",
+      "allow_embed": true,
+      "image_name": null,
+      "Tech_stack": [
+        "Python",
+        "Django",
+        "HTML",
+        "CSS",
+        "Tailwind",
+        "JS",
+        "Azure",
+        "MySQL",
+        "Redis"
+      ]
+    },
+    {
+      "name": "Garnet Club Landing Page",
+      "GitHub": "https://github.com/notnotrachit/garnet",
+      "URL": "https://garnet-club.vercel.app/",
+      "description": "Landing page for a client based on web3 marketing ",
+      "image_url": "https://i.imgur.com/0ZGiNzG.png",
+      "long_description": "Landing page for a client based on web3 marketing ",
+      "allow_embed": false,
+      "image_name": null,
+      "Tech_stack": ["NextJS"]
+    }
+  ]
+}

@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "../hooks/use-outside-click";
+import ProjectData from "../data/projects.json";
 
 export function ProjectCards() {
   const [active, setActive] = useState<(typeof cards)[number] | boolean | null>(null);
@@ -68,7 +69,7 @@ export function ProjectCards() {
             <motion.div
               layoutId={`card-${active.title}-${id}`}
               ref={ref}
-              className="w-full max-w-[500px]  h-full md:h-fit md:max-h-[90%]  flex flex-col bg-primary sm:rounded-3xl overflow-hidden"
+              className="max-w-[500px] h-fit md:max-h-[90%]  flex flex-col bg-primary rounded-3xl overflow-hidden mx-4"
             >
               <motion.div layoutId={`image-${active.title}-${id}`}>
                 <Image
@@ -86,13 +87,13 @@ export function ProjectCards() {
                   <div className="">
                     <motion.h3
                       layoutId={`title-${active.title}-${id}`}
-                      className="font-medium text-neutral-700 dark:text-neutral-200 text-base"
+                      className="font-bold text-black text-base"
                     >
                       {active.title}
                     </motion.h3>
                     <motion.p
                       layoutId={`description-${active.description}-${id}`}
-                      className="text-neutral-600 dark:text-neutral-400 text-base"
+                      className="text-gray-600 text-base"
                     >
                       {active.description}
                     </motion.p>
@@ -116,7 +117,7 @@ export function ProjectCards() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="text-neutral-600 text-xs md:text-sm lg:text-base h-40 md:h-fit pb-10 flex flex-col items-start gap-4 overflow-auto dark:text-neutral-400 [mask:linear-gradient(to_bottom,white,white,transparent)] [scrollbar-width:none] [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch]"
+                    className="text-gray-600 text-xs md:text-sm lg:text-base h-40 md:h-fit pb-10 flex flex-col items-start gap-4 overflow-auto[mask:linear-gradient(to_bottom,white,white,transparent)] [scrollbar-width:none] [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch]"
                   >
                     {typeof active.content === "function"
                       ? active.content()
@@ -134,7 +135,7 @@ export function ProjectCards() {
             layoutId={`card-${card.title}-${id}`}
             key={card.title}
             onClick={() => setActive(card)}
-            className="p-4 flex flex-col bg-primary rounded-xl cursor-pointer mt-36"
+            className="p-4 flex flex-col bg-primary/50 rounded-xl cursor-pointer mt-36 backdrop-blur-md"
           >
             <div className="flex gap-4 flex-col  w-full">
               <motion.div layoutId={`image-${card.title}-${id}`}>
@@ -143,19 +144,19 @@ export function ProjectCards() {
                   height={100}
                   src={card.src}
                   alt={card.title}
-                  className="w-full -mt-36 rounded-t-xl"
+                  className="w-full -mt-36 rounded-t-xl bg-primary-content/70 backdrop-blur-md aspect-video object-scale-down border-t-2 border-primary"
                 />
               </motion.div>
               <div className="flex justify-center items-center flex-col">
                 <motion.h3
                   layoutId={`title-${card.title}-${id}`}
-                  className="font-medium text-neutral-800 dark:text-neutral-200 text-center md:text-left text-base"
+                  className="text-white text-center md:text-left text-base font-bold"
                 >
                   {card.title}
                 </motion.h3>
                 <motion.p
                   layoutId={`description-${card.description}-${id}`}
-                  className="text-neutral-600 dark:text-neutral-400 text-center md:text-left text-base"
+                  className="text-gray-400 text-center md:text-left text-base"
                 >
                   {card.description}
                 </motion.p>
@@ -201,95 +202,110 @@ export const CloseIcon = () => {
   );
 };
 
-const cards = [
-  {
-    description: "Lana Del Rey",
-    title: "Summertime Sadness",
-    src: "https://assets.aceternity.com/demos/lana-del-rey.jpeg",
-    ctaText: "Visit",
-    ctaLink: "https://ui.aceternity.com/templates",
-    content: () => {
-      return (
-        <p>
-          Lana Del Rey, an iconic American singer-songwriter, is celebrated for
-          her melancholic and cinematic music style. Born Elizabeth Woolridge
-          Grant in New York City, she has captivated audiences worldwide with
-          her haunting voice and introspective lyrics. <br /> <br /> Her songs
-          often explore themes of tragic romance, glamour, and melancholia,
-          drawing inspiration from both contemporary and vintage pop culture.
-          With a career that has seen numerous critically acclaimed albums, Lana
-          Del Rey has established herself as a unique and influential figure in
-          the music industry, earning a dedicated fan base and numerous
-          accolades.
-        </p>
-      );
-    },
-  },
-  {
-    description: "Babbu Maan",
-    title: "Mitran Di Chhatri",
-    src: "https://assets.aceternity.com/demos/babbu-maan.jpeg",
-    ctaText: "Visit",
-    ctaLink: "https://ui.aceternity.com/templates",
-    content: () => {
-      return (
-        <p>
-          Babu Maan, a legendary Punjabi singer, is renowned for his soulful
-          voice and profound lyrics that resonate deeply with his audience. Born
-          in the village of Khant Maanpur in Punjab, India, he has become a
-          cultural icon in the Punjabi music industry. <br /> <br /> His songs
-          often reflect the struggles and triumphs of everyday life, capturing
-          the essence of Punjabi culture and traditions. With a career spanning
-          over two decades, Babu Maan has released numerous hit albums and
-          singles that have garnered him a massive fan following both in India
-          and abroad.
-        </p>
-      );
-    },
-  },
+// const cards = [
+//   {
+//     description: "Lana Del Rey",
+//     title: "Summertime Sadness",
+//     src: "https://assets.aceternity.com/demos/lana-del-rey.jpeg",
+//     ctaText: "Visit",
+//     ctaLink: "https://ui.aceternity.com/templates",
+//     content: () => {
+//       return (
+//         <p>
+//           Lana Del Rey, an iconic American singer-songwriter, is celebrated for
+//           her melancholic and cinematic music style. Born Elizabeth Woolridge
+//           Grant in New York City, she has captivated audiences worldwide with
+//           her haunting voice and introspective lyrics. <br /> <br /> Her songs
+//           often explore themes of tragic romance, glamour, and melancholia,
+//           drawing inspiration from both contemporary and vintage pop culture.
+//           With a career that has seen numerous critically acclaimed albums, Lana
+//           Del Rey has established herself as a unique and influential figure in
+//           the music industry, earning a dedicated fan base and numerous
+//           accolades.
+//         </p>
+//       );
+//     },
+//   },
+//   {
+//     description: "Babbu Maan",
+//     title: "Mitran Di Chhatri",
+//     src: "https://assets.aceternity.com/demos/babbu-maan.jpeg",
+//     ctaText: "Visit",
+//     ctaLink: "https://ui.aceternity.com/templates",
+//     content: () => {
+//       return (
+//         <p>
+//           Babu Maan, a legendary Punjabi singer, is renowned for his soulful
+//           voice and profound lyrics that resonate deeply with his audience. Born
+//           in the village of Khant Maanpur in Punjab, India, he has become a
+//           cultural icon in the Punjabi music industry. <br /> <br /> His songs
+//           often reflect the struggles and triumphs of everyday life, capturing
+//           the essence of Punjabi culture and traditions. With a career spanning
+//           over two decades, Babu Maan has released numerous hit albums and
+//           singles that have garnered him a massive fan following both in India
+//           and abroad.
+//         </p>
+//       );
+//     },
+//   },
 
-  {
-    description: "Metallica",
-    title: "For Whom The Bell Tolls",
-    src: "https://assets.aceternity.com/demos/metallica.jpeg",
+//   {
+//     description: "Metallica",
+//     title: "For Whom The Bell Tolls",
+//     src: "https://assets.aceternity.com/demos/metallica.jpeg",
+//     ctaText: "Visit",
+//     ctaLink: "https://ui.aceternity.com/templates",
+//     content: () => {
+//       return (
+//         <p>
+//           Metallica, an iconic American heavy metal band, is renowned for their
+//           powerful sound and intense performances that resonate deeply with
+//           their audience. Formed in Los Angeles, California, they have become a
+//           cultural icon in the heavy metal music industry. <br /> <br /> Their
+//           songs often reflect themes of aggression, social issues, and personal
+//           struggles, capturing the essence of the heavy metal genre. With a
+//           career spanning over four decades, Metallica has released numerous hit
+//           albums and singles that have garnered them a massive fan following
+//           both in the United States and abroad.
+//         </p>
+//       );
+//     },
+//   },
+//   {
+//     description: "Lord Himesh",
+//     title: "Aap Ka Suroor",
+//     src: "https://assets.aceternity.com/demos/aap-ka-suroor.jpeg",
+//     ctaText: "Visit",
+//     ctaLink: "https://ui.aceternity.com/templates",
+//     content: () => {
+//       return (
+//         <p>
+//           Himesh Reshammiya, a renowned Indian music composer, singer, and
+//           actor, is celebrated for his distinctive voice and innovative
+//           compositions. Born in Mumbai, India, he has become a prominent figure
+//           in the Bollywood music industry. <br /> <br /> His songs often feature
+//           a blend of contemporary and traditional Indian music, capturing the
+//           essence of modern Bollywood soundtracks. With a career spanning over
+//           two decades, Himesh Reshammiya has released numerous hit albums and
+//           singles that have garnered him a massive fan following both in India
+//           and abroad.
+//         </p>
+//       );
+//     },
+//   },
+// ];
+
+const cards = [];
+const orig_data = ProjectData.documents;
+for (let i = 0; i < orig_data.length; i++) {
+  cards.push({
+    description: orig_data[i].description,
+    title: orig_data[i].name,
+    src: orig_data[i].image_url || "/projects/"+ orig_data[i].image_name || "https://assets.aceternity.com/demos/lana-del-rey.jpeg",
     ctaText: "Visit",
-    ctaLink: "https://ui.aceternity.com/templates",
+    ctaLink: orig_data[i].GitHub,
     content: () => {
-      return (
-        <p>
-          Metallica, an iconic American heavy metal band, is renowned for their
-          powerful sound and intense performances that resonate deeply with
-          their audience. Formed in Los Angeles, California, they have become a
-          cultural icon in the heavy metal music industry. <br /> <br /> Their
-          songs often reflect themes of aggression, social issues, and personal
-          struggles, capturing the essence of the heavy metal genre. With a
-          career spanning over four decades, Metallica has released numerous hit
-          albums and singles that have garnered them a massive fan following
-          both in the United States and abroad.
-        </p>
-      );
+      return <p>{orig_data[i].long_description}</p>;
     },
-  },
-  {
-    description: "Lord Himesh",
-    title: "Aap Ka Suroor",
-    src: "https://assets.aceternity.com/demos/aap-ka-suroor.jpeg",
-    ctaText: "Visit",
-    ctaLink: "https://ui.aceternity.com/templates",
-    content: () => {
-      return (
-        <p>
-          Himesh Reshammiya, a renowned Indian music composer, singer, and
-          actor, is celebrated for his distinctive voice and innovative
-          compositions. Born in Mumbai, India, he has become a prominent figure
-          in the Bollywood music industry. <br /> <br /> His songs often feature
-          a blend of contemporary and traditional Indian music, capturing the
-          essence of modern Bollywood soundtracks. With a career spanning over
-          two decades, Himesh Reshammiya has released numerous hit albums and
-          singles that have garnered him a massive fan following both in India
-          and abroad.
-        </p>
-      );
-    },
-  },
-];
+  });
+}
