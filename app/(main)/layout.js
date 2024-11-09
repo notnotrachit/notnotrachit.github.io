@@ -23,8 +23,27 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+
+  function scrollElementToView(scrollToId) {
+    const element = document.querySelector(`#${scrollToId}`);
+
+    const elRect = element.getBoundingClientRect();
+
+    const scrollDistance = elRect.top + window.scrollY;
+    const offset = Number(element.getAttribute('data-scroll-to-view-offset')) || 0;
+
+    window.scrollTo({
+      top: scrollDistance + offset,
+      behavior: 'smooth'
+    })
+  }
   return (
-    <html lang="en" data-theme="night">
+    <html
+      lang="en"
+      data-theme="night"
+      className="scroll-smooth"
+      style={{ scrollBehavior: "smooth" }}
+    >
       <head>
         <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
         <link rel="icon" href="/profile.jpg" sizes="any" />
@@ -41,7 +60,7 @@ export default function RootLayout({ children }) {
           " overflow-x-hidden mb-24 lg:mb-12 text-base-content"
         }
       >
-        <div className="p-2 sticky z-50 top-0 bg-transparent">
+        <div className="p-2 sticky z-[45] top-0 bg-transparent">
           <AOSc />
           <div className="text-primary rounded-xl md:flex w-full px-[1%] backdrop-blur-2xl shadow-2xl shadow-primary border-2 border-primary">
             <div className="flex-cols md:flex-1 justify-center text-center md:text-left">
@@ -52,16 +71,24 @@ export default function RootLayout({ children }) {
             <div className="flex md:flex-none">
               <ul className="menu menu-horizontal px-1 justify-center">
                 <li>
-                  <Link href="/experience">Experience</Link>
+                  <Link href="#experience" scroll={false}>
+                    Experience
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/projects">Projects</Link>
+                  <Link href="#projects" scroll={false}>
+                    Projects
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/skills">Skills</Link>
+                  <Link href="#skills" scroll={false}>
+                    Skills
+                  </Link>
                 </li>
                 <li>
-                  <Link href="/education">Education</Link>
+                  <Link href="#education" scroll={false}>
+                    Education
+                  </Link>
                 </li>
                 <li>
                   <Link href="/blogs">Blog</Link>

@@ -8,7 +8,7 @@ export default async function blogs() {
     console.log(blogs);
 
     return (
-        <main className="bg-base-100">
+        <main className="">
             <div className="text-5xl w-full text-center py-5 font-bold underline">My Blogs</div>
 
             <div className="flex w-full justify-center">

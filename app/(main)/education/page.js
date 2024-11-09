@@ -16,6 +16,7 @@ const promise = databases.listDocuments(
 promise.then(
   function (response) {
     console.log("Got certificates");
+    console.log(response);
   },
   function (error) {
     console.log(error);

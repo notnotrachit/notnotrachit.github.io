@@ -80,7 +80,7 @@
       "URL": "https://deta.space/discovery/@dilutewater/learnrack",
       "description": "Youlearn is a platform for you to study from any youtube playlist like a course without distractions",
       "image_url": "https://cloud.appwrite.io/v1/storage/buckets/647080af0e056dcab189/files/647514ddcface9d04703/view?project=64707ef1e67c12fddb64&mode=admin",
-      "long_description": "YouTube is a popular platform that many people use to access educational resources, but it was not designed specifically for learning. One of the drawbacks of using YouTube for learning is that it does not offer features to track progress in real-time or provide visual motivation through tools like bar graphs. Additionally, the suggested videos that appear on the side of the page can be a distraction and disrupt the learner's focus. YouLearn is a platform that was created to address these issues and enhance the learning experience. It is specifically designed to optimize the learning process and provide a more focused, effective and enjoyable way to study.",
+      "long_description": "YouTube is a popular platform that many people use to access educational resources, but it was not designed specifically for learning. YouLearn is a platform that allows you to study from any YouTube playlist like a course without distractions.",
       "allow_embed": null,
       "image_name": null,
       "Tech_stack": ["Python", "Flask", "Javascript", "HTML", "CSS", "Tailwind"]

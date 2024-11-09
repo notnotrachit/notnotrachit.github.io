@@ -8,10 +8,14 @@ import Link from "next/link";
 import BlurIn from "@/components/magicui/blur-in";
 import ShineBorder from "@/components/magicui/shine-border";
 import ExperienceCard from "@/components/experience";
+import Skills from "@/components/skills";
 import {ExperienceTimeLine} from "@/components/ExpTimeline";
+import Education_Card from "@/components/education";
 
 import { Chakra_Petch, Press_Start_2P, Source_Code_Pro } from "next/font/google";
 import { ProjectCards } from "@/components/cards";
+import Certificates from "@/components/certificates";
+import certificate_data from "@/data/certifications.json";
 
 // const petch = Chakra_Petch({ subsets: ["latin"], display: 'swap', weight: '500', style: 'normal' });
 const petch = Source_Code_Pro({
@@ -185,7 +189,7 @@ export default function Home() {
             <span className="inline-flex">
               <picture className="mx-1">
                 <source
-                  srcset="https://fonts.gstatic.com/s/e/notoemoji/latest/1f44b/512.webp"
+                  srcSet="https://fonts.gstatic.com/s/e/notoemoji/latest/1f44b/512.webp"
                   type="image/webp"
                 />
                 <img
@@ -200,7 +204,7 @@ export default function Home() {
             BTech CSE at Bennett University (2022-2026){" "}
             <span className="inline-flex">
               <source
-                srcset="https://fonts.gstatic.com/s/e/notoemoji/latest/1f393/512.webp"
+                srcSet="https://fonts.gstatic.com/s/e/notoemoji/latest/1f393/512.webp"
                 type="image/webp"
               />
               <img
@@ -262,15 +266,59 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="text-3xl w-full text-center my-4">Community Experience</div>
-        <div className="-mt-20 flex justify-center">
-            {/* <ExperienceCard /> */}
-            <ExperienceTimeLine />
+        <div className="text-3xl w-full text-center my-4">
+          Community Experience
         </div>
-        <div className="mx-10 lg:mx-40">
+        <div className="lg:-mt-20 flex justify-center">
+          {/* <ExperienceCard /> */}
+          <ExperienceTimeLine />
+        </div>
+      </section>
+      <section className="py-16" id="projects">
+        <div className="text-5xl w-full text-center font-bold underline underline-offset-2">
+          Projects
+        </div>
+        <div className="mx-10 lg:mx-40 mt-16">
           <ProjectCards />
         </div>
       </section>
+      <section className="py-16" id="skills">
+          <div className="text-5xl w-full text-center font-bold underline underline-offset-2">
+            Skills
+          </div>
+          <div>
+            <Skills />
+          </div>
+      </section>
+
+      <section className="py-16" id="education">
+        <div className="text-5xl w-full text-center font-bold underline underline-offset-2 mb-8">
+          Education
+        </div>
+        <div className="flex justify-center">
+          <Education_Card />
+        </div>
+        {/* certifications */}
+          <div className="text-3xl w-full text-center my-4">Certifications</div>
+
+          <div className="flex justify-center gap-4 flex-wrap">
+            {certificate_data.documents.map((certificate) => (
+                <Certificates
+                  key={certificate.name}
+                  name={certificate.name}
+                  credetial_id={certificate.credetial_id}
+                  credential_url={certificate.credential_url}
+                  issued_on={certificate.issued_on}
+                  issuing_authority={certificate.issuing_authority}
+                  issuing_authority_url={certificate.issuing_authority_url}
+                  image_url={certificate.image_url}
+                  image_name={certificate.image_name}
+                />
+              ))
+            }
+          </div>
+      </section>
+
     </div>
   );
 }

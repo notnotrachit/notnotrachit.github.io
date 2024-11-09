@@ -16,6 +16,9 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
 body {
   color: rgb(var(--foreground-rgb));
   /* background: linear-gradient(
@@ -30,4 +33,20 @@ body {
 --radius: 100%;
 border-top-left-radius: var(--radius);
 border-top-right-radius: var(--radius);
+}
+
+@layer utilities {
+
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
+  }
 }
