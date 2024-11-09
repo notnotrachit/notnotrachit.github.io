@@ -283,12 +283,12 @@ export default function Home() {
         </div>
       </section>
       <section className="py-16" id="skills">
-          <div className="text-5xl w-full text-center font-bold underline underline-offset-2">
-            Skills
-          </div>
-          <div>
-            <Skills />
-          </div>
+        <div className="text-5xl w-full text-center font-bold underline underline-offset-2">
+          Skills
+        </div>
+        <div>
+          <Skills />
+        </div>
       </section>
 
       <section className="py-16" id="education">
@@ -299,26 +299,198 @@ export default function Home() {
           <Education_Card />
         </div>
         {/* certifications */}
-          <div className="text-3xl w-full text-center my-4">Certifications</div>
+        <div className="text-3xl w-full text-center my-4">Certifications</div>
 
-          <div className="flex justify-center gap-4 flex-wrap">
-            {certificate_data.documents.map((certificate) => (
-                <Certificates
-                  key={certificate.name}
-                  name={certificate.name}
-                  credetial_id={certificate.credetial_id}
-                  credential_url={certificate.credential_url}
-                  issued_on={certificate.issued_on}
-                  issuing_authority={certificate.issuing_authority}
-                  issuing_authority_url={certificate.issuing_authority_url}
-                  image_url={certificate.image_url}
-                  image_name={certificate.image_name}
-                />
-              ))
-            }
-          </div>
+        <div className="flex justify-center gap-4 flex-wrap">
+          {certificate_data.documents.map((certificate) => (
+            <Certificates
+              key={certificate.name}
+              name={certificate.name}
+              credetial_id={certificate.credetial_id}
+              credential_url={certificate.credential_url}
+              issued_on={certificate.issued_on}
+              issuing_authority={certificate.issuing_authority}
+              issuing_authority_url={certificate.issuing_authority_url}
+              image_url={certificate.image_url}
+              image_name={certificate.image_name}
+            />
+          ))}
+        </div>
       </section>
+      <section className="py-16" id="achievements">
+        <div className="text-5xl w-full text-center font-bold underline underline-offset-2 mb-8">
+          Achievements
+        </div>
+        <div className="flex justify-center gap-4 my-4 flex-wrap">
+          <div className="backdrop-blur-sm rounded-xl w-full lg:w-[48rem] p-5 flex gap-4 border-[0.3px] border-primary/50">
+            <div>
+              <Image
+                src="/achievements/185.webp"
+                alt="SheBuilds"
+                width={64}
+                height={64}
+                className="rounded-full"
+              />
+            </div>
+            <div>
+              <div className="w-full text-2xl font-semibold">
+                SheBuilds 2023
+              </div>
+              <div>
+                <span className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text text-lg">
+                  Special Mention
+                </span>
+              </div>
+              <div>
+                <span className="text-base">
+                  Team mates: Yash Singh, Vasvi Garg, Pratibha Dureja
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
 
+        <div className="flex justify-center gap-4 my-4 flex-wrap">
+          <div className="backdrop-blur-sm rounded-xl w-full lg:w-[48rem] p-5 flex gap-4 border-[0.3px] border-primary/50">
+            <div>
+              <Image
+                src="/achievements/onchain.webp"
+                alt="OnChain"
+                width={64}
+                height={64}
+                className="rounded-full"
+              />
+            </div>
+            <div>
+              <div className="w-full text-2xl font-semibold">
+                OnChain Summer Buildathon
+              </div>
+              <span className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text text-lg">
+                Discovery Track Winner
+              </span>
+              <div className="text-base">
+                Team mates: Yash Raj, Rakesh Sharma
+              </div>
+              <div>
+                <span className="text-lg"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex justify-center gap-4 my-4 flex-wrap">
+          <div className="backdrop-blur-sm rounded-xl w-full lg:w-[48rem] p-5 flex gap-4 border-[0.3px] border-primary/50">
+            <div>
+              <Image
+                src="/achievements/hedera.png"
+                alt="Hederahack"
+                width={64}
+                height={64}
+                className="rounded-full"
+              />
+            </div>
+            <div>
+              <div className="w-full text-2xl font-semibold">
+                Hedera Hello Future Hackathon
+              </div>
+              <span className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text text-lg">
+                2nd Runner Up in AI Track
+              </span>{" "}
+              <br />
+              <span className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text text-lg">
+                Fuelling Women&apos;s Innovation in Web3
+              </span>
+              <div className="text-base">
+                Team mates: Yash Raj, Rakesh Sharma, Urvashi Agarwal, Harshita
+                Malviya
+              </div>
+              <div>
+                <span className="text-lg"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex justify-center gap-4 my-4 flex-wrap">
+          <div className="backdrop-blur-sm rounded-xl w-full lg:w-[48rem] p-5 flex gap-4 border-[0.3px] border-primary/50">
+            <div>
+              <Image
+                src="/achievements/hopperhacks.png"
+                alt="HopperHacks"
+                width={64}
+                height={64}
+                className="rounded-full"
+              />
+            </div>
+            <div>
+              <div className="w-full text-2xl font-semibold">
+                HopperHacks 2024 by Stony Brook University
+              </div>
+              <span className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text text-lg">
+                Best Diversity & Inclusion Hack - Inclusion Under One Blanket
+              </span>
+              <div className="text-base">Team mates: Yash Raj, Aditya</div>
+              <div>
+                <span className="text-lg"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex justify-center gap-4 my-4 flex-wrap">
+          <div className="backdrop-blur-sm rounded-xl w-full lg:w-[48rem] p-5 flex gap-4 border-[0.3px] border-primary/50">
+            <div>
+              <Image
+                src="/achievements/qubit.png"
+                alt="Qubit"
+                width={64}
+                height={64}
+                className="rounded-full"
+              />
+            </div>
+
+            <div>
+              <div className="w-full text-2xl font-semibold">
+                QubitX Hacks by YCW
+              </div>
+              <span className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text text-lg">
+                2nd Runner Up
+              </span>
+              <div className="text-base">Team mates: Yash Raj, Aditya</div>
+              <div>
+                <span className="text-lg"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex justify-center gap-4 my-4 flex-wrap">
+          <div className="backdrop-blur-sm rounded-xl w-full lg:w-[48rem] p-5 flex gap-4 border-[0.3px] border-primary/50">
+            <div>
+              <Image
+                src="/achievements/hackcbs6.webp"
+                alt="Qubit"
+                width={64}
+                height={64}
+                className="rounded-full"
+              />
+            </div>
+
+            <div>
+              <div className="w-full text-2xl font-semibold">
+                HackCBS 6.0
+              </div>
+              <span className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text text-lg">
+                Domain track from GoDaddy
+              </span>
+              <div className="text-base">Team mates: Khushi, Ashish Kumar Verma</div>
+              <div>
+                <span className="text-lg"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
