@@ -181,7 +181,7 @@ export function ProjectCards() {
             layoutId={`card-${card.title}-${id}`}
             key={card.title}
             onClick={() => setActive(card)}
-            className="p-4 flex flex-col bg-primary/50 rounded-xl cursor-pointer mt-36 backdrop-blur-md"
+            className="p-4 flex flex-col bg-primary/30 border-2 border-primary rounded-xl cursor-pointer mt-36 backdrop-blur-md"
           >
             <div className="flex gap-4 flex-col  w-full">
               <motion.div layoutId={`image-${card.title}-${id}`}>
