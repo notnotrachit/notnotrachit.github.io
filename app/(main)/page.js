@@ -9,13 +9,18 @@ import BlurIn from "@/components/magicui/blur-in";
 import ShineBorder from "@/components/magicui/shine-border";
 import ExperienceCard from "@/components/experience";
 import Skills from "@/components/skills";
-import {ExperienceTimeLine} from "@/components/ExpTimeline";
+import { ExperienceTimeLine } from "@/components/ExpTimeline";
 import Education_Card from "@/components/education";
 
-import { Chakra_Petch, Press_Start_2P, Source_Code_Pro } from "next/font/google";
+import {
+  Chakra_Petch,
+  Press_Start_2P,
+  Source_Code_Pro,
+} from "next/font/google";
 import { ProjectCards } from "@/components/cards";
 import Certificates from "@/components/certificates";
 import certificate_data from "@/data/certifications.json";
+import { LinkPreview } from "@/components/ui/link-preview";
 
 // const petch = Chakra_Petch({ subsets: ["latin"], display: 'swap', weight: '500', style: 'normal' });
 const petch = Source_Code_Pro({
@@ -26,8 +31,6 @@ const petch = Source_Code_Pro({
 });
 
 export default function Home() {
-
-
   useEffect(() => {
     new TypeIt("#element", {
       lifeLike: false,
@@ -201,7 +204,8 @@ export default function Home() {
               </picture>
             </span>
             , I am Rachit Khurana, a full stack developer. Currently pursuing
-            BTech CSE at Bennett University (2022-2026){" "}
+            BTech CSE at Bennett University (2022-2026) . I am also a freelance
+            developer and a technical writer.
             <span className="inline-flex">
               <source
                 srcSet="https://fonts.gstatic.com/s/e/notoemoji/latest/1f393/512.webp"
@@ -214,17 +218,26 @@ export default function Home() {
                 height="20"
               />
             </span>
-            . I am also a Microsoft Learn Student Ambassador
+            . I am the Lead of FOSS Club at Bennett University and a Microsoft
+            Learn Student Ambassador{" "}
             <span className="inline-flex">
               <img src="./mlsa.png" alt="🎓" width="20" height="20" />
             </span>
-            . Currently exploring the cloud computing field ☁️. I am also a FOSS
-            enthusiast.
+            . Currently exploring the cloud computing field ☁️.
             <br />
             <br />I love to build stuff and learn new technologies.
           </div>
         </div>
       </div>
+      <a
+        href="https://rachitkhurana.tech/resume.pdf"
+        target="_blank"
+        className="flex justify-center mt-4"
+      >
+        <button className="inline-flex h-12 animate-shimmer items-center justify-center rounded border border-primary bg-[linear-gradient(110deg,#2884ad,45%,#38BCF8,55%,#2884ad)] bg-[length:200%_100%] px-6 font-medium text-white focus:outline-none hover:scale-110 transition-all ease-in-out">
+          Resume
+        </button>
+      </a>
 
       <section className="py-16" id="experience">
         <div className="text-5xl w-full text-center font-bold underline underline-offset-2">
@@ -477,13 +490,13 @@ export default function Home() {
             </div>
 
             <div>
-              <div className="w-full text-2xl font-semibold">
-                HackCBS 6.0
-              </div>
+              <div className="w-full text-2xl font-semibold">HackCBS 6.0</div>
               <span className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text text-lg">
                 Domain track from GoDaddy
               </span>
-              <div className="text-base">Team mates: Khushi, Ashish Kumar Verma</div>
+              <div className="text-base">
+                Team mates: Khushi, Ashish Kumar Verma
+              </div>
               <div>
                 <span className="text-lg"></span>
               </div>

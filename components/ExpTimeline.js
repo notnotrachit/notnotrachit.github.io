@@ -22,10 +22,10 @@ export function ExperienceTimeLine() {
               <span className="text-sm font-medium mr-2 px-2.5 py-0.5 rounded bg-blue-900 text-blue-300 ml-6 mb-3">
                 Ongoing
               </span>
-              <time className="block mb-1 ml-6 mt-3 text-sm font-normal leading-none text-gray-500">
+              <time className="block mb-1 ml-6 mt-3 text-sm font-normal leading-none text-content">
                 September, 2024
               </time>
-              <p className="text-xl mb-2 ml-6 font-normal text-gray-500 dark:text-gray-400">
+              <p className="text-xl mb-2 ml-6 font-normal text-gray-200">
                 Lead
               </p>
             </div>
@@ -58,10 +58,10 @@ export function ExperienceTimeLine() {
               <span className="text-sm font-medium mr-2 px-2.5 py-0.5 rounded bg-blue-900 text-blue-300 ml-6 mb-3">
                 Ongoing
               </span>
-              <time className="block mb-1 ml-6 mt-3 text-sm font-normal leading-none text-gray-500">
+              <time className="block mb-1 ml-6 mt-3 text-sm font-normal leading-none text-content">
                 14th September, 2023
               </time>
-              <p className="text-xl mb-2 ml-6 font-normal text-gray-500 dark:text-gray-400">
+              <p className="text-xl mb-2 ml-6 font-normal text-gray-200">
                 Beta MLSA
               </p>
               <time className="block mb-1 ml-6 text-sm font-normal leading-none text-gray-500">
@@ -98,10 +98,10 @@ export function ExperienceTimeLine() {
               alt="CSI"
             />
             <div>
-              <time className="block mb-1 ml-6 mt-3 text-sm font-normal leading-none text-gray-500">
+              <time className="block mb-1 ml-6 mt-3 text-sm font-normal leading-none text-content">
                 November 2022 - August 2023
               </time>
-              <p className="text-xl mb-2 ml-6 font-normal text-gray-500 dark:text-gray-400">
+              <p className="text-xl mb-2 ml-6 font-normal text-gray-200">
                 Chief of Tech
               </p>
               <time className="block mb-1 ml-6 text-sm font-normal leading-none text-gray-500">

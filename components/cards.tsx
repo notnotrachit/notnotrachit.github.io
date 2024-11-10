@@ -153,6 +153,22 @@ export function ProjectCards() {
                       ? active.content()
                       : active.content}
                   </motion.div>
+                    {/* url button */}
+                  {active.url && (
+                  <div className="flex justify-center items-center">
+                    <motion.a
+                      layout
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      href={active.url}
+                      target="_blank"
+                      className="px-4 py-3 text-sm rounded font-bold bg-green-500 text-white mb-4"
+                    >
+                      Visit
+                    </motion.a>
+                  </div>
+                  )}
                 </div>
               </div>
             </motion.div>
@@ -293,6 +309,7 @@ for (let i = 0; i < orig_data.length; i++) {
     ctaText: "GitHub",
     ctaLink: orig_data[i].GitHub,
     techStack: orig_data[i].Tech_stack,
+    url: orig_data[i].URL,
     content: () => {
       return <p>{orig_data[i].long_description}</p>;
     },
