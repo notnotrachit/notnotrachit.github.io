@@ -71,31 +71,31 @@ export default function RootLayout({ children }) {
             <div className="flex md:flex-none">
               <ul className="menu menu-horizontal px-1 justify-center">
                 <li>
-                  <Link href="#experience" scroll={false}>
+                  <Link href="/#experience" scroll={false}>
                     Experience
                   </Link>
                 </li>
                 <li>
-                  <Link href="#projects" scroll={false}>
+                  <Link href="/#projects" scroll={false}>
                     Projects
                   </Link>
                 </li>
                 <li>
-                  <Link href="#skills" scroll={false}>
+                  <Link href="/#skills" scroll={false}>
                     Skills
                   </Link>
                 </li>
                 <li>
-                  <Link href="#education" scroll={false}>
+                  <Link href="/#education" scroll={false}>
                     Education
                   </Link>
                 </li>
                 <li>
                   <Link href="/blogs">Blog</Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link href="/contact">Contact</Link>
-                </li>
+                </li> */}
               </ul>
             </div>
           </div>

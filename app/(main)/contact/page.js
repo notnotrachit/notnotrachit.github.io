@@ -3,7 +3,7 @@ import { FaLinkedin, FaTwitter, FaMastodon } from "react-icons/fa";
 export default async function contact() {
   return (
     <main>
-      <div className="hero bg-base-100">
+      <div className="hero">
         <div className="hero-content flex-col lg:flex-row">
           <div className="text-center lg:text-center" data-aos="zoom-in">
             <h1 className="text-5xl font-bold">Contact Me!</h1>
