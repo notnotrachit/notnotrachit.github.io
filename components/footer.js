@@ -18,16 +18,24 @@ export default function FooterDock() {
       <div className="fixed bottom-5 left-0 w-full flex justify-center">
         <Dock magnification={60} distance={100}>
           <DockIcon className="p-1">
-            <FaGithub className="size-full text-3xl" />
+            <a href="https://github.com/notnotrachit" target="_blank">
+              <FaGithub className="size-full text-3xl" />
+            </a>
           </DockIcon>
           <DockIcon className="p-1">
-            <BsTwitterX className="size-full text-3xl" />
+            <a href="https://x.com/notnotrachit" target="_blank">
+              <BsTwitterX className="size-full text-3xl" />
+            </a>
           </DockIcon>
           <DockIcon className="p-1">
-            <FaLinkedin className="size-full text-3xl" />
+            <a href="https://www.linkedin.com/in/rachitkhurana1" target="_blank">
+              <FaLinkedin className="size-full text-3xl" />
+            </a>
           </DockIcon>
           <DockIcon className="p-1">
-            <SiLinktree className="size-full text-3xl" />
+            <a href="/links" target="_blank">
+              <SiLinktree className="size-full text-3xl" />
+            </a>
           </DockIcon>
         </Dock>
       </div>
