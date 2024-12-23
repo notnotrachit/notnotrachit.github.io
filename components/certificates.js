@@ -3,7 +3,7 @@ export default function Certificates(props) {
   const date = new Date(props.issued_on);
   const date_string = date.toDateString().split(" ").slice(1).join(" ");
   return (
-    <div className="card w-80 bg-neutral shadow-xl" data-aos="zoom-in-up">
+    <div className="card w-80 backdrop-blur-xl shadow-xl border border-primary" data-aos="zoom-in-up">
       <figure>
         {props.image_name ? (
           <Image

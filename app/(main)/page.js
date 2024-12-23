@@ -245,7 +245,40 @@ export default function Home() {
         </div>
         <div className="text-3xl w-full text-center my-4">Work Experience</div>
         <div className="my-8">
-          <div className="flex justify-center">
+          <div className="flex justify-center my-4">
+            <ShineBorder color="#38BCF8">
+              <div className="backdrop-blur-sm rounded-xl w-full lg:w-[48rem] p-5 flex gap-4 border-[0.3px] border-primary/50">
+                <div>
+                  <Image
+                    src="/hyathi_technologies_logo.jpeg"
+                    alt="Hyathi Technologies"
+                    width={250}
+                    height={250}
+                    className="rounded-full w-28"
+                  />
+                </div>
+                <div>
+                  <div className="w-full text-2xl font-semibold">
+                    Hyathi Technologies
+                  </div>
+                  <div>
+                    <span className="text-lg italic">
+                      December 2024 - Present{" "}
+                    </span>
+                    <br />
+                    <span className="text-lg">
+                      Role: Full Stack & Web3 Developer Intern{" "}
+                    </span>
+                  </div>
+                  <div className="">
+                    As a full stack and web3 developer intern I will work on a
+                    variety of projects and tech stacks.
+                  </div>
+                </div>
+              </div>
+            </ShineBorder>
+          </div>
+          <div className="flex justify-center my-4">
             <ShineBorder color="#38BCF8">
               <div className="backdrop-blur-sm rounded-xl w-full lg:w-[48rem] p-5 flex gap-4 border-[0.3px] border-primary/50">
                 <div>
@@ -262,6 +295,8 @@ export default function Home() {
                     ClearMind AI
                   </div>
                   <div>
+                    <span className="text-lg italic">Jun 2023 - Aug 2023</span>
+                    <br />
                     <span className="text-lg">
                       Role: Full Stack Developer Intern{" "}
                     </span>
