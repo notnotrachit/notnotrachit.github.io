@@ -282,10 +282,10 @@ export default async function links() {
           </a>
 
           <a
-            href="upi://pay?pa=rachitkhurana@pingpay&cu=INR"
+            href="upi://pay?pa=rachit.khurana@superyes&cu=INR"
             className="tooltip tooltip-bottom tooltip-primary"
             target="_blank"
-            data-tip="UPI: rachitkhurana@pingpay"
+            data-tip="UPI: rachit.khurana@superyes"
           >
             <button className="hover:bg-primary hover:text-primary-content rounded-xl transition-all ease-in-out p-2 text-5xl">
               <FaQrcode className="mx-auto" />
