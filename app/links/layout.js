@@ -1,6 +1,7 @@
 import "app/(main)/globals.css";
 import { Poppins } from "next/font/google";
 import Analytics from "@/components/analytics";
+import RetroGrid from "../../components/magicui/retro-grid";
 
 const poppins = Poppins({ subsets: ["latin"],display: 'swap', weight: '500', style: 'normal' });
 
@@ -34,7 +35,9 @@ export default function RootLayout({ children }) {
       >
 
         {children}
-
+        <div className="fixed top-0 left-0 w-full h-full -z-20">
+          <RetroGrid />
+        </div>
       </body>
     </html>
   );
