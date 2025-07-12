@@ -2,16 +2,18 @@ import "./globals.css";
 import { Poppins } from "next/font/google";
 import Link from "next/link";
 import AOSc from "@/components/aos";
-import { FaGithub, FaLinkedin, FaTwitter, FaMastodon } from 'react-icons/fa'
+import { FaGithub, FaLinkedin, FaTwitter, FaMastodon } from "react-icons/fa";
 import { FaSquareXTwitter } from "react-icons/fa6";
 import Analytics from "@/components/analytics";
 import RetroGrid from "@/components/magicui/retro-grid";
 import FooterDock from "@/components/footer";
 
-
-
-
-const poppins = Poppins({ subsets: ["latin"],display: 'swap', weight: '500', style: 'normal' });
+const poppins = Poppins({
+  subsets: ["latin"],
+  display: "swap",
+  weight: "500",
+  style: "normal",
+});
 
 export const metadata = {
   title: "Rachit Khurana",
@@ -23,19 +25,19 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-
   function scrollElementToView(scrollToId) {
     const element = document.querySelector(`#${scrollToId}`);
 
     const elRect = element.getBoundingClientRect();
 
     const scrollDistance = elRect.top + window.scrollY;
-    const offset = Number(element.getAttribute('data-scroll-to-view-offset')) || 0;
+    const offset =
+      Number(element.getAttribute("data-scroll-to-view-offset")) || 0;
 
     window.scrollTo({
       top: scrollDistance + offset,
-      behavior: 'smooth'
-    })
+      behavior: "smooth",
+    });
   }
   return (
     <html
@@ -52,6 +54,9 @@ export default function RootLayout({ children }) {
           name="google-site-verification"
           content="zqYE4zRgKDrWS1JQzTGYub-w6p8EsdBN71nyGr_Mpb8"
         />
+        <a rel="me" href="https://mastodon.social/@notnotrachit">
+          Mastodon
+        </a>
         <Analytics />
       </head>
       <body
