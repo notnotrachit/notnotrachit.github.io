@@ -15,8 +15,8 @@ import { SiLinktree } from "react-icons/si";
 
 export default function FooterDock() {
     return (
-      <div className="fixed bottom-5 left-0 w-full flex justify-center">
-        <Dock magnification={60} distance={100}>
+      <div className="fixed bottom-5 left-0 w-full flex justify-center pointer-events-none">
+        <Dock magnification={60} distance={100} className="pointer-events-auto">
           <DockIcon className="p-1">
             <a href="https://github.com/notnotrachit" target="_blank">
               <FaGithub className="size-full text-3xl" />
@@ -28,7 +28,10 @@ export default function FooterDock() {
             </a>
           </DockIcon>
           <DockIcon className="p-1">
-            <a href="https://www.linkedin.com/in/rachitkhurana1" target="_blank">
+            <a
+              href="https://www.linkedin.com/in/rachitkhurana1"
+              target="_blank"
+            >
               <FaLinkedin className="size-full text-3xl" />
             </a>
           </DockIcon>

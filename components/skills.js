@@ -12,86 +12,105 @@ export default function Skills() {
       <div className="flex justify-center" data-aos="zoom-in-up">
         <div className="flex justify-center w-3/4">
           <div className="flex justify-evenly w-full flex-wrap">
-            <div>
+            <div className="group cursor-pointer">
               <Image
                 src="https://img.icons8.com/color/96/000000/python--v1.png"
                 alt="Python"
                 width={96}
                 height={96}
+                className="transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
               />
-              <p className="text-center">Python</p>
+              <p className="text-center transition-colors duration-300 group-hover:text-primary">Python</p>
             </div>
-            <div>
+            <div className="group cursor-pointer">
               <Image
                 src="https://img.icons8.com/color/96/000000/javascript--v1.png"
                 alt="Javascript"
                 width={96}
                 height={96}
+                className="transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
               />
-              <p className="text-center">JavaScript</p>
+              <p className="text-center transition-colors duration-300 group-hover:text-primary">JavaScript</p>
             </div>
-            <div>
+            <div className="group cursor-pointer">
               <Image
                 src="https://img.icons8.com/color/96/000000/java-coffee-cup-logo--v1.png"
                 alt="Java"
                 width={96}
                 height={96}
+                className="transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
               />
-              <p className="text-center">Java</p>
+              <p className="text-center transition-colors duration-300 group-hover:text-primary">Java</p>
             </div>
-            <div>
+            <div className="group cursor-pointer">
+              <Image
+                src="https://img.icons8.com/color/96/000000/golang.png"
+                alt="Golang"
+                width={96}
+                height={96}
+                className="transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
+              />
+              <p className="text-center transition-colors duration-300 group-hover:text-primary">Golang</p>
+            </div>
+            <div className="group cursor-pointer">
               <Image
                 src="https://img.icons8.com/color/96/c-plus-plus-logo.png"
                 alt="c++"
                 width={96}
                 height={96}
+                className="transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
               />
-              <p className="text-center">C++</p>
+              <p className="text-center transition-colors duration-300 group-hover:text-primary">C++</p>
             </div>
-            <div>
+            <div className="group cursor-pointer">
               <Image
                 src="https://img.icons8.com/color/96/000000/css3.png"
                 alt="CSS"
                 width={96}
                 height={96}
+                className="transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
               />
-              <p className="text-center">CSS</p>
+              <p className="text-center transition-colors duration-300 group-hover:text-primary">CSS</p>
             </div>
-            <div>
+            <div className="group cursor-pointer">
               <Image
                 src="https://img.icons8.com/color/96/000000/html-5--v1.png"
                 alt="HTML"
                 width={96}
                 height={96}
+                className="transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
               />
-              <p className="text-center">HTML</p>
+              <p className="text-center transition-colors duration-300 group-hover:text-primary">HTML</p>
             </div>
-            <div>
+            <div className="group cursor-pointer">
               <Image
                 src="https://img.icons8.com/color/96/000000/mongodb.png"
                 alt="MongoDB"
                 width={96}
                 height={96}
+                className="transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
               />
-              <p className="text-center">MongoDB</p>
+              <p className="text-center transition-colors duration-300 group-hover:text-primary">MongoDB</p>
             </div>
-            <div>
+            <div className="group cursor-pointer">
               <Image
                 src="https://img.icons8.com/?size=96&id=38561&format=png"
                 alt="Postgres"
                 width={96}
                 height={96}
+                className="transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
               />
-              <p className="text-center">Postgres</p>
+              <p className="text-center transition-colors duration-300 group-hover:text-primary">Postgres</p>
             </div>
-            <div>
+            <div className="group cursor-pointer">
               <Image
                 src="https://img.icons8.com/?size=512&id=UFXRpPFebwa2&format=png"
                 alt="MySQL"
                 width={96}
                 height={96}
+                className="transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
               />
-              <p className="text-center">MySQL</p>
+              <p className="text-center transition-colors duration-300 group-hover:text-primary">MySQL</p>
             </div>
           </div>
         </div>
@@ -102,52 +121,65 @@ export default function Skills() {
       <div className="flex justify-center" data-aos="zoom-in-up">
         <div className="flex justify-center w-3/4">
           <div className="flex justify-evenly w-full flex-wrap">
-            <div>
+            <div className="group cursor-pointer">
               <Image
                 src="https://img.icons8.com/color/96/000000/django.png"
                 alt="Django"
                 width={96}
                 height={96}
+                className="transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
               />
-              <p className="text-center">Django</p>
+              <p className="text-center transition-colors duration-300 group-hover:text-primary">Django</p>
             </div>
-            <div>
+            <div className="group cursor-pointer">
               <Image
                 src="https://img.icons8.com/96/ffffff/flask"
                 alt="Flask"
                 width={96}
                 height={96}
+                className="transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
               />
-              <p className="text-center">Flask</p>
+              <p className="text-center transition-colors duration-300 group-hover:text-primary">Flask</p>
             </div>
-            <div>
+            <div className="group cursor-pointer">
               <Image
                 src="/skills/fastapi.svg"
                 alt="FastAPI"
                 width={96}
                 height={96}
+                className="transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
               />
-              <p className="text-center">FastAPI</p>
+              <p className="text-center transition-colors duration-300 group-hover:text-primary">FastAPI</p>
             </div>
-            <div>
+            <div className="group cursor-pointer">
               <Image
                 src="/skills/nextjs.svg"
                 alt="Nextjs"
                 width={96}
                 height={96}
-                className="bg-white rounded-full"
+                className="bg-white rounded-full transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
               />
-              <p className="text-center">NextJS</p>
+              <p className="text-center transition-colors duration-300 group-hover:text-primary">NextJS</p>
             </div>
             <div>
               <Image
                 src="https://img.icons8.com/color/96/react-native.png"
-                alt="Nextjs"
+                alt="React"
                 width={96}
                 height={96}
                 className="rounded-full"
               />
               <p className="text-center">ReactJS</p>
+            </div>
+            <div>
+              <Image
+                src="https://img.icons8.com/color/96/react-native.png"
+                alt="React Native"
+                width={96}
+                height={96}
+                className="rounded-full"
+              />
+              <p className="text-center">React Native</p>
             </div>
             <div>
               <Image

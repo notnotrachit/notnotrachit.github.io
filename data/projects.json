@@ -12,6 +12,16 @@
       "Tech_stack": ["NextJS", "Solidity", "Hedera", "AI"]
     },
     {
+      "name": "Sharepal",
+      "GitHub": "https://github.com/notnotrachit/sharepal",
+      "description": "A simple group expense splitting platform.",
+      "image_url": "https://fra.cloud.appwrite.io/v1/storage/buckets/647080af0e056dcab189/files/687e7c4d002b3f558a00/view?project=64707ef1e67c12fddb64&mode=admin",
+      "long_description": "A simple group expense splitting platform.",
+      "allow_embed": false,
+      "image_name": null,
+      "Tech_stack": ["GoLang", "React Native", "MongoDB", "S3"]
+    },
+    {
       "name": "Re-Dcrypt",
       "GitHub": "https://github.com/Re-Dcrypt/redcrypt",
       "URL": "https://redcrypt.azurewebsites.net/",

@@ -20,6 +20,11 @@ import {
 import { ProjectCards } from "@/components/cards";
 import Certificates from "@/components/certificates";
 import certificate_data from "@/data/certifications.json";
+import achievement_data from "@/data/achievements.json";
+import AchievementCard from "@/components/achievements";
+import BackToTop from "@/components/back-to-top";
+import ScrollProgress from "@/components/scroll-progress";
+import SectionDivider from "@/components/section-divider";
 import { LinkPreview } from "@/components/ui/link-preview";
 
 // const petch = Chakra_Petch({ subsets: ["latin"], display: 'swap', weight: '500', style: 'normal' });
@@ -144,6 +149,7 @@ export default function Home() {
 
   return (
     <div className="bg-opacity-0">
+      <ScrollProgress />
       <div className="flex justify-center py-16 bg-opacity-0 bg-white ">
         <div className="flex flex-col lg:flex-row">
           <div className="flex justify-center">
@@ -245,9 +251,9 @@ export default function Home() {
         </div>
         <div className="text-3xl w-full text-center my-4">Work Experience</div>
         <div className="my-8">
-          <div className="flex justify-center my-4">
+          <div className="flex justify-center my-4  transition-all duration-300 hover:scale-105">
             <ShineBorder color="#38BCF8">
-              <div className="backdrop-blur-sm rounded-xl w-full lg:w-[48rem] p-5 flex gap-4 border-[0.3px] border-primary/50">
+              <div className="backdrop-blur-sm rounded-xl w-full lg:w-[48rem] p-5 flex gap-4 border-[0.3px] border-primary/50 hover:border-primary/80">
                 <div>
                   <Image
                     src="/hyathi_technologies_logo.jpeg"
@@ -278,9 +284,9 @@ export default function Home() {
               </div>
             </ShineBorder>
           </div>
-          <div className="flex justify-center my-4">
+          <div className="flex justify-center my-4  transition-all duration-300 hover:scale-105">
             <ShineBorder color="#38BCF8">
-              <div className="backdrop-blur-sm rounded-xl w-full lg:w-[48rem] p-5 flex gap-4 border-[0.3px] border-primary/50">
+              <div className="backdrop-blur-sm rounded-xl w-full lg:w-[48rem] p-5 flex gap-4 border-[0.3px] border-primary/50 hover:border-primary/80">
                 <div>
                   <Image
                     src="/clearai.jpeg"
@@ -315,13 +321,15 @@ export default function Home() {
         </div>
 
         <div className="text-3xl w-full text-center my-4">
-          Community Experience
+          Leadership & Community
         </div>
-        <div className="lg:-mt-20 flex justify-center">
-          {/* <ExperienceCard /> */}
-          <ExperienceTimeLine />
+        <div className="flex justify-center">
+          <div className="w-full max-w-5xl">
+            <ExperienceTimeLine />
+          </div>
         </div>
       </section>
+      <SectionDivider />
       <section className="py-16" id="projects">
         <div className="text-5xl w-full text-center font-bold underline underline-offset-2">
           Projects
@@ -338,6 +346,7 @@ export default function Home() {
           <Skills />
         </div>
       </section>
+      <SectionDivider />
 
       <section className="py-16" id="education">
         <div className="text-5xl w-full text-center font-bold underline underline-offset-2 mb-8">
@@ -369,176 +378,15 @@ export default function Home() {
         <div className="text-5xl w-full text-center font-bold underline underline-offset-2 mb-8">
           Achievements
         </div>
-        <div className="flex justify-center gap-4 my-4 flex-wrap">
-          <div className="backdrop-blur-sm rounded-xl w-full lg:w-[48rem] p-5 flex gap-4 border-[0.3px] border-primary/50">
-            <div>
-              <Image
-                src="/achievements/185.webp"
-                alt="SheBuilds"
-                width={64}
-                height={64}
-                className="rounded-full"
-              />
-            </div>
-            <div>
-              <div className="w-full text-2xl font-semibold">
-                SheBuilds 2023
-              </div>
-              <div>
-                <span className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text text-lg">
-                  Special Mention
-                </span>
-              </div>
-              <div>
-                <span className="text-base">
-                  Team mates: Yash Singh, Vasvi Garg, Pratibha Dureja
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex justify-center gap-4 my-4 flex-wrap">
-          <div className="backdrop-blur-sm rounded-xl w-full lg:w-[48rem] p-5 flex gap-4 border-[0.3px] border-primary/50">
-            <div>
-              <Image
-                src="/achievements/onchain.webp"
-                alt="OnChain"
-                width={64}
-                height={64}
-                className="rounded-full"
-              />
-            </div>
-            <div>
-              <div className="w-full text-2xl font-semibold">
-                OnChain Summer Buildathon
-              </div>
-              <span className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text text-lg">
-                Discovery Track Winner
-              </span>
-              <div className="text-base">
-                Team mates: Yash Raj, Rakesh Sharma
-              </div>
-              <div>
-                <span className="text-lg"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex justify-center gap-4 my-4 flex-wrap">
-          <div className="backdrop-blur-sm rounded-xl w-full lg:w-[48rem] p-5 flex gap-4 border-[0.3px] border-primary/50">
-            <div>
-              <Image
-                src="/achievements/hedera.png"
-                alt="Hederahack"
-                width={64}
-                height={64}
-                className="rounded-full"
-              />
-            </div>
-            <div>
-              <div className="w-full text-2xl font-semibold">
-                Hedera Hello Future Hackathon
-              </div>
-              <span className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text text-lg">
-                2nd Runner Up in AI Track
-              </span>{" "}
-              <br />
-              <span className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text text-lg">
-                Fuelling Women&apos;s Innovation in Web3
-              </span>
-              <div className="text-base">
-                Team mates: Yash Raj, Rakesh Sharma, Urvashi Agarwal, Harshita
-                Malviya
-              </div>
-              <div>
-                <span className="text-lg"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex justify-center gap-4 my-4 flex-wrap">
-          <div className="backdrop-blur-sm rounded-xl w-full lg:w-[48rem] p-5 flex gap-4 border-[0.3px] border-primary/50">
-            <div>
-              <Image
-                src="/achievements/hopperhacks.png"
-                alt="HopperHacks"
-                width={64}
-                height={64}
-                className="rounded-full"
-              />
-            </div>
-            <div>
-              <div className="w-full text-2xl font-semibold">
-                HopperHacks 2024 by Stony Brook University
-              </div>
-              <span className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text text-lg">
-                Best Diversity & Inclusion Hack - Inclusion Under One Blanket
-              </span>
-              <div className="text-base">Team mates: Yash Raj, Aditya</div>
-              <div>
-                <span className="text-lg"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex justify-center gap-4 my-4 flex-wrap">
-          <div className="backdrop-blur-sm rounded-xl w-full lg:w-[48rem] p-5 flex gap-4 border-[0.3px] border-primary/50">
-            <div>
-              <Image
-                src="/achievements/qubit.png"
-                alt="Qubit"
-                width={64}
-                height={64}
-                className="rounded-full"
-              />
-            </div>
-
-            <div>
-              <div className="w-full text-2xl font-semibold">
-                QubitX Hacks by YCW
-              </div>
-              <span className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text text-lg">
-                2nd Runner Up
-              </span>
-              <div className="text-base">Team mates: Yash Raj, Aditya</div>
-              <div>
-                <span className="text-lg"></span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="flex justify-center gap-4 my-4 flex-wrap">
-          <div className="backdrop-blur-sm rounded-xl w-full lg:w-[48rem] p-5 flex gap-4 border-[0.3px] border-primary/50">
-            <div>
-              <Image
-                src="/achievements/hackcbs6.webp"
-                alt="Qubit"
-                width={64}
-                height={64}
-                className="rounded-full"
-              />
-            </div>
-
-            <div>
-              <div className="w-full text-2xl font-semibold">HackCBS 6.0</div>
-              <span className="bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400 inline-block text-transparent bg-clip-text text-lg">
-                Domain track from GoDaddy
-              </span>
-              <div className="text-base">
-                Team mates: Khushi, Ashish Kumar Verma
-              </div>
-              <div>
-                <span className="text-lg"></span>
-              </div>
-            </div>
+        <div className="flex justify-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-6xl px-4">
+            {achievement_data.achievements.map((achievement, index) => (
+              <AchievementCard key={index} achievement={achievement} />
+            ))}
           </div>
         </div>
       </section>
+      <BackToTop />
     </div>
   );
 }

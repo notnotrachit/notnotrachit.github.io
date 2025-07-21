@@ -134,6 +134,8 @@ export function ProjectCards() {
                           ? "bg-blue-500"
                           : tech === "FastAPI"
                           ? "bg-[#079789]"
+                          : tech === "GoLang"
+                          ? "bg-[#6AD6E3]"
                           : "bg-gray-500"
                       }`}
                     >
@@ -153,21 +155,21 @@ export function ProjectCards() {
                       ? active.content()
                       : active.content}
                   </motion.div>
-                    {/* url button */}
+                  {/* url button */}
                   {active.url && (
-                  <div className="flex justify-center items-center">
-                    <motion.a
-                      layout
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      href={active.url}
-                      target="_blank"
-                      className="px-4 py-3 text-sm rounded font-bold bg-green-500 text-white mb-4"
-                    >
-                      Visit
-                    </motion.a>
-                  </div>
+                    <div className="flex justify-center items-center">
+                      <motion.a
+                        layout
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        href={active.url}
+                        target="_blank"
+                        className="px-4 py-3 text-sm rounded font-bold bg-green-500 text-white mb-4"
+                      >
+                        Visit
+                      </motion.a>
+                    </div>
                   )}
                 </div>
               </div>
@@ -247,6 +249,8 @@ export function ProjectCards() {
                           ? "bg-blue-500"
                           : tech === "FastAPI"
                           ? "bg-[#079789]"
+                          : tech === "GoLang"
+                          ? "bg-[#6AD6E3]"
                           : "bg-gray-500"
                       }`}
                     >

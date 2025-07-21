@@ -1,6 +1,6 @@
 import TypeIt from "typeit-react";
 import { FaPython, FaJava } from "react-icons/fa";
-import { SiJavascript, SiCss3, SiHtml5, SiMongodb, SiPostgresql, SiDjango, SiFlask, SiFastapi, SiTailwindcss, SiLinux, SiFedora, SiGit, SiDocker, SiGithub } from "react-icons/si";
+import { SiJavascript, SiCss3, SiHtml5, SiMongodb, SiPostgresql, SiDjango, SiFlask, SiFastapi, SiTailwindcss, SiLinux, SiFedora, SiGit, SiDocker, SiGithub, SiGo, SiReact } from "react-icons/si";
 import { GrMysql } from "react-icons/gr";
 import { TbBrandNextjs } from "react-icons/tb";
 
@@ -20,6 +20,7 @@ export default function CliSkills() {
               <span className="flex gap-x-1"><FaPython size={'1rem'} className="mt-1 text-info"/>Python <span className="text-info">| </span> </span>
               <span className="flex gap-x-1"><SiJavascript size={'1rem'} className="mt-1 text-info"/>JavaScript <span className="text-info">| </span> </span>   
               <span className="flex gap-x-1"><FaJava size={'1rem'} className="mt-1 text-info"/>Java <span className="text-info">| </span> </span>
+              <span className="flex gap-x-1"><SiGo size={'1rem'} className="mt-1 text-info"/>Golang <span className="text-info">| </span> </span>
               <span className="flex gap-x-1"><SiHtml5 size={'1rem'} className="mt-1 text-info"/>HTML <span className="text-info">| </span> </span>
               <span className="flex gap-x-1"><SiCss3 size={'1rem'} className="mt-1 text-info"/>CSS <span className="text-info">| </span> </span>
               <span className="flex gap-x-1"><SiMongodb size={'1rem'} className="mt-1 text-info"/>MongoDB <span className="text-info">| </span> </span>
@@ -34,6 +35,7 @@ export default function CliSkills() {
               <span className="flex gap-x-1"><SiFlask size={'1rem'} className="mt-1 text-info"/>Flask <span className="text-info">| </span> </span>
               <span className="flex gap-x-1"><SiFastapi size={'1rem'} className="mt-1 text-info"/>FastAPI <span className="text-info">| </span> </span>
               <span className="flex gap-x-1"><TbBrandNextjs size={'1rem'} className="mt-1 text-info"/>Next.js <span className="text-info">| </span> </span>
+              <span className="flex gap-x-1"><SiReact size={'1rem'} className="mt-1 text-info"/>React Native <span className="text-info">| </span> </span>
               <span className="flex gap-x-1"><SiTailwindcss size={'1rem'} className="mt-1 text-info"/>Tailwind CSS</span>
             </div>
             <br />

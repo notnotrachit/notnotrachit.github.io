@@ -13,9 +13,9 @@ export function ExperienceTimeLine() {
           <div className="flex items-center">
             <Image
               src={"/foss.png"}
-              height={200}
-              width={200}
-              className="rounded-[2rem] w-36 lg:w-48"
+              height={150}
+              width={150}
+              className="rounded-[2rem] w-24 lg:w-32"
               alt="FOSS"
             />
             <div>
@@ -49,9 +49,9 @@ export function ExperienceTimeLine() {
           <div className="flex items-center">
             <Image
               src={"/mlsa.png"}
-              height={200}
-              width={200}
-              className="w-36 lg:w-48"
+              height={150}
+              width={150}
+              className="w-24 lg:w-32"
               alt="MLSA"
             />
             <div>
@@ -92,9 +92,9 @@ export function ExperienceTimeLine() {
           <div className="flex items-center">
             <Image
               src={"/csi.jpg"}
-              height={200}
-              width={200}
-              className="rounded-full w-36 lg:w-48"
+              height={150}
+              width={150}
+              className="rounded-full w-24 lg:w-32"
               alt="CSI"
             />
             <div>
@@ -134,9 +134,9 @@ export function ExperienceTimeLine() {
           <div className="flex items-center">
             <Image
               src={"/gdsc.svg"}
-              height={200}
-              width={200}
-              className="rounded-full w-36 lg:w-48"
+              height={150}
+              width={150}
+              className="rounded-full w-24 lg:w-32"
               alt="GDSC"
             />
             <div>

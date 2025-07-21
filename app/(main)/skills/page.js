@@ -41,6 +41,15 @@ export default function skills() {
             </div>
             <div>
               <Image
+                src="https://img.icons8.com/color/96/000000/golang.png"
+                alt="Golang"
+                width={96}
+                height={96}
+              />
+              <p className="text-center">Golang</p>
+            </div>
+            <div>
+              <Image
                 src="https://img.icons8.com/color/96/000000/css3.png"
                 alt="CSS"
                 width={96}
@@ -129,6 +138,26 @@ export default function skills() {
                 className="bg-white rounded-full"
               />
               <p className="text-center">NextJS</p>
+            </div>
+            <div>
+              <Image
+                src="https://img.icons8.com/color/96/react-native.png"
+                alt="React"
+                width={96}
+                height={96}
+                className="rounded-full"
+              />
+              <p className="text-center">ReactJS</p>
+            </div>
+            <div>
+              <Image
+                src="https://img.icons8.com/color/96/react-native.png"
+                alt="React Native"
+                width={96}
+                height={96}
+                className="rounded-full"
+              />
+              <p className="text-center">React Native</p>
             </div>
             <div>
               <Image
