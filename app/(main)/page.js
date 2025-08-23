@@ -170,10 +170,13 @@ export default function Home() {
               word="a.k.a DiluteWater/notnotrachit"
               className="text-md mx-12 mb-8"
             />
-            <div className="flex w-full ml-10" data-aos="zoom-in">
+            <div className="flex w-full ml-4 md:ml-10" data-aos="zoom-in">
               <p
                 id="element"
-                className={"text-xl lg:text-3xl font-bold " + petch.className}
+                className={
+                  "text-xl lg:text-3xl font-bold w-full break-words whitespace-normal " +
+                  petch.className
+                }
               ></p>
             </div>
           </div>
