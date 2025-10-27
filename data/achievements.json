@@ -59,6 +59,12 @@
       "award": "Domain track from GoDaddy",
       "image": "/achievements/hackcbs6.webp",
       "teammates": ["Khushi", "Ashish Kumar Verma"]
+    },
+    {
+      "title": "VeChain Global Hackathon",
+      "award": "3rd Prize in Social Impact track",
+      "image": "https://cdn.dorahacks.io/static/files/199720adffaabc7cf9e5f444682829f9.png",
+      "teammates": ["Arnab Roy", "Sahil Nihalani"]
     }
   ]
 }

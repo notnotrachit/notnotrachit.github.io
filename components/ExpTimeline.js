@@ -23,7 +23,7 @@ export function ExperienceTimeLine() {
                 Ongoing
               </span>
               <time className="block mb-1 ml-6 mt-3 text-sm font-normal leading-none text-content">
-                September, 2024
+                September, 2024 - Sept, 2025
               </time>
               <p className="text-xl mb-2 ml-6 font-normal text-gray-200">
                 Lead
