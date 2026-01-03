@@ -5,9 +5,7 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{js,jsx}",
-    "./@/**/*.{ts,tsx}",
   ],
-  prefix: "",
   theme: {
     container: {
       center: true,
@@ -23,14 +21,14 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        // primary: {
-        //   DEFAULT: "hsl(var(--primary))",
-        //   foreground: "hsl(var(--primary-foreground))",
-        // },
-        // secondary: {
-        //   DEFAULT: "hsl(var(--secondary))",
-        //   foreground: "hsl(var(--secondary-foreground))",
-        // },
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
@@ -66,64 +64,17 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
-        grid: {
-          "0%": { transform: "translateY(-50%)" },
-          "100%": { transform: "translateY(0)" },
-        },
-        "shine-pulse": {
-          "0%": {
-            "background-position": "0% 0%",
-          },
-          "50%": {
-            "background-position": "100% 100%",
-          },
-          to: {
-            "background-position": "0% 0%",
-          },
-        },
-        shimmer: {
-          from: {
-            backgroundPosition: "0 0",
-          },
-          to: {
-            backgroundPosition: "-200% 0",
-          },
+        blink: {
+          "0%, 100%": { opacity: 1 },
+          "50%": { opacity: 0 },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        grid: "grid 15s linear infinite",
-        shimmer: "shimmer 2s linear infinite",
+        blink: "blink 1s step-end infinite",
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("daisyui")],
-  daisyui: {
-    themes: [
-      {
-        custom_light: {
-          primary: "#7ad8f5",
-
-          secondary: "#6998c7",
-
-          accent: "#69c7b3",
-
-          neutral: "#a2e1f5",
-
-          "base-100": "#c5e8eb",
-
-          info: "#2563EB",
-
-          success: "#047857",
-
-          warning: "#fde047",
-
-          error: "#f87171",
-        },
-      },
-      "night",
-      "dark",
-    ],
-  },
+  plugins: [require("tailwindcss-animate")],
 };

@@ -44,10 +44,5 @@
     "git-scripts": "^0.6.4",
     "surge": "^0.23.1",
     "typescript": "^5.5.4"
-  },
-  "git": {
-    "scripts": {
-      "pre-push": "npm run build && surge out --domain rachit.surge.sh && surge out --domain https://rachit.is-a-fullstack.dev && surge out --domain https://rachit.is-a-good.dev"
-    }
   }
 }
