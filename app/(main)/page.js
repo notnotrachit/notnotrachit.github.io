@@ -18,6 +18,7 @@ import { useEffect, useState } from "react";
 import ProjectData from "@/data/projects.json";
 import CertificateData from "@/data/certifications.json";
 import AchievementData from "@/data/achievements.json";
+import { IconCloud } from "@/components/ui/icon-cloud";
 
 // --- Components ---
 
@@ -201,7 +202,7 @@ export default function Home() {
                     Based in India.
                 </p>
 
-                <div className="flex gap-4 pt-6">
+                <div className="flex flex-wrap gap-4 pt-6">
                     {[
                         { icon: FaGithub, href: "https://github.com/notnotrachit" },
                         { icon: FaLinkedin, href: "https://linkedin.com" },
@@ -219,6 +220,15 @@ export default function Home() {
                             <social.icon size={22} />
                         </motion.a>
                     ))}
+                    <motion.a
+                        href="/stats"
+                        whileHover={{ scale: 1.05 }}
+                        className="group relative text-primary font-mono text-sm px-5 py-3 bg-black/50 rounded-lg border border-primary/50 hover:border-primary hover:shadow-[0_0_20px_rgba(167,139,250,0.3)] transition-all duration-300 flex items-center gap-2 overflow-hidden"
+                    >
+                        <span className="text-green-400">&gt;_</span>
+                        <span className="tracking-wider">Stats for Nerds</span>
+                        <span className="animate-pulse">▌</span>
+                    </motion.a>
                 </div>
             </section>
 
@@ -368,88 +378,132 @@ export default function Home() {
             {/* Projects */}
             <section id="projects" className="scroll-mt-24">
                 <SectionHeader number="03" title="FEATURED PROJECTS" />
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {ProjectData.documents.map((project, index) => (
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {ProjectData.documents.slice(0, 9).map((project, index) => (
                         <motion.a
                             href={project.URL || project.GitHub}
                             target="_blank"
                             key={index}
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={{ opacity: 0, y: 30 }}
                             whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: index * 0.05 }}
+                            transition={{ delay: index * 0.08, duration: 0.4 }}
                             viewport={{ once: true }}
-                            className="group relative p-6 rounded-2xl glass hover:border-primary/40 transition-all hover:-translate-y-1 overflow-hidden flex flex-col h-full"
+                            className="group relative rounded-2xl glass overflow-hidden flex flex-col h-full hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/10"
                         >
-                            <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-
-                            <div className="flex justify-between items-start mb-4">
-                                <h3 className="text-xl font-bold group-hover:text-primary transition-colors line-clamp-1">
-                                    {project.name}
-                                </h3>
-                                <div className="flex gap-2 text-muted-foreground">
-                                    {project.GitHub && <FaGithub className="hover:text-primary" />}
-                                    {project.URL && <FaExternalLinkAlt className="hover:text-primary text-xs" />}
+                            {/* Project Image */}
+                            {project.image_url && (
+                                <div className="relative h-44 w-full overflow-hidden bg-gradient-to-br from-primary/20 to-secondary/10">
+                                    <Image
+                                        src={project.image_url}
+                                        alt={project.name}
+                                        fill
+                                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                                    />
+                                    <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
                                 </div>
-                            </div>
+                            )}
+                            {!project.image_url && (
+                                <div className="h-32 w-full bg-gradient-to-br from-primary/20 via-purple-900/20 to-secondary/10 flex items-center justify-center">
+                                    <span className="text-4xl font-bold text-primary/30">{project.name.charAt(0)}</span>
+                                </div>
+                            )}
 
-                            <p className="text-gray-400 text-sm leading-relaxed mb-6 line-clamp-3">
-                                {project.description}
-                            </p>
+                            {/* Content */}
+                            <div className="p-6 flex flex-col flex-grow">
+                                <div className="flex justify-between items-start mb-3">
+                                    <h3 className="text-lg font-bold group-hover:text-primary transition-colors line-clamp-1">
+                                        {project.name}
+                                    </h3>
+                                    <div className="flex gap-3 text-muted-foreground">
+                                        {project.GitHub && <FaGithub className="hover:text-primary transition-colors" size={16} />}
+                                        {project.URL && <FaExternalLinkAlt className="hover:text-primary transition-colors" size={12} />}
+                                    </div>
+                                </div>
 
-                            <div className="flex flex-wrap gap-2 mt-auto">
-                                {project.Tech_stack.slice(0, 4).map((t) => (
-                                    <span
-                                        key={t}
-                                        className="text-xs font-mono bg-white/5 px-2 py-1 rounded text-primary/90 border border-white/5"
-                                    >
-                                        {t}
-                                    </span>
-                                ))}
-                                {project.Tech_stack.length > 4 && (
-                                    <span className="text-xs font-mono text-muted-foreground py-1">+{project.Tech_stack.length - 4}</span>
-                                )}
+                                <p className="text-gray-400 text-sm leading-relaxed mb-4 line-clamp-2 flex-grow">
+                                    {project.description}
+                                </p>
+
+                                <div className="flex flex-wrap gap-2 mt-auto pt-4 border-t border-white/5">
+                                    {project.Tech_stack.slice(0, 3).map((t) => (
+                                        <span
+                                            key={t}
+                                            className="text-xs font-mono bg-primary/10 px-2 py-1 rounded-full text-primary/80 border border-primary/20"
+                                        >
+                                            {t}
+                                        </span>
+                                    ))}
+                                    {project.Tech_stack.length > 3 && (
+                                        <span className="text-xs font-mono text-muted-foreground py-1">+{project.Tech_stack.length - 3}</span>
+                                    )}
+                                </div>
                             </div>
                         </motion.a>
                     ))}
                 </div>
+                {ProjectData.documents.length > 9 && (
+                    <div className="flex justify-center mt-10">
+                        <a
+                            href="https://github.com/notnotrachit"
+                            target="_blank"
+                            className="px-6 py-3 rounded-full border border-primary/30 text-primary hover:bg-primary/10 transition-colors font-mono text-sm"
+                        >
+                            View All Projects →
+                        </a>
+                    </div>
+                )}
             </section>
 
             {/* Skills */}
             <section id="skills" className="scroll-mt-24">
                 <SectionHeader number="04" title="SKILLS" />
-                <div className="space-y-12">
-                    {[
-                        {
-                            category: "Languages & Databases",
-                            items: ["Python", "JavaScript", "Java", "Golang", "C++", "CSS", "HTML", "MongoDB", "Postgres", "MySQL"]
-                        },
-                        {
-                            category: "Frameworks",
-                            items: ["Django", "Flask", "FastAPI", "NextJS", "ReactJS", "React Native", "TailwindCSS"]
-                        },
-                        {
-                            category: "Other Tools",
-                            items: ["Linux", "Git", "Docker", "GitHub"]
-                        }
-                    ].map((skillGroup, index) => (
-                        <div key={index} className="text-center">
-                            <h3 className="text-xl font-bold mb-6 text-foreground/80">{skillGroup.category}</h3>
-                            <div className="flex flex-wrap gap-3 justify-center">
-                                {skillGroup.items.map((skill, i) => (
-                                    <motion.div
-                                        key={i}
-                                        initial={{ opacity: 0, scale: 0.8 }}
-                                        whileInView={{ opacity: 1, scale: 1 }}
-                                        viewport={{ once: true }}
-                                        transition={{ delay: i * 0.05 }}
-                                        className="px-4 py-2 rounded-lg glass border border-white/5 hover:border-primary/40 hover:text-primary transition-colors cursor-default"
-                                    >
-                                        {skill}
-                                    </motion.div>
-                                ))}
+                <div className="grid lg:grid-cols-2 gap-12 items-center">
+                    {/* Skill Tags */}
+                    <div className="space-y-10">
+                        {[
+                            {
+                                category: "Languages & Databases",
+                                items: ["Python", "JavaScript", "Java", "Golang", "C++", "CSS", "HTML", "MongoDB", "Postgres", "MySQL"]
+                            },
+                            {
+                                category: "Frameworks",
+                                items: ["Django", "Flask", "FastAPI", "NextJS", "ReactJS", "React Native", "TailwindCSS"]
+                            },
+                            {
+                                category: "Other Tools",
+                                items: ["Linux", "Git", "Docker", "GitHub"]
+                            }
+                        ].map((skillGroup, index) => (
+                            <div key={index}>
+                                <h3 className="text-xl font-bold mb-4 text-foreground/80">{skillGroup.category}</h3>
+                                <div className="flex flex-wrap gap-3 justify-start">
+                                    {skillGroup.items.map((skill, i) => (
+                                        <motion.div
+                                            key={i}
+                                            initial={{ opacity: 0, scale: 0.8 }}
+                                            whileInView={{ opacity: 1, scale: 1 }}
+                                            viewport={{ once: true }}
+                                            transition={{ delay: i * 0.05 }}
+                                            className="px-4 py-2 rounded-lg glass border border-white/5 hover:border-primary/40 hover:text-primary transition-colors cursor-default"
+                                        >
+                                            {skill}
+                                        </motion.div>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
-                    ))}
+                        ))}
+                    </div>
+
+                    {/* Icon Cloud */}
+                    <div className="relative flex items-center justify-center h-[400px]">
+                        <IconCloud
+                            images={[
+                                "python", "javascript", "java", "go", "cplusplus", "css3", "html5",
+                                "mongodb", "postgresql", "mysql", "django", "flask", "fastapi",
+                                "nextdotjs", "react", "tailwindcss", "linux", "git", "docker", "github"
+                            ].map(slug => `https://cdn.simpleicons.org/${slug}`)}
+                        />
+                    </div>
                 </div>
             </section>
 
@@ -507,15 +561,27 @@ export default function Home() {
                             initial={{ opacity: 0, scale: 0.95 }}
                             whileInView={{ opacity: 1, scale: 1 }}
                             viewport={{ once: true }}
-                            className="glass p-6 rounded-2xl flex items-center gap-4 hover:bg-secondary/40 transition-colors"
+                            className="glass p-6 rounded-2xl flex items-start gap-4 hover:border-primary/40 transition-colors group"
                         >
-                            <div className="p-3 bg-primary/10 rounded-full text-primary">
-                                <FaAward size={24} />
+                            <div className="flex-shrink-0 w-16 h-16 rounded-xl overflow-hidden bg-primary/10 border border-primary/20">
+                                {item.image ? (
+                                    <Image
+                                        src={item.image}
+                                        alt={item.title}
+                                        width={64}
+                                        height={64}
+                                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                                    />
+                                ) : (
+                                    <div className="w-full h-full flex items-center justify-center text-primary">
+                                        <FaAward size={28} />
+                                    </div>
+                                )}
                             </div>
-                            <div>
-                                <h4 className="font-bold text-lg">{item.title}</h4>
-                                <p className="text-primary/80 font-medium">{item.award}</p>
-                                {item.subAward && <p className="text-sm text-muted-foreground">{item.subAward}</p>}
+                            <div className="flex-grow">
+                                <h4 className="font-bold text-lg group-hover:text-primary transition-colors">{item.title}</h4>
+                                <p className="text-primary/80 font-medium text-sm">{item.award}</p>
+                                {item.subAward && <p className="text-xs text-muted-foreground mt-1">{item.subAward}</p>}
                             </div>
                         </motion.div>
                     ))}
@@ -529,7 +595,7 @@ export default function Home() {
             </section>
 
             {/* Footer */}
-            <footer className="pt-24 text-center text-sm text-gray-500 pb-8 border-t border-white/5 mt-12">
+            <footer className="pt-24 text-center text-sm text-gray-500 pb-8 border-t border-white/5 mt-12 hidden">
                 <p>
                     Designed & Built by <span className="text-primary">Rachit Khurana</span>
                 </p>
