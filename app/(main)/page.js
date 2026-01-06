@@ -255,25 +255,25 @@ export default function Home() {
                                 <span className="text-[#8be9fd]">developer</span> <span className="text-[#ff79c6]">=</span> {"{"}
                             </p>
                             <p className="pl-6">
-                                <span className="text-[#bd93f9]">name</span>: <span className="text-[#f1fa8c]">"Rachit Khurana"</span>,
+                                <span className="text-[#bd93f9]">name</span>: <span className="text-[#f1fa8c]">&quot;Rachit Khurana&quot;</span>,
                             </p>
                             <p className="pl-6">
-                                <span className="text-[#bd93f9]">location</span>: <span className="text-[#f1fa8c]">"India"</span>,
+                                <span className="text-[#bd93f9]">location</span>: <span className="text-[#f1fa8c]">&quot;India&quot;</span>,
                             </p>
                             <p className="pl-6">
-                                <span className="text-[#bd93f9]">role</span>: <span className="text-[#f1fa8c]">"Full Stack Engineer"</span>,
+                                <span className="text-[#bd93f9]">role</span>: <span className="text-[#f1fa8c]">&quot;Full Stack Engineer&quot;</span>,
                             </p>
                             <p className="pl-6">
                                 <span className="text-[#bd93f9]">skills</span>: [
-                                <span className="text-[#f1fa8c]">"Next.js"</span>,{" "}
-                                <span className="text-[#f1fa8c]">"Python"</span>,{" "}
-                                <span className="text-[#f1fa8c]">"Go"</span>,{" "}
-                                <span className="text-[#f1fa8c]">"Web3"</span>],
+                                <span className="text-[#f1fa8c]">&quot;Next.js&quot;</span>,{" "}
+                                <span className="text-[#f1fa8c]">&quot;Python&quot;</span>,{" "}
+                                <span className="text-[#f1fa8c]">&quot;Go&quot;</span>,{" "}
+                                <span className="text-[#f1fa8c]">&quot;Web3&quot;</span>],
                             </p>
                             <p className="pl-6">
                                 <span className="text-[#bd93f9]">hobbies</span>: [
-                                <span className="text-[#f1fa8c]">"Music"</span>,{" "}
-                                <span className="text-[#f1fa8c]">"FOSS"</span>],
+                                <span className="text-[#f1fa8c]">&quot;Music&quot;</span>,{" "}
+                                <span className="text-[#f1fa8c]">&quot;FOSS&quot;</span>],
                             </p>
                             <p>{"};"}</p>
                         </div>
