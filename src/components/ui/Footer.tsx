@@ -30,7 +30,6 @@ export function Footer() {
                         </p>
                         <p className="font-body text-neutral-600 text-xs mt-1">
                             Designed & Developed with <span className="text-white">♥</span>{" "}
-                            using TanStack Start
                         </p>
                     </div>
                 </div>
