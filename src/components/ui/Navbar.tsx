@@ -40,10 +40,11 @@ export function Navbar() {
 	return (
 		<>
 			<nav
-				className={`fixed top-0 left-0 w-full px-6 md:px-12 py-6 z-50 flex justify-between items-center transition-all duration-500 ${scrolled
-					? "py-4 backdrop-blur-xl bg-[#020617]/80 border-b border-white/5"
-					: "bg-transparent"
-					}`}
+				className={`fixed top-0 left-0 w-full px-6 md:px-12 py-6 z-50 flex justify-between items-center transition-all duration-500 ${
+					scrolled
+						? "py-4 bg-[#020617]/90 border-b border-white/5"
+						: "bg-transparent"
+				}`}
 			>
 				<Link
 					to="/"
@@ -55,7 +56,7 @@ export function Navbar() {
 				</Link>
 
 				{/* Desktop Menu */}
-				<div className="hidden md:flex items-center gap-2 bg-white/5 px-4 py-2 border border-white/5 backdrop-blur-sm shadow-lg shadow-cyan-900/10">
+				<div className="hidden md:flex items-center gap-2 bg-white/5 px-4 py-2 border border-white/5 shadow-lg shadow-cyan-900/10">
 					{navItems.map((item) => (
 						<Magnetic key={item.name} strength={0.2}>
 							<a
@@ -110,55 +111,40 @@ export function Navbar() {
 			<AnimatePresence>
 				{isOpen && (
 					<motion.div
-						initial={{ opacity: 0, y: "-100%" }}
-						animate={{ opacity: 1, y: 0 }}
-						exit={{ opacity: 0, y: "-100%" }}
-						transition={{ duration: 0.5, ease: [0.76, 0, 0.24, 1] }}
-						className="fixed inset-0 bg-[#020617] z-40 flex flex-col items-center justify-center md:hidden"
+						initial={{ opacity: 0 }}
+						animate={{ opacity: 1 }}
+						exit={{ opacity: 0 }}
+						transition={{ duration: 0.3 }}
+						className="fixed inset-0 bg-[#020617] z-40 flex flex-col items-center justify-center md:hidden will-change-[opacity]"
 					>
-						{/* Background Texture */}
-						<div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 pointer-events-none" />
+						{/* Simplified Background - no external image */}
 						<div className="absolute inset-0 bg-gradient-to-b from-cyan-900/20 to-transparent pointer-events-none" />
 
 						<div className="flex flex-col items-center gap-8 relative z-10">
 							{navItems.map((item, index) => (
 								<motion.div
 									key={item.name}
-									initial={{ opacity: 0, y: 50 }}
+									initial={{ opacity: 0, y: 20 }}
 									animate={{ opacity: 1, y: 0 }}
-									exit={{ opacity: 0, y: 50 }}
-									transition={{ delay: 0.1 + index * 0.1, duration: 0.5 }}
+									exit={{ opacity: 0 }}
+									transition={{ delay: index * 0.05, duration: 0.3 }}
+									className="will-change-transform"
 								>
 									<a
 										href={item.href}
 										onClick={(e) => handleScrollTo(e, item.href)}
-										className="font-display text-5xl font-bold uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-white to-white/50 hover:to-white transition-all"
+										className="font-display text-5xl font-bold uppercase tracking-tighter text-white hover:text-cyan-400 transition-colors"
 									>
 										{item.name}
 									</a>
 								</motion.div>
 							))}
-							<motion.div
-								initial={{ opacity: 0, y: 50 }}
-								animate={{ opacity: 1, y: 0 }}
-								exit={{ opacity: 0, y: 50 }}
-								transition={{ delay: 0.6, duration: 0.5 }}
-								className="hidden"
-							>
-								<Link
-									to="/stats"
-									onClick={() => setIsOpen(false)}
-									className="font-display text-5xl font-bold uppercase tracking-tighter text-transparent bg-clip-text bg-gradient-to-b from-cyan-400 to-cyan-400/50 hover:to-cyan-300 transition-all"
-								>
-									Stats
-								</Link>
-							</motion.div>
 						</div>
 
 						<motion.div
 							initial={{ opacity: 0 }}
 							animate={{ opacity: 1 }}
-							transition={{ delay: 0.5 }}
+							transition={{ delay: 0.2 }}
 							className="absolute bottom-12 flex flex-col items-center gap-4 text-neutral-500 font-mono text-sm"
 						>
 							<div className="w-[1px] h-12 bg-white/10 mb-4" />

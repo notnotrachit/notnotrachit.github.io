@@ -80,8 +80,8 @@
 
   /* Glass Utilities */
   .glass {
-    background-color: rgb(15 23 42 / 0.5);
-    backdrop-filter: blur(16px);
+    background-color: rgb(15 23 42 / 0.7);
+    /* backdrop-filter removed for performance */
     border: 1px solid rgb(6 182 212 / 0.1);
     box-shadow: 0 8px 32px 0 rgba(6, 182, 212, 0.1);
   }

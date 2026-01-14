@@ -43,7 +43,7 @@ export function SectionHeader({
 			<div
 				className={`flex items-center gap-4 mb-6 ${isCenter ? "justify-center" : ""}`}
 			>
-				<div className="flex items-center gap-2 text-cyan-500 font-mono text-sm tracking-widest bg-cyan-500/10 px-4 py-1.5 border border-cyan-500/20 backdrop-blur-lg">
+				<div className="flex items-center gap-2 text-cyan-500 font-mono text-sm tracking-widest bg-cyan-500/10 px-4 py-1.5 border border-cyan-500/20">
 					<span className="text-cyan-500 font-bold">{number}</span>
 					<span className="text-cyan-500/80">{label}</span>
 				</div>

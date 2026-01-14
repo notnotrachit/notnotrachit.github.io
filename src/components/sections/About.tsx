@@ -48,7 +48,7 @@ export function About() {
 						whileInView="visible"
 						viewport={{ once: true, amount: 0.3 }}
 						variants={fadeInLeft}
-						className="bg-white/5 backdrop-blur-lg border border-white/10 shadow-[0_8px_32px_0_rgba(6,182,212,0.1)] p-1 bg-gradient-to-br from-white/10 to-transparent order-2 md:order-1"
+						className="bg-white/5 border border-white/10 shadow-[0_8px_32px_0_rgba(6,182,212,0.1)] p-1 bg-gradient-to-br from-white/10 to-transparent order-2 md:order-1"
 					>
 						<div className="bg-[#020617] p-6 font-mono text-sm overflow-hidden shadow-2xl border border-white/5">
 							{/* Terminal Header */}
