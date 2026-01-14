@@ -4,6 +4,7 @@ import {
 	Scripts,
 	createRootRoute,
 } from "@tanstack/react-router";
+import { Analytics } from "@vercel/analytics/react";
 import type { ReactNode } from "react";
 import { SmoothScroll } from "../components/SmoothScroll";
 import { CustomCursor } from "../components/ui/CustomCursor";
@@ -120,6 +121,18 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-YG4LM0HFDQ');`,
 			},
+			{
+				src: "https://cloud.umami.is/script.js",
+				defer: true,
+				"data-website-id": "9413186d-358a-46de-91e1-a039ba4137a5",
+			},
+			{
+				children: `(function(c,l,a,r,i,t,y){
+c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+})(window, document, "clarity", "script", "v1ezlk33wj");`,
+			},
 		],
 	}),
 	component: RootComponent,
@@ -153,6 +166,7 @@ function RootDocument({ children }: { children: ReactNode }) {
 					<Navbar />
 					{children}
 				</div>
+				<Analytics />
 				<Scripts />
 			</body>
 		</html>
