@@ -109,6 +109,18 @@ export const Route = createRootRoute({
 			{ rel: "icon", href: "/profile.jpg", sizes: "any" },
 			{ rel: "me", href: "https://mastodon.social/@notnotrachit" },
 		],
+		scripts: [
+			{
+				src: "https://www.googletagmanager.com/gtag/js?id=G-YG4LM0HFDQ",
+				async: true,
+			},
+			{
+				children: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-YG4LM0HFDQ');`,
+			},
+		],
 	}),
 	component: RootComponent,
 	notFoundComponent: NotFound,
