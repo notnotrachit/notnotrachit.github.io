@@ -19,7 +19,7 @@ export const experience: ExperienceItem[] = [
 		description:
 			"Working on a variety of projects involving Full Stack and Web3 technologies for enterprise clients.",
 		type: "work",
-		technologies: ["React", "Node.js", "Web3.js", "Solidity"],
+		technologies: ["React", "Next.js", "Node.js", "Rust", "Tauri", "Solidity", "Python"],
 	},
 	{
 		id: 2,

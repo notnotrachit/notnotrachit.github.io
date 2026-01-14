@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { Magnetic } from "./Magnetic";
@@ -6,6 +6,8 @@ import { Magnetic } from "./Magnetic";
 export function Navbar() {
 	const [scrolled, setScrolled] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
+	const location = useLocation();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -29,6 +31,13 @@ export function Navbar() {
 	) => {
 		e.preventDefault();
 		setIsOpen(false);
+
+		// If not on home page, navigate to home with the hash
+		if (location.pathname !== "/") {
+			navigate({ to: "/" + href });
+			return;
+		}
+
 		const element = document.querySelector(href);
 		if (element) {
 			setTimeout(() => {
