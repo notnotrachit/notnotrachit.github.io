@@ -1,0 +1,34 @@
+# Dependencies
+node_modules
+
+# Build outputs (will be rebuilt in container)
+.output
+.vinxi
+dist
+.next
+.tanstack
+
+# Development files
+.git
+.github
+.vscode
+*.md
+LICENSE
+
+# Environment files (should be set via Cloud Run)
+.env
+.env.*
+!.env.example
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Test files
+*.test.*
+*.spec.*
+__tests__
+
+# Other
+.gitignore copy
+wakapi_*.json
