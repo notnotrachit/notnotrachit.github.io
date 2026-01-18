@@ -8,6 +8,7 @@ import { Analytics } from "@vercel/analytics/react";
 import type { ReactNode } from "react";
 import { SmoothScroll } from "../components/SmoothScroll";
 import { CustomCursor } from "../components/ui/CustomCursor";
+import { EasterEggs } from "../components/ui/EasterEggs";
 import { Navbar } from "../components/ui/Navbar";
 import { NotFound } from "../components/ui/NotFound";
 import appCss from "../index.css?url";
@@ -155,7 +156,7 @@ function RootDocument({ children }: { children: ReactNode }) {
 			</head>
 			<body className="selection:bg-cyan-500/30 selection:text-cyan-200">
 				{/* Background Blobs Container - Isolated to prevent scroll issues */}
-				<div className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-[-1] bg-[linear-gradient(-45deg,#020617,#0f172a,#172554)] bg-[length:400%_400%] animate-gradient-bg">
+				<div id="default-theme-background" className="fixed inset-0 w-full h-full overflow-hidden pointer-events-none z-[-1] bg-[linear-gradient(-45deg,#020617,#0f172a,#172554)] bg-[length:400%_400%] animate-gradient-bg">
 					<div className="absolute -top-[10%] -left-[10%] w-[50vw] h-[50vw] bg-[radial-gradient(circle,rgba(6,182,212,0.15)_0%,rgba(0,0,0,0)_70%)] animate-float" />
 					<div className="absolute -bottom-[10%] -right-[10%] w-[60vw] h-[60vw] bg-[radial-gradient(circle,rgba(59,130,246,0.1)_0%,rgba(0,0,0,0)_70%)] animate-float-reverse" />
 				</div>
@@ -163,6 +164,7 @@ function RootDocument({ children }: { children: ReactNode }) {
 				<div id="root">
 					<SmoothScroll />
 					<CustomCursor />
+					<EasterEggs />
 					<Navbar />
 					{children}
 				</div>

@@ -57,6 +57,7 @@
     cursor: auto;
     scroll-behavior: auto;
     overflow-x: clip;
+    font-family: var(--font-body);
   }
 
   body {
@@ -64,6 +65,66 @@
     position: relative;
     overflow-x: clip;
   }
+
+  html.hacker-mode {
+    --color-background: #000500;
+    --color-surface: #001100;
+    --color-surface-hover: #001a00;
+    --color-foreground: #00ff00;
+    --color-primary: #00ff00;
+    --color-primary-foreground: #000000;
+    --color-secondary: #00aa00;
+    --color-accent: #33ff33;
+    --color-muted: #003300;
+
+    font-family: "Courier New", "Lucida Console", monospace !important;
+
+    /* Grid Background */
+    background-color: var(--color-background);
+    background-image:
+      linear-gradient(rgba(0, 255, 0, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0, 255, 0, 0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+
+  html.hacker-mode #default-theme-background,
+  html.hacker-mode .hero-glow {
+    display: none !important;
+  }
+
+  html.hacker-mode body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%,
+        rgba(0, 0, 0, 0.1) 50%);
+    background-size: 100% 4px;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  html.hacker-mode * {
+    font-family: inherit !important;
+    border-radius: 0 !important;
+    text-shadow: 0 0 4px rgba(0, 255, 0, 0.4);
+    border-color: rgba(0, 255, 0, 0.2) !important;
+  }
+
+  html.hacker-mode img,
+  html.hacker-mode video {
+    filter: grayscale(100%) sepia(100%) hue-rotate(50deg) saturate(300%) contrast(1.2);
+    border: 1px solid #00ff00 !important;
+  }
+
+  html.hacker-mode ::selection {
+    background: #00ff00;
+    color: #000000;
+  }
+
 
   /* Animations for new structure */
   .animate-gradient-bg {

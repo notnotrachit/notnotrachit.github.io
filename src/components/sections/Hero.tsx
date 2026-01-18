@@ -1,9 +1,12 @@
 "use client";
 
+import { useState, useCallback } from "react";
 import { motion } from "framer-motion";
 import { ArrowDown, Github, Linkedin, Mail, FileText } from "lucide-react";
 import { MagneticButton } from "../ui/MagneticButton";
 import { Parallax } from "../ui/Parallax";
+import { Confetti } from "../ui/Confetti";
+import { useGravity } from "../../hooks/useGravity";
 
 function XLogo({ className, size }: { className?: string; size?: number }) {
 	return (
@@ -21,6 +24,24 @@ function XLogo({ className, size }: { className?: string; size?: number }) {
 }
 
 export function Hero() {
+	const [clickCount, setClickCount] = useState(0);
+	const [showConfetti, setShowConfetti] = useState(false);
+
+	const { triggerGravity } = useGravity();
+
+	const handleProfileClick = useCallback(() => {
+		const newCount = clickCount + 1;
+		setClickCount(newCount);
+
+		if (newCount === 7) {
+			setShowConfetti(true);
+			triggerGravity();
+			setTimeout(() => {
+				setClickCount(0);
+			}, 6000);
+		}
+	}, [clickCount, triggerGravity]);
+
 	const title = "RACHIT KHURANA";
 	const splitTitle = title.split("").map((char, i) => ({
 		char,
@@ -94,7 +115,7 @@ export function Hero() {
 	return (
 		<section className="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden pt-20">
 			{/* Aurora Background Elements are in index.css, adding local accents */}
-			<div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/20 blur-[100px] -z-10 animate-pulse-slow pointer-events-none mix-blend-screen" />
+			<div className="hero-glow absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-cyan-500/20 blur-[100px] -z-10 animate-pulse-slow pointer-events-none mix-blend-screen" />
 
 			<div className="z-10 text-center px-4 md:px-8 w-full max-w-[1600px] mx-auto flex flex-col items-center">
 				{/* Status Badge */}
@@ -133,7 +154,9 @@ export function Hero() {
 							ease: "easeInOut"
 						}
 					}}
-					className="mb-10 relative group"
+					className="mb-10 relative group cursor-pointer"
+					onClick={handleProfileClick}
+					whileTap={{ scale: 0.95 }}
 				>
 					{/* Glowing Backlight */}
 					<div className="absolute inset-0 bg-cyan-500/30 blur-[40px] rounded-full scale-110 group-hover:scale-125 transition-transform duration-500 opacity-50" />
@@ -168,7 +191,24 @@ export function Hero() {
 						{/* Glitch/Noise Texture overlay (optional subtle grain) */}
 						<div className="absolute inset-0 opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')] z-20" />
 					</div>
+
+					{/* Click counter hint */}
+					{clickCount > 0 && clickCount < 7 && (
+						<motion.div
+							initial={{ opacity: 0, scale: 0.8 }}
+							animate={{ opacity: 1, scale: 1 }}
+							exit={{ opacity: 0, scale: 0.8 }}
+							className="absolute -bottom-2 left-1/2 -translate-x-1/2 bg-cyan-500/20 backdrop-blur-sm px-2 py-1 rounded text-xs text-cyan-300 font-mono"
+						>
+							{7 - clickCount} more...
+						</motion.div>
+					)}
 				</motion.div>
+
+				{/* Easter egg confetti */}
+				<Confetti isActive={showConfetti} onComplete={() => setShowConfetti(false)} />
+
+
 
 				{/* Main Title */}
 				<Parallax offset={-50} className="w-full max-w-full flex justify-center">
@@ -211,8 +251,8 @@ export function Hero() {
 							className="font-body text-muted-foreground text-lg md:text-xl text-center leading-relaxed"
 						>
 							Full Stack Engineer crafting{" "}
-							<span className="text-cyan-500 font-medium">Scalable Web Apps</span>{" "}
-							and exploring the decentralized web.
+							<span className="text-cyan-500 font-medium">Scalable Web Apps</span>{" "}& everything else too{" "}
+							and also loves to FAFO.
 						</motion.p>
 					</Parallax>
 

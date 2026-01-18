@@ -51,42 +51,42 @@ export function Achievements() {
 						<motion.div
 							key={achievement.id}
 							variants={itemVariants}
-							className="group relative bg-white/[0.02] border border-white/5 overflow-hidden hover:border-cyan-500/20 transition-all duration-300"
+							className="group relative bg-white/[0.02] border border-white/5 overflow-hidden hover:border-cyan-500/20 transition-all duration-300 flex flex-row md:block items-stretch md:items-start h-32 md:h-auto"
 						>
-							<div className="aspect-video w-full overflow-hidden mb-4 relative">
+							<div className="w-1/3 md:w-full md:aspect-video overflow-hidden relative shrink-0 md:mb-4">
 								<img
 									src={achievement.image}
 									alt={achievement.title}
 									className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
 								/>
-								<div className="absolute inset-0 bg-gradient-to-t from-[#020617] via-transparent to-transparent opacity-60" />
-								
-								<div className="absolute top-3 right-3 bg-cyan-500/10 backdrop-blur-md border border-cyan-500/20 px-3 py-1.5 rounded-full">
-									<Trophy className="w-4 h-4 text-cyan-400" />
+								<div className="absolute inset-0 bg-gradient-to-r md:bg-gradient-to-t from-[#020617]/80 md:from-[#020617] via-transparent to-transparent opacity-60" />
+
+								<div className="absolute top-2 right-2 md:top-3 md:right-3 bg-cyan-500/10 backdrop-blur-md border border-cyan-500/20 px-2 py-1 md:px-3 md:py-1.5 rounded-full">
+									<Trophy className="w-3 h-3 md:w-4 md:h-4 text-cyan-400" />
 								</div>
 							</div>
 
-							<div className="p-6 pt-2">
-								<h3 className="font-display text-xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+							<div className="p-4 flex-1 flex flex-col justify-center md:block md:p-6 md:pt-2 overflow-hidden">
+								<h3 className="font-display text-base md:text-xl font-bold text-white mb-1.5 md:mb-2 group-hover:text-cyan-400 transition-colors line-clamp-2 md:line-clamp-none">
 									{achievement.title}
 								</h3>
-								
-								<div className="flex flex-col gap-3">
+
+								<div className="flex flex-col gap-1.5 md:gap-3">
 									<div className="flex flex-col">
-										<p className="text-cyan-200 font-medium text-sm">
+										<p className="text-cyan-200 font-medium text-xs md:text-sm">
 											{achievement.award}
 										</p>
 										{achievement.subAward && (
-											<p className="text-neutral-500 text-xs mt-1">
+											<p className="text-neutral-500 text-[10px] md:text-xs mt-0.5 md:mt-1">
 												{achievement.subAward}
 											</p>
 										)}
 									</div>
-									
+
 									{(achievement.teammates && achievement.teammates.length > 0) && (
-										<div className="flex items-start gap-2 pt-3 border-t border-white/5 mt-2">
+										<div className="flex items-start gap-2 pt-2 md:pt-3 border-t border-white/5 mt-1 md:mt-2 hidden md:flex">
 											<Users className="w-4 h-4 text-neutral-500 mt-0.5" />
-											<p className="text-xs text-neutral-400 leading-relaxed">
+											<p className="text-xs text-neutral-400 leading-relaxed line-clamp-1">
 												with {achievement.teammates.join(", ")}
 											</p>
 										</div>
