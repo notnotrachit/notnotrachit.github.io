@@ -13,7 +13,6 @@ import (
 	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/glamour"
-	"github.com/charmbracelet/huh"
 	"github.com/charmbracelet/lipgloss"
 	"github.com/charmbracelet/ssh"
 	"github.com/charmbracelet/wish"
@@ -91,14 +90,6 @@ func tabBorderWithBottom(left, middle, right string) lipgloss.Border {
 	return border
 }
 
-type focusArea int
-
-const (
-	focusNav focusArea = iota
-	focusContent
-	focusForm
-)
-
 type layoutMode int
 
 const (
@@ -115,7 +106,7 @@ const logoText = `██████╗  █████╗  ██████�
 ██║  ██║██║  ██║╚██████╗ ██║  ██║ ██████╗    ██║
 ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝    ╚═╝`
 
-const subHeader = ">> INTERACTIVE TERMINAL EXPERIENCE <<"
+const targetSubHeader = ">> Caffeine Powered BitFlipper <<"
 const helpText = "↑/↓: Navigate • Enter: Select • PgUp/PgDn: Scroll • Esc: Back"
 
 // --- Content Data ---
@@ -218,18 +209,20 @@ I'm **Rachit Khurana**, a Full Stack Engineer passionate about building scalable
 
 type model struct {
 	viewport    viewport.Model
-	contactForm *huh.Form
 	renderer    *glamour.TermRenderer
 	activeItem  string
 	width       int
 	height      int
 	quitting    bool
 	ready       bool
-	focus       focusArea
 	showHelp    bool
 
 	tabs           []string
 	activeTabIndex int
+
+	// Animation
+	subHeaderIdx  int
+	subHeaderShow string
 
 	// computed layout
 	headerH int
@@ -238,44 +231,26 @@ type model struct {
 	mainH   int
 }
 
+type tickMsg time.Time
+
+func tick() tea.Cmd {
+	return tea.Tick(50*time.Millisecond, func(t time.Time) tea.Msg {
+		return tickMsg(t)
+	})
+}
+
 func initialModel(r *glamour.TermRenderer) model {
-	tabs := []string{"About Me", "Experience", "Projects", "Skills", "Contact"}
+	tabs := []string{"About Me", "Experience", "Projects", "Skills"}
 	return model{
 		tabs:           tabs,
 		activeTabIndex: 0,
 		renderer:       r,
 		activeItem:     tabs[0],
-		contactForm:    newContactForm(),
-		focus:          focusNav,
 	}
 }
 
-func newContactForm() *huh.Form {
-	return huh.NewForm(
-		huh.NewGroup(
-			huh.NewInput().
-				Title("What's your name?").
-				Prompt("? "),
-			huh.NewSelect[string]().
-				Title("What's this regarding?").
-				Options(
-					huh.NewOption("Project Collaboration", "collab"),
-					huh.NewOption("Job Opportunity", "job"),
-					huh.NewOption("Just saying hi", "hi"),
-				),
-			huh.NewText().
-				Title("Your Message").
-				CharLimit(200),
-			huh.NewConfirm().
-				Title("Send Message?").
-				Affirmative("Rocket! 🚀").
-				Negative("Cancel"),
-		),
-	).WithTheme(huh.ThemeCatppuccin())
-}
-
 func (m model) Init() tea.Cmd {
-	return nil
+	return tick()
 }
 
 func clamp(min, v, max int) int {
@@ -329,32 +304,21 @@ func (m model) headerView() string {
 	}
 
 	logo := logoStyle.Render(centeredLogo.String())
-	sub := subHeaderStyle.Render(lipgloss.PlaceHorizontal(m.width, lipgloss.Center, subHeader))
+	sub := subHeaderStyle.Render(lipgloss.PlaceHorizontal(m.width, lipgloss.Center, m.subHeaderShow))
 	return headerWrapStyle.Render(lipgloss.JoinVertical(lipgloss.Top, logo, sub))
 }
 
 func (m model) footerView() string {
-	focus := "NAV"
-	if m.focus == focusContent {
-		focus = "CONTENT"
-	}
-	if m.focus == focusForm {
-		focus = "FORM"
-	}
-
-	left := lipgloss.NewStyle().Foreground(soft).Render("Focus: " + focus)
+	// Global focus, no need to show specific focus area
 	right := lipgloss.NewStyle().Foreground(soft).Render("Section: " + m.activeItem)
 
-	keys := "←/→:nav tabs  tab:focus  j/k:scroll  ?:help  q:quit"
+	keys := "←/→:nav tabs  ↑/↓:scroll  q:quit"
 	if m.showHelp {
 		keys = "esc:close help"
 	}
 	keys = truncateToWidth(keys, m.width)
 
-	row := left + "  " + right
-	row = truncateToWidth(row, m.width)
-	row = lipgloss.PlaceHorizontal(m.width, lipgloss.Center, row)
-
+	row := lipgloss.PlaceHorizontal(m.width, lipgloss.Center, right)
 	hints := lipgloss.PlaceHorizontal(m.width, lipgloss.Center, keys)
 	return footerStyle.Render(lipgloss.JoinVertical(lipgloss.Top, row, hints))
 }
@@ -396,25 +360,15 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		cmds []tea.Cmd
 	)
 
-	if m.focus == focusForm {
-		if msg, ok := msg.(tea.KeyMsg); ok && msg.String() == "esc" {
-			m.focus = focusNav
-			return m, nil
-		}
-
-		form, cmd := m.contactForm.Update(msg)
-		if f, ok := form.(*huh.Form); ok {
-			m.contactForm = f
-			if m.contactForm.State == huh.StateCompleted {
-				m.focus = focusContent
-				m.activeItem = "MessageSent"
-				m.updateViewportContent()
-			}
-		}
-		return m, cmd
-	}
-
 	switch msg := msg.(type) {
+	case tickMsg:
+		if m.subHeaderIdx < len(targetSubHeader) {
+			m.subHeaderIdx++
+			m.subHeaderShow = targetSubHeader[:m.subHeaderIdx]
+			return m, tick()
+		}
+		return m, nil
+
 	case tea.KeyMsg:
 		if msg.String() == "?" {
 			m.showHelp = !m.showHelp
@@ -431,56 +385,33 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.quitting = true
 			return m, tea.Quit
 		}
-		if msg.String() == "tab" {
-			if m.focus == focusNav {
-				m.focus = focusContent
-			} else {
-				m.focus = focusNav
-			}
-			return m, nil
-		}
-		// Navigating between tabs
-		if m.focus == focusNav {
-			if msg.String() == "h" || msg.String() == "left" {
-				m.activeTabIndex--
-				if m.activeTabIndex < 0 {
-					m.activeTabIndex = len(m.tabs) - 1
-				}
-				m.activeItem = m.tabs[m.activeTabIndex]
-				m.updateViewportContent()
-				return m, nil
-			}
-			if msg.String() == "l" || msg.String() == "right" {
-				m.activeTabIndex++
-				if m.activeTabIndex >= len(m.tabs) {
-					m.activeTabIndex = 0
-				}
-				m.activeItem = m.tabs[m.activeTabIndex]
-				m.updateViewportContent()
-				return m, nil
-			}
-			if msg.String() == "enter" {
-				if m.activeItem == "Contact" {
-					m.focus = focusForm
-					m.contactForm = newContactForm()
-					return m, m.contactForm.Init()
-				}
-				m.focus = focusContent
-				return m, nil
-			}
-		}
 
-		if msg.String() == "esc" {
-			m.focus = focusNav
+		// Tab Navigation (Left/Right/h/l)
+		switch msg.String() {
+		case "left", "h":
+			m.activeTabIndex--
+			if m.activeTabIndex < 0 {
+				m.activeTabIndex = len(m.tabs) - 1
+			}
+			m.activeItem = m.tabs[m.activeTabIndex]
+			m.updateViewportContent()
+			m.viewport.GotoTop() // Reset scroll
+			return m, nil
+		case "right", "l":
+			m.activeTabIndex++
+			if m.activeTabIndex >= len(m.tabs) {
+				m.activeTabIndex = 0
+			}
+			m.activeItem = m.tabs[m.activeTabIndex]
+			m.updateViewportContent()
+			m.viewport.GotoTop() // Reset scroll
 			return m, nil
 		}
 
-		if m.focus == focusContent {
-			// Let viewport handle scrolling keys.
-			m.viewport, cmd = m.viewport.Update(msg)
-			cmds = append(cmds, cmd)
-			return m, tea.Batch(cmds...)
-		}
+		// Viewport Scrolling (Up/Down/j/k handled by viewport.Update)
+		m.viewport, cmd = m.viewport.Update(msg)
+		cmds = append(cmds, cmd)
+		return m, tea.Batch(cmds...)
 
 	case tea.WindowSizeMsg:
 		m.width = msg.Width
@@ -489,21 +420,10 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.recalcLayout()
 	}
 
-	// Only update viewport when it has focus or we need to process ticks
-	if m.focus == focusContent {
-		m.viewport, cmd = m.viewport.Update(msg)
-		cmds = append(cmds, cmd)
-	}
-
 	return m, tea.Batch(cmds...)
 }
 
 func (m *model) updateViewportContent() {
-	if m.activeItem == "MessageSent" {
-		m.viewport.SetContent(glamourStyle(m.renderer, "# 🎉 Message Sent!\n\nThanks for reaching out."))
-		return
-	}
-
 	mdContent := contentMap[m.activeItem]
 	m.renderer, _ = glamour.NewTermRenderer(
 		glamour.WithStandardStyle("dark"),
@@ -566,23 +486,11 @@ func (m model) View() string {
 	footer := m.footerView()
 
 	// Focus-aware borders.
-	contentBorder := lipgloss.Color("#444444")
-	if m.focus == focusContent {
-		contentBorder = cPink
-	} else {
-		// If nav is focused, maybe highlight the content border or just leave it?
-		// Since tabs show active state, we can keep content border distinct.
-		// If focus is on tabs (focusNav), let's color content border slightly different or keep default.
-	}
-
+	contentBorder := cPink // Always active color
 	contentStyle := contentBaseStyle.BorderForeground(contentBorder)
 
 	var body string
-	if m.focus == focusForm {
-		body = contentStyle.Width(m.width - 4).Height(m.mainH).Align(lipgloss.Center).Render(m.contactForm.View())
-	} else {
-		body = contentStyle.Width(m.width - 4).Height(m.mainH).Render(m.viewport.View())
-	}
+	body = contentStyle.Width(m.width - 4).Height(m.mainH).Render(m.viewport.View())
 
 	ui := lipgloss.JoinVertical(lipgloss.Left, header, tabs, body, footer)
 	ui = appStyle.Render(ui)
@@ -616,7 +524,7 @@ func teaHandler(s ssh.Session) (tea.Model, []tea.ProgramOption) {
 
 	return m, []tea.ProgramOption{
 		tea.WithAltScreen(),
-		tea.WithMouseCellMotion(),
+		// tea.WithMouseCellMotion(), // Disable mouse capture to allow native link clicking
 		tea.WithInput(pty.Slave),
 		tea.WithOutput(pty.Slave),
 	}
