@@ -35,3 +35,5 @@ yarn-error.log*
 next-env.d.ts
 dist/*
 .output/*
+tui-portfolio/.ssh/*
+tui-portfolio/tui-portfolio
