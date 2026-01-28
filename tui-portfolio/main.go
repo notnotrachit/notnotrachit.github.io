@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"strconv"
 	"strings"
 	"syscall"
 	"time"
@@ -25,8 +26,16 @@ import (
 
 const (
 	host = "0.0.0.0"
-	port = 23234
 )
+
+func getPort() int {
+	if p := os.Getenv("PORT"); p != "" {
+		if i, err := strconv.Atoi(p); err == nil {
+			return i
+		}
+	}
+	return 23234
+}
 
 // --- Styling ---
 
@@ -531,6 +540,7 @@ func teaHandler(s ssh.Session) (tea.Model, []tea.ProgramOption) {
 }
 
 func main() {
+	port := getPort()
 	s, err := wish.NewServer(
 		wish.WithAddress(fmt.Sprintf("%s:%d", host, port)),
 		wish.WithHostKeyPath(".ssh/term_info_ed25519"),
