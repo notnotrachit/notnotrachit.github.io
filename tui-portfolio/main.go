@@ -30,6 +30,9 @@ import (
 	"github.com/mattn/go-runewidth"
 	"github.com/muesli/termenv"
 	"github.com/nfnt/resize"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 const (
@@ -357,6 +360,12 @@ type model struct {
 	blogFetched    bool
 	blogFetchError error
 	blogLoading    bool
+
+	// Analytics
+	sessionID  string
+	startTime  time.Time
+	tabsViewed []string
+	lastTab    string
 }
 
 type tickMsg time.Time
@@ -398,6 +407,15 @@ func min(a, b int) int {
 		return a
 	}
 	return b
+}
+
+func contains(slice []string, item string) bool {
+	for _, s := range slice {
+		if s == item {
+			return true
+		}
+	}
+	return false
 }
 
 func truncateToWidth(s string, w int) string {
@@ -522,17 +540,28 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 		if msg.String() == "ctrl+c" || msg.String() == "q" {
 			m.quitting = true
+			// Track session end
+			duration := time.Since(m.startTime)
+			trackSessionEnd(m.sessionID, duration, m.tabsViewed)
 			return m, tea.Quit
 		}
 
 		// Tab Navigation (Left/Right/h/l)
 		switch msg.String() {
 		case "left", "h":
+			oldTab := m.activeItem
 			m.activeTabIndex--
 			if m.activeTabIndex < 0 {
 				m.activeTabIndex = len(m.tabs) - 1
 			}
 			m.activeItem = m.tabs[m.activeTabIndex]
+			// Track tab switch
+			if m.activeItem != oldTab {
+				trackEvent(m.sessionID, "tab_switch", m.activeItem)
+				if !contains(m.tabsViewed, m.activeItem) {
+					m.tabsViewed = append(m.tabsViewed, m.activeItem)
+				}
+			}
 			m.updateViewportContent()
 			m.viewport.GotoTop() // Reset scroll
 			// Fetch blog posts if switching to Blog tab
@@ -543,11 +572,19 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			}
 			return m, nil
 		case "right", "l":
+			oldTab := m.activeItem
 			m.activeTabIndex++
 			if m.activeTabIndex >= len(m.tabs) {
 				m.activeTabIndex = 0
 			}
 			m.activeItem = m.tabs[m.activeTabIndex]
+			// Track tab switch
+			if m.activeItem != oldTab {
+				trackEvent(m.sessionID, "tab_switch", m.activeItem)
+				if !contains(m.tabsViewed, m.activeItem) {
+					m.tabsViewed = append(m.tabsViewed, m.activeItem)
+				}
+			}
 			m.updateViewportContent()
 			m.viewport.GotoTop() // Reset scroll
 			// Fetch blog posts if switching to Blog tab
@@ -1233,7 +1270,11 @@ func (m model) tabsView() string {
 
 func (m model) View() string {
 	if m.quitting {
-		return "Thanks for visiting! Bye.\n"
+		msg := "Thanks for visiting!\n\nFeel free to check out the website: https://rcht.dev\n\nBye! 👋\n"
+		return lipgloss.NewStyle().
+			Foreground(cNeonGreen).
+			Bold(true).
+			Render(msg)
 	}
 	if !m.ready {
 		return "\n  Initializing..."
@@ -1276,9 +1317,29 @@ func teaHandler(s ssh.Session) (tea.Model, []tea.ProgramOption) {
 		glamour.WithWordWrap(80),
 	)
 
+	// Extract session info for analytics
+	sessionID := s.Context().SessionID()
+	user := s.User()
+	ip := s.RemoteAddr().String()
+	clientVersion := s.Context().ClientVersion()
+	ptyInfo, _, _ := s.Pty()
+	terminalType := ptyInfo.Term
+	width := ptyInfo.Window.Width
+	height := ptyInfo.Window.Height
+
+	// Track session start
+	trackSessionStart(sessionID, user, ip, clientVersion, terminalType, width, height)
+
 	m := initialModel(r)
+	m.sessionID = sessionID
+	m.startTime = time.Now()
+	m.tabsViewed = []string{m.activeItem}
+
 	// Initial update to set content
 	m.updateViewportContent()
+
+	// Track initial tab view
+	trackEvent(sessionID, "tab_switch", m.activeItem)
 
 	return m, []tea.ProgramOption{
 		tea.WithAltScreen(),
@@ -1288,7 +1349,110 @@ func teaHandler(s ssh.Session) (tea.Model, []tea.ProgramOption) {
 	}
 }
 
+// --- Analytics ---
+
+var mongoClient *mongo.Client
+var analyticsCollection *mongo.Collection
+
+func initAnalytics() {
+	mongoURI := os.Getenv("MONGODB_URI")
+	if mongoURI == "" {
+		log.Println("MONGODB_URI not set, analytics disabled")
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	client, err := mongo.Connect(ctx, options.Client().ApplyURI(mongoURI))
+	if err != nil {
+		log.Printf("Failed to connect to MongoDB: %v", err)
+		return
+	}
+
+	if err := client.Ping(ctx, nil); err != nil {
+		log.Printf("Failed to ping MongoDB: %v", err)
+		return
+	}
+
+	mongoClient = client
+	analyticsCollection = client.Database("portfolio").Collection("sessions")
+	log.Println("Analytics connected to MongoDB")
+}
+
+func trackSessionStart(sessionID, user, ip, clientVersion, terminalType string, width, height int) {
+	if analyticsCollection == nil {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	doc := bson.M{
+		"session_id":     sessionID,
+		"user":           user,
+		"ip_address":     ip,
+		"client_version": clientVersion,
+		"terminal_type":  terminalType,
+		"window_width":   width,
+		"window_height":  height,
+		"start_time":     time.Now(),
+		"tabs_viewed":    []string{},
+		"events":         []bson.M{},
+	}
+
+	if _, err := analyticsCollection.InsertOne(ctx, doc); err != nil {
+		log.Printf("Failed to track session start: %v", err)
+	}
+}
+
+func trackSessionEnd(sessionID string, duration time.Duration, tabs []string) {
+	if analyticsCollection == nil {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	filter := bson.M{"session_id": sessionID}
+	update := bson.M{
+		"$set": bson.M{
+			"end_time":         time.Now(),
+			"duration_seconds": duration.Seconds(),
+			"tabs_viewed":      tabs,
+		},
+	}
+
+	if _, err := analyticsCollection.UpdateOne(ctx, filter, update); err != nil {
+		log.Printf("Failed to track session end: %v", err)
+	}
+}
+
+func trackEvent(sessionID, eventType, tabName string) {
+	if analyticsCollection == nil {
+		return
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+	defer cancel()
+
+	event := bson.M{
+		"type":      eventType,
+		"tab":       tabName,
+		"timestamp": time.Now(),
+	}
+
+	filter := bson.M{"session_id": sessionID}
+	update := bson.M{"$push": bson.M{"events": event}}
+
+	if _, err := analyticsCollection.UpdateOne(ctx, filter, update); err != nil {
+		log.Printf("Failed to track event: %v", err)
+	}
+}
+
 func main() {
+	initAnalytics()
+
 	port := getPort()
 	s, err := wish.NewServer(
 		wish.WithAddress(fmt.Sprintf("%s:%d", host, port)),
@@ -1316,6 +1480,13 @@ func main() {
 
 	<-done
 	log.Println("Stopping SSH server...")
+
+	if mongoClient != nil {
+		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
+		defer cancel()
+		mongoClient.Disconnect(ctx)
+	}
+
 	ctx, cancel := context.WithTimeout(context.Background(), 30*time.Second)
 	defer cancel()
 	if err := s.Shutdown(ctx); err != nil {
