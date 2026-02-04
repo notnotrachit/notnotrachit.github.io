@@ -2,8 +2,11 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
+	"io"
 	"log"
+	"net/http"
 	"os"
 	"os/signal"
 	"strconv"
@@ -81,14 +84,14 @@ var (
 			Bold(true).
 			Padding(0, 1)
 	inactiveTabStyle = lipgloss.NewStyle().
-			Border(tabBorder, true).
-			Foreground(cGrey).
-			Padding(0, 1)
+				Border(tabBorder, true).
+				Foreground(cGrey).
+				Padding(0, 1)
 	tabGapStyle = lipgloss.NewStyle().
 			Border(lipgloss.Border{
-				Bottom: "─",
-			}, false, false, true, false).
-			Foreground(cGrey)
+			Bottom: "─",
+		}, false, false, true, false).
+		Foreground(cGrey)
 )
 
 func tabBorderWithBottom(left, middle, right string) lipgloss.Border {
@@ -105,6 +108,44 @@ const (
 	layoutColumns layoutMode = iota
 	layoutStack
 )
+
+// --- Blog Types ---
+
+type BlogPost struct {
+	Title       string `json:"title"`
+	Description string `json:"description"`
+	URL         string `json:"url"`
+	PublishedAt string `json:"published_at"`
+	Tags        string `json:"tags"`
+}
+
+const devtoUsername = "dilutewater"
+
+type blogFetchMsg struct {
+	posts []BlogPost
+	err   error
+}
+
+func fetchBlogPosts() tea.Msg {
+	url := fmt.Sprintf("https://dev.to/api/articles?username=%s&per_page=10", devtoUsername)
+	resp, err := http.Get(url)
+	if err != nil {
+		return blogFetchMsg{err: err}
+	}
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return blogFetchMsg{err: err}
+	}
+
+	var posts []BlogPost
+	if err := json.Unmarshal(body, &posts); err != nil {
+		return blogFetchMsg{err: err}
+	}
+
+	return blogFetchMsg{posts: posts}
+}
 
 // --- ASCII Art ---
 
@@ -217,14 +258,14 @@ I'm **Rachit Khurana**, a Full Stack Engineer passionate about building scalable
 // --- Model ---
 
 type model struct {
-	viewport    viewport.Model
-	renderer    *glamour.TermRenderer
-	activeItem  string
-	width       int
-	height      int
-	quitting    bool
-	ready       bool
-	showHelp    bool
+	viewport   viewport.Model
+	renderer   *glamour.TermRenderer
+	activeItem string
+	width      int
+	height     int
+	quitting   bool
+	ready      bool
+	showHelp   bool
 
 	tabs           []string
 	activeTabIndex int
@@ -238,6 +279,12 @@ type model struct {
 	footerH int
 	tabsH   int
 	mainH   int
+
+	// Blog
+	blogPosts      []BlogPost
+	blogFetched    bool
+	blogFetchError error
+	blogLoading    bool
 }
 
 type tickMsg time.Time
@@ -249,12 +296,14 @@ func tick() tea.Cmd {
 }
 
 func initialModel(r *glamour.TermRenderer) model {
-	tabs := []string{"About Me", "Experience", "Projects", "Skills"}
+	tabs := []string{"About Me", "Experience", "Projects", "Skills", "Blog"}
 	return model{
 		tabs:           tabs,
 		activeTabIndex: 0,
 		renderer:       r,
 		activeItem:     tabs[0],
+		blogPosts:      []BlogPost{},
+		blogFetched:    false,
 	}
 }
 
@@ -270,6 +319,13 @@ func clamp(min, v, max int) int {
 		return max
 	}
 	return v
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	}
+	return b
 }
 
 func truncateToWidth(s string, w int) string {
@@ -324,6 +380,8 @@ func (m model) footerView() string {
 	keys := "←/→:nav tabs  ↑/↓:scroll  q:quit"
 	if m.showHelp {
 		keys = "esc:close help"
+	} else if m.activeItem == "Blog" {
+		keys = "←/→:nav  ↑/↓:scroll  r:refresh  q:quit"
 	}
 	keys = truncateToWidth(keys, m.width)
 
@@ -405,6 +463,12 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.activeItem = m.tabs[m.activeTabIndex]
 			m.updateViewportContent()
 			m.viewport.GotoTop() // Reset scroll
+			// Fetch blog posts if switching to Blog tab
+			if m.activeItem == "Blog" && !m.blogFetched && !m.blogLoading {
+				m.blogLoading = true
+				m.updateViewportContent()
+				return m, fetchBlogPosts
+			}
 			return m, nil
 		case "right", "l":
 			m.activeTabIndex++
@@ -414,7 +478,21 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.activeItem = m.tabs[m.activeTabIndex]
 			m.updateViewportContent()
 			m.viewport.GotoTop() // Reset scroll
+			// Fetch blog posts if switching to Blog tab
+			if m.activeItem == "Blog" && !m.blogFetched && !m.blogLoading {
+				m.blogLoading = true
+				m.updateViewportContent()
+				return m, fetchBlogPosts
+			}
 			return m, nil
+		}
+
+		// Refresh blog posts with 'r'
+		if msg.String() == "r" && m.activeItem == "Blog" {
+			m.blogLoading = true
+			m.blogFetched = false
+			m.updateViewportContent()
+			return m, fetchBlogPosts
 		}
 
 		// Viewport Scrolling (Up/Down/j/k handled by viewport.Update)
@@ -427,19 +505,237 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.height = msg.Height
 		m.ready = true
 		m.recalcLayout()
+
+	case blogFetchMsg:
+		m.blogLoading = false
+		if msg.err != nil {
+			m.blogFetchError = msg.err
+		} else {
+			m.blogPosts = msg.posts
+			m.blogFetched = true
+			m.blogFetchError = nil
+		}
+		m.updateViewportContent()
+		return m, nil
 	}
 
 	return m, tea.Batch(cmds...)
 }
 
-func (m *model) updateViewportContent() {
-	mdContent := contentMap[m.activeItem]
-	m.renderer, _ = glamour.NewTermRenderer(
-		glamour.WithStandardStyle("dark"),
-		glamour.WithWordWrap(m.viewport.Width),
+var (
+	// Blog Card Styles - Horizontal layout
+	blogCardStyle = lipgloss.NewStyle().
+			BorderStyle(lipgloss.RoundedBorder()).
+			BorderForeground(cNeonBlue).
+			Padding(1, 2).
+			Width(100).
+			Height(7)
+
+	blogCardTitleStyle = lipgloss.NewStyle().
+				Bold(true).
+				Foreground(cNeonGreen).
+				Width(40)
+
+	blogCardDateStyle = lipgloss.NewStyle().
+				Foreground(cCyan).
+				Italic(true).
+				Width(20)
+
+	blogCardDescStyle = lipgloss.NewStyle().
+				Foreground(cGrey).
+				Width(55)
+
+	blogCardTagStyle = lipgloss.NewStyle().
+				Background(cPurple).
+				Foreground(lipgloss.Color("#FFFFFF")).
+				Padding(0, 1).
+				MarginRight(1)
+
+	blogCardLinkStyle = lipgloss.NewStyle().
+				Foreground(cPink).
+				Underline(true)
+)
+
+func formatBlogPosts(posts []BlogPost, fetchError error, isLoading bool, width int) string {
+	headerStyle := lipgloss.NewStyle().Bold(true).Foreground(cNeonGreen)
+	subHeaderStyle := lipgloss.NewStyle().Foreground(cGrey)
+	linkStyle := lipgloss.NewStyle().Foreground(cPink)
+
+	// Dynamic card width based on terminal width
+	cardWidth := width - 6 // Account for padding and borders
+	if cardWidth < 60 {
+		cardWidth = 60
+	}
+	if cardWidth > 120 {
+		cardWidth = 120
+	}
+
+	if isLoading {
+		var sb strings.Builder
+		sb.WriteString(headerStyle.Render("📝 Latest Blog Posts"))
+		sb.WriteString("\n\n")
+		sb.WriteString(subHeaderStyle.Render("⏳ Loading posts from dev.to..."))
+		sb.WriteString("\n")
+		sb.WriteString(subHeaderStyle.Render("Please wait while I fetch the latest articles."))
+		return sb.String()
+	}
+
+	if fetchError != nil {
+		var sb strings.Builder
+		sb.WriteString(headerStyle.Render("📝 Latest Blog Posts"))
+		sb.WriteString("\n\n")
+		sb.WriteString(fmt.Sprintf("⚠️ Error fetching posts: %v", fetchError))
+		sb.WriteString("\n")
+		sb.WriteString(subHeaderStyle.Render("Please check your internet connection."))
+		return sb.String()
+	}
+
+	if len(posts) == 0 {
+		var sb strings.Builder
+		sb.WriteString(headerStyle.Render("📝 Latest Blog Posts"))
+		sb.WriteString("\n\n")
+		sb.WriteString("No posts found. Visit ")
+		sb.WriteString(linkStyle.Render("dev.to/@" + devtoUsername))
+		sb.WriteString(" for the latest articles.")
+		return sb.String()
+	}
+
+	var sb strings.Builder
+	// Header with Lipgloss styles (not markdown)
+	sb.WriteString(headerStyle.Render("📝 Latest Blog Posts"))
+	sb.WriteString("\n")
+	sb.WriteString(subHeaderStyle.Render("Fetching articles from " + linkStyle.Render("dev.to/@"+devtoUsername)))
+	sb.WriteString("\n")
+
+	// Build list of horizontal cards - 1 card per row
+	for _, post := range posts {
+		card := formatBlogCard(post, cardWidth)
+		sb.WriteString(card)
+		sb.WriteString("\n")
+	}
+
+	return sb.String()
+}
+
+func wrapText(s string, width int) []string {
+	var lines []string
+	words := strings.Fields(s)
+	currentLine := ""
+
+	for _, word := range words {
+		testLine := currentLine
+		if testLine != "" {
+			testLine += " "
+		}
+		testLine += word
+
+		if lipgloss.Width(testLine) <= width {
+			currentLine = testLine
+		} else {
+			if currentLine != "" {
+				lines = append(lines, currentLine)
+			}
+			currentLine = word
+		}
+	}
+	if currentLine != "" {
+		lines = append(lines, currentLine)
+	}
+
+	return lines
+}
+
+func formatBlogCard(post BlogPost, cardWidth int) string {
+	// Parse and format date
+	pubDate, _ := time.Parse(time.RFC3339, post.PublishedAt)
+	formattedDate := pubDate.Format("Jan 2, 2006")
+
+	// Calculate column widths
+	leftWidth := 40
+	gap := 4
+
+	// Dynamic styles based on width
+	cardStyle := lipgloss.NewStyle().
+		BorderStyle(lipgloss.RoundedBorder()).
+		BorderForeground(cNeonBlue).
+		Padding(1, 2).
+		Width(cardWidth)
+
+	titleStyle := lipgloss.NewStyle().
+		Bold(true).
+		Foreground(cNeonGreen).
+		Width(leftWidth)
+
+	// Create clickable hyperlink
+	linkText := "🔗 Read on dev.to →"
+	// ANSI hyperlink escape sequence: \e]8;;URL\e\TEXT\e]8;;\e\
+	clickableLink := "\x1b]8;;" + post.URL + "\x1b\\" + linkText + "\x1b]8;;\x1b\\"
+
+	// Left column - Wrapped Title, Date, Tags
+	titleLines := wrapText(post.Title, leftWidth-2)
+	var titleWrapped string
+	for i, line := range titleLines {
+		if i > 0 {
+			titleWrapped += "\n"
+		}
+		titleWrapped += line
+	}
+
+	leftCol := lipgloss.JoinVertical(
+		lipgloss.Top,
+		titleStyle.Render(titleWrapped),
+		blogCardDateStyle.Render("📅 "+formattedDate),
 	)
-	rendered, _ := m.renderer.Render(mdContent)
-	m.viewport.SetContent(rendered)
+
+	// Tags
+	if post.Tags != "" {
+		tags := strings.Split(post.Tags, ",")
+		var tagStrs []string
+		for _, tag := range tags {
+			if len(tagStrs) < 3 {
+				tagStrs = append(tagStrs, blogCardTagStyle.Render(strings.TrimSpace(tag)))
+			}
+		}
+		if len(tagStrs) > 0 {
+			leftCol = lipgloss.JoinVertical(
+				lipgloss.Top,
+				leftCol,
+				strings.Join(tagStrs, " "),
+			)
+		}
+	}
+
+	// Right side - Just the clickable link, vertically centered
+	linkStyle := lipgloss.NewStyle().
+		Foreground(cPink).
+		Bold(true)
+
+	rightCol := lipgloss.PlaceVertical(
+		lipgloss.Height(leftCol),
+		lipgloss.Center,
+		linkStyle.Render(clickableLink),
+	)
+
+	// Join left and right columns horizontally
+	content := lipgloss.JoinHorizontal(lipgloss.Top, leftCol, strings.Repeat(" ", gap), rightCol)
+
+	return cardStyle.Render(content)
+}
+
+func (m *model) updateViewportContent() {
+	if m.activeItem == "Blog" {
+		// Blog content is already styled with Lipgloss - don't pass through Glamour
+		content := formatBlogPosts(m.blogPosts, m.blogFetchError, m.blogLoading, m.viewport.Width)
+		m.viewport.SetContent(content)
+	} else {
+		mdContent := contentMap[m.activeItem]
+		m.renderer, _ = glamour.NewTermRenderer(
+			glamour.WithStandardStyle("dark"),
+			glamour.WithWordWrap(m.viewport.Width),
+		)
+		rendered, _ := m.renderer.Render(mdContent)
+		m.viewport.SetContent(rendered)
+	}
 }
 
 func glamourStyle(r *glamour.TermRenderer, str string) string {
