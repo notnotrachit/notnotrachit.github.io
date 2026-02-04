@@ -227,17 +227,22 @@ Conducted events including the flagship Google Week.
 > An expense splitting web app built with modern tech.
 > [Live Demo](https://owwn.rcht.dev/) | [GitHub](https://github.com/notnotrachit/owwn)
 
-## 2. **ClubKonnect**
+## 2. **DevComplete**
+> *Stack: Python, Django, Azure*
+> An AI powered 1v1 Coding Contest Platform with real-time code collaboration and auto evaluation.
+> [GitHub](https://github.com/notnotrachit/devcomplete)
+
+## 3. **ClubKonnect**
 > *Stack: Python, Django, Tailwind*
 > A complete recruitment platform for university clubs with OAuth.
 > [GitHub](https://github.com/notnotrachit/ClubKonnect)
 
-## 3. **Sharepal**
+## 4. **Sharepal**
 > *Stack: GoLang, React Native, MongoDB*
 > Group expense splitting mobile application.
 > [GitHub](https://github.com/notnotrachit/sharepal)
 
-## 4. **Re-Dcrypt**
+## 5. **Re-Dcrypt**
 > *Stack: Python, Django, HTML, CSS, JS*
 > A full stack web platform for organising cryptic hunt.
 > [GitHub](https://github.com/Re-Dcrypt/redcrypt)
@@ -892,8 +897,13 @@ func formatBlogCard(post BlogPost, cardWidth int) string {
 		tagsLine = built.String()
 	}
 
-	linkLabel := blogCardLinkStyle.Render("Read on dev.to →")
-	linkURL := lipgloss.NewStyle().Foreground(cPink).Underline(true).Render(post.URL)
+	// Build clickable OSC-8 hyperlink that won't wrap
+	osc8 := "\x1b]8;;" + post.URL + "\x1b\\"
+	closeOsc8 := "\x1b]8;;\x1b\\"
+	linkText := "🔗 Read on dev.to →"
+	linkLine := osc8 + linkText + closeOsc8
+	linkStyle := lipgloss.NewStyle().Foreground(cPink).Bold(true)
+	linkRendered := linkStyle.Render(linkLine)
 
 	cardLines := []string{}
 	cardLines = append(cardLines, strings.Split(thumb, "\n")...)
@@ -901,8 +911,7 @@ func formatBlogCard(post BlogPost, cardWidth int) string {
 	cardLines = append(cardLines, strings.Split(title, "\n")...)
 	cardLines = append(cardLines, date)
 	cardLines = append(cardLines, tagsLine)
-	cardLines = append(cardLines, linkLabel)
-	cardLines = append(cardLines, linkURL)
+	cardLines = append(cardLines, linkRendered)
 
 	for len(cardLines) < innerH {
 		cardLines = append(cardLines, "")
