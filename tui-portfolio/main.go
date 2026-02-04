@@ -1,9 +1,12 @@
 package main
 
 import (
+	"bytes"
 	"context"
 	"encoding/json"
 	"fmt"
+	"image"
+	"image/draw"
 	"io"
 	"log"
 	"net/http"
@@ -14,6 +17,7 @@ import (
 	"syscall"
 	"time"
 
+	_ "github.com/chai2010/webp"
 	"github.com/charmbracelet/bubbles/viewport"
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/glamour"
@@ -25,6 +29,7 @@ import (
 	"github.com/charmbracelet/wish/logging"
 	"github.com/mattn/go-runewidth"
 	"github.com/muesli/termenv"
+	"github.com/nfnt/resize"
 )
 
 const (
@@ -117,6 +122,7 @@ type BlogPost struct {
 	URL         string `json:"url"`
 	PublishedAt string `json:"published_at"`
 	Tags        string `json:"tags"`
+	CoverImage  string `json:"cover_image"`
 }
 
 const devtoUsername = "dilutewater"
@@ -175,42 +181,66 @@ I'm **Rachit Khurana**, a Full Stack Engineer passionate about building scalable
 > "Caffeine Powered Bit Flipper"
 `,
 	"Experience": `
-# 💼 Work Experience
+# 💼 Experience
+
+## 💼 Work Experience
 
 ### **Hyathi Technologies**
 *Full Stack & Web3 Developer Intern* (Dec 2024 - Present)
-- Building enterprise solutions using React, Next.js, Node.js, and Rust.
+Working on a variety of projects involving Full Stack and Web3 technologies for enterprise clients.
+
+**Tech:** React, Next.js, Node.js, Rust, Tauri, Solidity, Python
 
 ### **ClearMind AI**
 *Full Stack Developer Intern* (Jun 2023 - Aug 2023)
-- Engineered a journaling app scaling to 45k+ users with Next.js and OpenAI API.
+Engineered the ClearMind Journaling Web App using Next.js and Tailwind, integrating OpenAI and Azure APIs. Scaled to 45k+ users.
+
+**Tech:** Next.js, TailwindCSS, OpenAI API, Azure
+
+---
+
+## 👥 Community Experience
 
 ### **Microsoft Learn Student Ambassadors**
 *Beta MLSA* (Sep 2023 - Present)
-- conducting workshops and building community around Microsoft technologies.
+Conducting workshops, mentoring students, and building a community around Microsoft technologies.
+
+**Tech:** Azure, Public Speaking, Community Building
+
+### **CSI Bennett University**
+*Chief Technical Officer* (Aug 2023 - Aug 2024)
+Led technical initiatives and managed the tech team for university events and workshops.
+
+**Tech:** Leadership, Event Management, Technical Planning
+
+### **GDSC Bennett University**
+*Tech Team Member* (Nov 2022 - Aug 2023)
+Conducted events including the flagship Google Week.
+
+**Tech:** Google Cloud, Web Development
 `,
 	"Projects": `
 # 🛠️ Selected Projects
 
-## 1. **Owwn** (Featured)
+## 1. **Owwn**
 > *Stack: Tanstack, Convex*
 > An expense splitting web app built with modern tech.
 > [Live Demo](https://owwn.rcht.dev/) | [GitHub](https://github.com/notnotrachit/owwn)
 
-## 2. **QuizVerse**
-> *Stack: NextJS, Solidity, Hedera, AI*
-> Decentralized AI-powered quizzing platform on blockchain.
-> [GitHub](https://github.com/notnotrachit/QuizVerse/)
-
-## 3. **ClubKonnect**
+## 2. **ClubKonnect**
 > *Stack: Python, Django, Tailwind*
 > A complete recruitment platform for university clubs with OAuth.
 > [GitHub](https://github.com/notnotrachit/ClubKonnect)
 
-## 4. **Sharepal**
+## 3. **Sharepal**
 > *Stack: GoLang, React Native, MongoDB*
 > Group expense splitting mobile application.
 > [GitHub](https://github.com/notnotrachit/sharepal)
+
+## 4. **Re-Dcrypt**
+> *Stack: Python, Django, HTML, CSS, JS*
+> A full stack web platform for organising cryptic hunt.
+> [GitHub](https://github.com/Re-Dcrypt/redcrypt)
 `,
 	"Skills": `
 # ⚡ Tech Stack
@@ -245,13 +275,50 @@ I'm **Rachit Khurana**, a Full Stack Engineer passionate about building scalable
 ### ☁️ Infrastructure
 - 🐳 **Docker**
 - ☁️ **AWS**
+- ☁️ **Azure**
 - 🐧 **Linux**
 - 🐙 **Git**
-- ☸️ **K8s**
 - 🚀 **CI/CD**
 - 🐘 **Postgres**
 - 🍃 **Mongo**
 - 🔺 **Redis**
+`,
+	"Education": `
+# 🎓 Education & Certifications
+
+## 📚 Academic Background
+
+### **Bennett University**
+*BTech CSE* (2022 - 2026)
+- Ongoing
+
+### **Sardar Patel Vidyalaya**
+*XI - XII* (2020 - 2022)
+- XII Boards - 84.8%
+
+### **Apeejay School Noida**
+*Nursery - X* (2008 - 2020)
+- X Boards - 90.2%
+
+---
+
+## 🏆 Certifications
+
+### **AWS Certified Cloud Practitioner**
+*Amazon Web Services* (2024)
+- [View Credential](https://www.credly.com/badges/435b1a30-5f35-4341-a33b-d5a484824583/public_url)
+
+### **Google IT Automation with Python**
+*Grow With Google* (2023)
+- [View Credential](https://www.coursera.org/account/accomplishments/specialization/certificate/ELE2UKYHP4HQ)
+
+### **Introduction to Computers and Operating Systems and Security**
+*Microsoft* (2024)
+- [View Credential](https://www.coursera.org/account/accomplishments/records/5Y6ZMZNFBBBH)
+
+### **The Bits and Bytes of Computer Networking**
+*Google* (2024)
+- [View Credential](https://coursera.org/verify/F4GARCTVDKDS)
 `,
 }
 
@@ -296,7 +363,7 @@ func tick() tea.Cmd {
 }
 
 func initialModel(r *glamour.TermRenderer) model {
-	tabs := []string{"About Me", "Experience", "Projects", "Skills", "Blog"}
+	tabs := []string{"About Me", "Experience", "Projects", "Skills", "Education", "Achievements", "Blog"}
 	return model{
 		tabs:           tabs,
 		activeTabIndex: 0,
@@ -562,12 +629,9 @@ func formatBlogPosts(posts []BlogPost, fetchError error, isLoading bool, width i
 	linkStyle := lipgloss.NewStyle().Foreground(cPink)
 
 	// Dynamic card width based on terminal width
-	cardWidth := width - 6 // Account for padding and borders
+	cardWidth := width
 	if cardWidth < 60 {
 		cardWidth = 60
-	}
-	if cardWidth > 120 {
-		cardWidth = 120
 	}
 
 	if isLoading {
@@ -607,14 +671,129 @@ func formatBlogPosts(posts []BlogPost, fetchError error, isLoading bool, width i
 	sb.WriteString(subHeaderStyle.Render("Fetching articles from " + linkStyle.Render("dev.to/@"+devtoUsername)))
 	sb.WriteString("\n")
 
-	// Build list of horizontal cards - 1 card per row
-	for _, post := range posts {
-		card := formatBlogCard(post, cardWidth)
-		sb.WriteString(card)
+	gap := 2
+	cardsPerRow := 1
+	if width >= 140 {
+		cardsPerRow = 2
+	}
+
+	cardW := cardWidth
+	if cardsPerRow == 2 {
+		cardW = max(50, (cardWidth-gap)/2)
+	}
+
+	for i := 0; i < len(posts); i += cardsPerRow {
+		var row []string
+		for j := 0; j < cardsPerRow && i+j < len(posts); j++ {
+			row = append(row, formatBlogCard(posts[i+j], cardW))
+		}
+		sb.WriteString(lipgloss.JoinHorizontal(lipgloss.Top, row...))
 		sb.WriteString("\n")
 	}
 
+	// CTA at bottom
+	ctaText := "See all of my blogs on dev.to"
+	ctaURL := "https://dev.to/@" + devtoUsername
+	ctaStyle := lipgloss.NewStyle().
+		BorderStyle(lipgloss.RoundedBorder()).
+		BorderForeground(cPink).
+		Foreground(cGrey).
+		Bold(true).
+		Padding(0, 2)
+	urlStyle := lipgloss.NewStyle().Foreground(cPink).Underline(true)
+
+	ctaRendered := ctaStyle.Render(ctaText)
+	ctaRendered = lipgloss.PlaceHorizontal(max(0, width), lipgloss.Center, ctaRendered)
+	urlRendered := lipgloss.PlaceHorizontal(max(0, width), lipgloss.Center, urlStyle.Render(ctaURL))
+
+	sb.WriteString("\n")
+	sb.WriteString(ctaRendered)
+	sb.WriteString("\n")
+	sb.WriteString(urlRendered)
+	sb.WriteString("\n")
+
 	return sb.String()
+}
+
+// --- Thumbnails ---
+
+var thumbCache = map[string]string{}
+
+func blendOver(bg uint8, c uint8, a uint8) uint8 {
+	// (c*a + bg*(255-a)) / 255
+	return uint8((uint16(c)*uint16(a) + uint16(bg)*uint16(255-a)) / 255)
+}
+
+func renderBlockThumbnail(imageURL string, cols, rows int) (string, error) {
+	if cols <= 0 || rows <= 0 {
+		return "", nil
+	}
+	key := fmt.Sprintf("%s|%dx%d", imageURL, cols, rows)
+	if v, ok := thumbCache[key]; ok {
+		return v, nil
+	}
+
+	resp, err := http.Get(imageURL)
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+	data, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return "", err
+	}
+	img, _, err := image.Decode(bytes.NewReader(data))
+	if err != nil {
+		return "", err
+	}
+
+	// Two vertical pixels per cell using the upper half-block character.
+	resized := resize.Resize(uint(cols), uint(rows*2), img, resize.Lanczos3)
+	rgba := image.NewRGBA(resized.Bounds())
+	draw.Draw(rgba, rgba.Bounds(), resized, resized.Bounds().Min, draw.Src)
+
+	// Blend transparent pixels over the app background.
+	bgR, bgG, bgB := uint8(0x1f), uint8(0x24), uint8(0x2d)
+
+	var out bytes.Buffer
+	out.Grow((cols*rows)*24 + rows)
+
+	curFg := [3]uint8{0, 0, 0}
+	curBg := [3]uint8{0, 0, 0}
+	set := false
+
+	for y := 0; y < rows*2; y += 2 {
+		set = false
+		for x := 0; x < cols; x++ {
+			t := rgba.RGBAAt(x, y)
+			b := rgba.RGBAAt(x, y+1)
+
+			tr := blendOver(bgR, t.R, t.A)
+			tg := blendOver(bgG, t.G, t.A)
+			tb := blendOver(bgB, t.B, t.A)
+			br := blendOver(bgR, b.R, b.A)
+			bg := blendOver(bgG, b.G, b.A)
+			bb := blendOver(bgB, b.B, b.A)
+
+			fg := [3]uint8{tr, tg, tb}
+			bgc := [3]uint8{br, bg, bb}
+
+			if !set || fg != curFg || bgc != curBg {
+				curFg, curBg = fg, bgc
+				set = true
+				out.WriteString(fmt.Sprintf("\x1b[38;2;%d;%d;%dm\x1b[48;2;%d;%d;%dm", fg[0], fg[1], fg[2], bgc[0], bgc[1], bgc[2]))
+			}
+			out.WriteRune('▀')
+		}
+		out.WriteString("\x1b[0m")
+		if y < (rows*2)-2 {
+			out.WriteByte('\n')
+		}
+	}
+
+	res := out.String()
+	thumbCache[key] = res
+	return res, nil
 }
 
 func wrapText(s string, width int) []string {
@@ -646,88 +825,111 @@ func wrapText(s string, width int) []string {
 }
 
 func formatBlogCard(post BlogPost, cardWidth int) string {
-	// Parse and format date
 	pubDate, _ := time.Parse(time.RFC3339, post.PublishedAt)
 	formattedDate := pubDate.Format("Jan 2, 2006")
 
-	// Calculate column widths
-	leftWidth := 40
-	gap := 4
-
-	// Dynamic styles based on width
-	cardStyle := lipgloss.NewStyle().
+	baseStyle := lipgloss.NewStyle().
 		BorderStyle(lipgloss.RoundedBorder()).
 		BorderForeground(cNeonBlue).
-		Padding(1, 2).
-		Width(cardWidth)
+		Padding(1, 2)
+	frameW, frameH := baseStyle.GetFrameSize()
+	innerW := max(10, cardWidth-frameW)
 
-	titleStyle := lipgloss.NewStyle().
-		Bold(true).
-		Foreground(cNeonGreen).
-		Width(leftWidth)
+	thumbH := 14
+	titleMaxLines := 2
+	innerH := thumbH + 7 // thumb + spacer + title(2) + date + tags + link label + url
 
-	// Create clickable hyperlink
-	linkText := "🔗 Read on dev.to →"
-	// ANSI hyperlink escape sequence: \e]8;;URL\e\TEXT\e]8;;\e\
-	clickableLink := "\x1b]8;;" + post.URL + "\x1b\\" + linkText + "\x1b]8;;\x1b\\"
+	cardStyle := baseStyle.
+		Width(cardWidth).
+		Height(innerH + frameH)
 
-	// Left column - Wrapped Title, Date, Tags
-	titleLines := wrapText(post.Title, leftWidth-2)
-	var titleWrapped string
-	for i, line := range titleLines {
-		if i > 0 {
-			titleWrapped += "\n"
+	// Thumbnail (high-res, color) using half-block rendering.
+	thumb := lipgloss.NewStyle().Width(innerW).Height(thumbH).Render(strings.Repeat("\n", thumbH-1))
+	if post.CoverImage != "" {
+		if t, err := renderBlockThumbnail(post.CoverImage, innerW, thumbH); err == nil && t != "" {
+			thumb = t
 		}
-		titleWrapped += line
 	}
 
-	leftCol := lipgloss.JoinVertical(
-		lipgloss.Top,
-		titleStyle.Render(titleWrapped),
-		blogCardDateStyle.Render("📅 "+formattedDate),
-	)
+	// Title (wrap, max 2 lines)
+	lines := wrapText(post.Title, innerW)
+	if len(lines) > titleMaxLines {
+		lines = lines[:titleMaxLines]
+		last := lines[titleMaxLines-1]
+		lines[titleMaxLines-1] = truncateToWidth(last, max(0, innerW-1)) + "…"
+	}
+	titleStyle := lipgloss.NewStyle().Bold(true).Foreground(cNeonGreen)
+	for i := range lines {
+		lines[i] = titleStyle.Render(lines[i])
+	}
+	title := strings.Join(lines, "\n")
 
-	// Tags
+	date := blogCardDateStyle.Render("📅 " + formattedDate)
+
+	// Tags (fit on one line)
+	tagsLine := ""
 	if post.Tags != "" {
 		tags := strings.Split(post.Tags, ",")
-		var tagStrs []string
-		for _, tag := range tags {
-			if len(tagStrs) < 3 {
-				tagStrs = append(tagStrs, blogCardTagStyle.Render(strings.TrimSpace(tag)))
+		var built strings.Builder
+		for _, raw := range tags {
+			tag := strings.TrimSpace(raw)
+			if tag == "" {
+				continue
 			}
+			badge := blogCardTagStyle.Render(tag)
+			cand := badge
+			if built.Len() > 0 {
+				cand = built.String() + " " + badge
+			}
+			if lipgloss.Width(cand) > innerW {
+				break
+			}
+			if built.Len() > 0 {
+				built.WriteString(" ")
+			}
+			built.WriteString(badge)
 		}
-		if len(tagStrs) > 0 {
-			leftCol = lipgloss.JoinVertical(
-				lipgloss.Top,
-				leftCol,
-				strings.Join(tagStrs, " "),
-			)
-		}
+		tagsLine = built.String()
 	}
 
-	// Right side - Just the clickable link, vertically centered
-	linkStyle := lipgloss.NewStyle().
-		Foreground(cPink).
-		Bold(true)
+	linkLabel := blogCardLinkStyle.Render("Read on dev.to →")
+	linkURL := lipgloss.NewStyle().Foreground(cPink).Underline(true).Render(post.URL)
 
-	rightCol := lipgloss.PlaceVertical(
-		lipgloss.Height(leftCol),
-		lipgloss.Center,
-		linkStyle.Render(clickableLink),
-	)
+	cardLines := []string{}
+	cardLines = append(cardLines, strings.Split(thumb, "\n")...)
+	cardLines = append(cardLines, "")
+	cardLines = append(cardLines, strings.Split(title, "\n")...)
+	cardLines = append(cardLines, date)
+	cardLines = append(cardLines, tagsLine)
+	cardLines = append(cardLines, linkLabel)
+	cardLines = append(cardLines, linkURL)
 
-	// Join left and right columns horizontally
-	content := lipgloss.JoinHorizontal(lipgloss.Top, leftCol, strings.Repeat(" ", gap), rightCol)
+	for len(cardLines) < innerH {
+		cardLines = append(cardLines, "")
+	}
+	if len(cardLines) > innerH {
+		cardLines = cardLines[:innerH]
+	}
 
-	return cardStyle.Render(content)
+	body := strings.Join(cardLines, "\n")
+	return cardStyle.Render(body)
 }
 
 func (m *model) updateViewportContent() {
-	if m.activeItem == "Blog" {
-		// Blog content is already styled with Lipgloss - don't pass through Glamour
+	switch m.activeItem {
+	case "Blog":
 		content := formatBlogPosts(m.blogPosts, m.blogFetchError, m.blogLoading, m.viewport.Width)
 		m.viewport.SetContent(content)
-	} else {
+	case "Experience":
+		content := formatExperienceContent(m.viewport.Width)
+		m.viewport.SetContent(content)
+	case "Skills":
+		content := formatSkillsContent(m.viewport.Width)
+		m.viewport.SetContent(content)
+	case "Achievements":
+		content := formatAchievementsContent(m.viewport.Width)
+		m.viewport.SetContent(content)
+	default:
 		mdContent := contentMap[m.activeItem]
 		m.renderer, _ = glamour.NewTermRenderer(
 			glamour.WithStandardStyle("dark"),
@@ -736,6 +938,248 @@ func (m *model) updateViewportContent() {
 		rendered, _ := m.renderer.Render(mdContent)
 		m.viewport.SetContent(rendered)
 	}
+}
+
+func formatExperienceContent(width int) string {
+	headerStyle := lipgloss.NewStyle().Bold(true).Foreground(cNeonGreen).MarginBottom(1)
+	sectionStyle := lipgloss.NewStyle().Bold(true).Foreground(cCyan).MarginTop(1).MarginBottom(1)
+	companyStyle := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FFFFFF"))
+	roleStyle := lipgloss.NewStyle().Foreground(cGrey)
+	periodStyle := lipgloss.NewStyle().Foreground(muted)
+	descStyle := lipgloss.NewStyle().Foreground(cGrey).Width(45)
+	tagStyle := lipgloss.NewStyle().Background(cPurple).Foreground(lipgloss.Color("#FFFFFF")).Padding(0, 1)
+
+	gap := 4
+	colWidth := max(40, (width-gap)/2)
+
+	workItems := []struct {
+		company string
+		role    string
+		period  string
+		desc    string
+		tech    []string
+	}{
+		{
+			company: "Hyathi Technologies",
+			role:    "Full Stack & Web3 Developer Intern",
+			period:  "Dec 2024 - Present",
+			desc:    "Working on a variety of projects involving Full Stack and Web3 technologies for enterprise clients.",
+			tech:    []string{"React", "Next.js", "Node.js", "Rust", "Tauri", "Solidity", "Python"},
+		},
+		{
+			company: "ClearMind AI",
+			role:    "Full Stack Developer Intern",
+			period:  "Jun 2023 - Aug 2023",
+			desc:    "Engineered the ClearMind Journaling Web App using Next.js and Tailwind, integrating OpenAI and Azure APIs. Scaled to 45k+ users.",
+			tech:    []string{"Next.js", "TailwindCSS", "OpenAI API", "Azure"},
+		},
+	}
+
+	communityItems := []struct {
+		company string
+		role    string
+		period  string
+		desc    string
+		tech    []string
+	}{
+		{
+			company: "FOSS United College Chapter, Bennett University",
+			role:    "Lead",
+			period:  "Sep 2024 - Sep 2025",
+			desc:    "Organized Linux Fest for open-source and Linux enthusiasts. Led BU Hacktoberfest to promote open-source contributions.",
+			tech:    []string{"Open Source", "Linux", "Community Building", "Event Management"},
+		},
+		{
+			company: "Microsoft Learn Student Ambassadors",
+			role:    "Beta MLSA",
+			period:  "Sep 2023 - Present",
+			desc:    "Conducting workshops, mentoring students, and building a community around Microsoft technologies.",
+			tech:    []string{"Azure", "Public Speaking", "Community Building"},
+		},
+		{
+			company: "CSI Bennett University",
+			role:    "Chief Technical Officer",
+			period:  "Aug 2023 - Aug 2024",
+			desc:    "Led technical initiatives and managed the tech team for university events and workshops.",
+			tech:    []string{"Leadership", "Event Management", "Technical Planning"},
+		},
+		{
+			company: "GDSC Bennett University",
+			role:    "Tech Team Member",
+			period:  "Nov 2022 - Aug 2023",
+			desc:    "Conducted events including the flagship Google Week.",
+			tech:    []string{"Google Cloud", "Web Development"},
+		},
+	}
+
+	renderItem := func(item struct {
+		company string
+		role    string
+		period  string
+		desc    string
+		tech    []string
+	}, width int) string {
+		var b strings.Builder
+		b.WriteString(companyStyle.Render(item.company))
+		b.WriteString("\n")
+		b.WriteString(roleStyle.Render(item.role))
+		b.WriteString("\n")
+		b.WriteString(periodStyle.Render(item.period))
+		b.WriteString("\n\n")
+		b.WriteString(descStyle.Render(item.desc))
+		b.WriteString("\n\n")
+		var techs []string
+		for _, t := range item.tech {
+			techs = append(techs, tagStyle.Render(t))
+		}
+		b.WriteString(strings.Join(techs, " "))
+		return b.String()
+	}
+
+	var leftCol strings.Builder
+	leftCol.WriteString(sectionStyle.Render("💼 Work Experience"))
+	leftCol.WriteString("\n\n")
+	for i, item := range workItems {
+		if i > 0 {
+			leftCol.WriteString("\n\n")
+		}
+		leftCol.WriteString(renderItem(item, colWidth))
+	}
+
+	var rightCol strings.Builder
+	rightCol.WriteString(sectionStyle.Render("👥 Community Experience"))
+	rightCol.WriteString("\n\n")
+	for i, item := range communityItems {
+		if i > 0 {
+			rightCol.WriteString("\n\n")
+		}
+		rightCol.WriteString(renderItem(item, colWidth))
+	}
+
+	var sb strings.Builder
+	sb.WriteString(headerStyle.Render("💼 Experience"))
+	sb.WriteString("\n\n")
+	sb.WriteString(lipgloss.JoinHorizontal(lipgloss.Top, leftCol.String(), strings.Repeat(" ", gap), rightCol.String()))
+	return sb.String()
+}
+
+func formatAchievementsContent(width int) string {
+	headerStyle := lipgloss.NewStyle().Bold(true).Foreground(cNeonGreen).MarginBottom(1)
+	titleStyle := lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("#FFFFFF"))
+	awardStyle := lipgloss.NewStyle().Foreground(cCyan)
+	subAwardStyle := lipgloss.NewStyle().Foreground(muted)
+	teammateStyle := lipgloss.NewStyle().Foreground(soft)
+
+	achievements := []struct {
+		title     string
+		award     string
+		subAward  string
+		teammates []string
+	}{
+		{
+			title:     "OnChain Summer Buildathon",
+			award:     "Discovery Track Winner",
+			teammates: []string{"Yash Raj", "Rakesh Sharma"},
+		},
+		{
+			title:     "SheBuilds 2023",
+			award:     "Special Mention",
+			teammates: []string{"Yash Singh", "Vasvi Garg", "Pratibha Dureja"},
+		},
+		{
+			title:     "Hedera Hello Future Hackathon",
+			award:     "2nd Runner Up in AI Track",
+			subAward:  "Fuelling Women's Innovation in Web3",
+			teammates: []string{"Yash Raj", "Rakesh Sharma", "Urvashi Agarwal", "Harshita Malviya"},
+		},
+		{
+			title:     "Hedera Hello Future 2 Hackathon",
+			award:     "2nd Runner Up",
+			subAward:  "Decentralized Identity and Verifiable Credentials Track",
+			teammates: []string{"Yash Raj", "Rakesh Sharma", "Urvashi Agarwal", "Harshita Malviya"},
+		},
+		{
+			title:     "EDU Chain Hackathon: Semester 3",
+			award:     "5th Place in Miscellaneous Track",
+			teammates: []string{"Vansh", "Urvashi Agarwal"},
+		},
+		{
+			title:     "HopperHacks 2024",
+			award:     "Best Diversity & Inclusion Hack",
+			subAward:  "Stony Brook University",
+			teammates: []string{"Yash Raj", "Aditya"},
+		},
+		{
+			title:     "QubitX Hacks by YCW",
+			award:     "2nd Runner Up",
+			teammates: []string{"Yash Raj", "Aditya"},
+		},
+		{
+			title:     "HackCBS 6.0",
+			award:     "Domain track from GoDaddy",
+			teammates: []string{"Khushi", "Ashish Kumar Verma"},
+		},
+		{
+			title:     "VeChain Global Hackathon",
+			award:     "3rd Prize in Social Impact track",
+			teammates: []string{"Arnab Roy", "Sahil Nihalani"},
+		},
+	}
+
+	var sb strings.Builder
+	sb.WriteString(headerStyle.Render("🏆 Achievements"))
+	sb.WriteString("\n\n")
+
+	for _, a := range achievements {
+		sb.WriteString(titleStyle.Render(a.title))
+		sb.WriteString("\n")
+		sb.WriteString(awardStyle.Render("🏆 " + a.award))
+		if a.subAward != "" {
+			sb.WriteString("\n")
+			sb.WriteString(subAwardStyle.Render(a.subAward))
+		}
+		if len(a.teammates) > 0 {
+			sb.WriteString("\n")
+			sb.WriteString(teammateStyle.Render("with " + strings.Join(a.teammates, ", ")))
+		}
+		sb.WriteString("\n\n")
+	}
+
+	return sb.String()
+}
+
+func formatSkillsContent(width int) string {
+	headerStyle := lipgloss.NewStyle().Bold(true).Foreground(cNeonGreen).MarginBottom(1)
+	sectionStyle := lipgloss.NewStyle().Bold(true).Foreground(cCyan).MarginTop(1).MarginBottom(1)
+	skillStyle := lipgloss.NewStyle().Foreground(cGrey)
+
+	gap := 4
+	colWidth := max(25, (width-gap)/3)
+
+	languages := []string{"🐍 Python", "🐹 Golang", "📘 TypeScript", "🦀 Rust", "☕ Java", "📜 JavaScript", "⛓️ Solidity", "➕ C++", "🗄️ SQL"}
+	frameworks := []string{"⚛️ React", "▲ Next.js", "🎸 Django", "🌶️ Flask", "⚡ FastAPI", "🎨 Tailwind"}
+	infrastructure := []string{"🐳 Docker", "☁️ AWS", "☁️ Azure", "🐧 Linux", "🐙 Git", "🚀 CI/CD", "🐘 Postgres", "🍃 Mongo", "🔺 Redis"}
+
+	renderCol := func(title string, items []string, w int) string {
+		var b strings.Builder
+		b.WriteString(sectionStyle.Render(title))
+		b.WriteString("\n")
+		for _, item := range items {
+			b.WriteString(skillStyle.Render(item))
+			b.WriteString("\n")
+		}
+		return b.String()
+	}
+
+	leftCol := renderCol("💻 Languages", languages, colWidth)
+	midCol := renderCol("🛠️ Frameworks", frameworks, colWidth)
+	rightCol := renderCol("☁️ Infrastructure", infrastructure, colWidth)
+
+	var sb strings.Builder
+	sb.WriteString(headerStyle.Render("⚡ Tech Stack"))
+	sb.WriteString("\n\n")
+	sb.WriteString(lipgloss.JoinHorizontal(lipgloss.Top, leftCol, strings.Repeat(" ", gap), midCol, strings.Repeat(" ", gap), rightCol))
+	return sb.String()
 }
 
 func glamourStyle(r *glamour.TermRenderer, str string) string {

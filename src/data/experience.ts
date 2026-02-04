@@ -19,7 +19,15 @@ export const experience: ExperienceItem[] = [
 		description:
 			"Working on a variety of projects involving Full Stack and Web3 technologies for enterprise clients.",
 		type: "work",
-		technologies: ["React", "Next.js", "Node.js", "Rust", "Tauri", "Solidity", "Python"],
+		technologies: [
+			"React",
+			"Next.js",
+			"Node.js",
+			"Rust",
+			"Tauri",
+			"Solidity",
+			"Python",
+		],
 	},
 	{
 		id: 2,
@@ -34,6 +42,22 @@ export const experience: ExperienceItem[] = [
 	},
 	{
 		id: 3,
+		company: "FOSS United College Chapter, Bennett University",
+		role: "Lead",
+		period: "Sep 2024 - Sep 2025",
+		logo: "/logos/foss_club.svg",
+		description:
+			"Organized Linux Fest for open-source and Linux enthusiasts. Led BU Hacktoberfest to promote open-source contributions.",
+		type: "volunteering",
+		technologies: [
+			"Open Source",
+			"Linux",
+			"Community Building",
+			"Event Management",
+		],
+	},
+	{
+		id: 4,
 		company: "Microsoft Learn Student Ambassadors",
 		role: "Beta MLSA",
 		period: "Sep 2023 - Present",
@@ -44,7 +68,7 @@ export const experience: ExperienceItem[] = [
 		technologies: ["Azure", "Public Speaking", "Community Building"],
 	},
 	{
-		id: 4,
+		id: 5,
 		company: "CSI Bennett University",
 		role: "Chief Technical Officer",
 		period: "Aug 2023 - Aug 2024",
@@ -55,7 +79,7 @@ export const experience: ExperienceItem[] = [
 		technologies: ["Leadership", "Event Management", "Technical Planning"],
 	},
 	{
-		id: 5,
+		id: 6,
 		company: "GDSC Bennett University",
 		role: "Tech Team Member",
 		period: "Nov 2022 - Aug 2023",
