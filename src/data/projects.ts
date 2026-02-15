@@ -12,11 +12,24 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
+		id: 11,
+		title: "Jist",
+		shortDescription: "AI powered notification manager",
+		description:
+			"An intelligent Android application that uses AI to manage, prioritize, and summarize notifications, helping users stay focused on what matters most.",
+		image: "https://utfs.io/f/9O0rMFCPJMcpnT2n8vBflLz1K8xM2Fg45kaTOCnce96ih30N",
+		link: null,
+		github: null,
+		techStack: ["Kotlin", "Android", "Jetpack Compose"],
+		featured: true,
+	},
+	{
 		id: 10,
 		title: "Owwn",
 		shortDescription: "An expense spliiting web app",
 		description: "An expense splitting web app built with Tanstack and Convex.",
-		image: "https://tv6akf8u5k.ufs.sh/f/9O0rMFCPJMcpS3PNLu0n7RvgQb3DkyYozBdOIKaGZE2CuwJL",
+		image:
+			"https://tv6akf8u5k.ufs.sh/f/9O0rMFCPJMcpS3PNLu0n7RvgQb3DkyYozBdOIKaGZE2CuwJL",
 		link: "https://owwn.rcht.dev/",
 		github: "https://github.com/notnotrachit/owwn",
 		techStack: ["Tanstack", "Convex"],
@@ -51,7 +64,8 @@ export const projects: Project[] = [
 		title: "Re-Dcrypt",
 		shortDescription: "Cryptic Hunt Platform",
 		description: "A full stack web platform for organising cryptic hunt.",
-		image: "https://tv6akf8u5k.ufs.sh/f/9O0rMFCPJMcp5F05Y71P5lqCSUGKRi7f1QOEXdDyHI9JshWY",
+		image:
+			"https://tv6akf8u5k.ufs.sh/f/9O0rMFCPJMcp5F05Y71P5lqCSUGKRi7f1QOEXdDyHI9JshWY",
 		link: null,
 		github: "https://github.com/Re-Dcrypt/redcrypt",
 		techStack: ["Python", "Django", "HTML", "CSS", "Tailwind", "Javascript"],

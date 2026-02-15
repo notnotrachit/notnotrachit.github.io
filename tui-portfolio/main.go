@@ -225,27 +225,31 @@ Conducted events including the flagship Google Week.
 	"Projects": `
 # 🛠️ Selected Projects
 
-## 1. **Owwn**
+## 1. **Jist**
+> *Stack: Kotlin, Android, Jetpack Compose*
+> An AI powered notification manager that intelligently organizes and summarizes your notifications.
+
+## 2. **Owwn**
 > *Stack: Tanstack, Convex*
 > An expense splitting web app built with modern tech.
 > [Live Demo](https://owwn.rcht.dev/) | [GitHub](https://github.com/notnotrachit/owwn)
 
-## 2. **DevComplete**
+## 3. **DevComplete**
 > *Stack: Python, Django, Azure*
 > An AI powered 1v1 Coding Contest Platform with real-time code collaboration and auto evaluation.
 > [GitHub](https://github.com/notnotrachit/devcomplete)
 
-## 3. **ClubKonnect**
+## 4. **ClubKonnect**
 > *Stack: Python, Django, Tailwind*
 > A complete recruitment platform for university clubs with OAuth.
 > [GitHub](https://github.com/notnotrachit/ClubKonnect)
 
-## 4. **Sharepal**
+## 5. **Sharepal**
 > *Stack: GoLang, React Native, MongoDB*
 > Group expense splitting mobile application.
 > [GitHub](https://github.com/notnotrachit/sharepal)
 
-## 5. **Re-Dcrypt**
+## 6. **Re-Dcrypt**
 > *Stack: Python, Django, HTML, CSS, JS*
 > A full stack web platform for organising cryptic hunt.
 > [GitHub](https://github.com/Re-Dcrypt/redcrypt)
