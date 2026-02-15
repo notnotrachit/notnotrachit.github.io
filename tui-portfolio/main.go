@@ -228,6 +228,7 @@ Conducted events including the flagship Google Week.
 ## 1. **Jist**
 > *Stack: Kotlin, Android, Jetpack Compose*
 > An AI powered notification manager that intelligently organizes and summarizes your notifications.
+> [GitHub](https://github.com/notnotrachit/jist)
 
 ## 2. **Owwn**
 > *Stack: Tanstack, Convex*

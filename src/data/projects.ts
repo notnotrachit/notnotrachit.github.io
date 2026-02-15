@@ -19,7 +19,7 @@ export const projects: Project[] = [
 			"An intelligent Android application that uses AI to manage, prioritize, and summarize notifications, helping users stay focused on what matters most.",
 		image: "https://utfs.io/f/9O0rMFCPJMcpnT2n8vBflLz1K8xM2Fg45kaTOCnce96ih30N",
 		link: null,
-		github: null,
+		github: "https://github.com/notnotrachit/jist",
 		techStack: ["Kotlin", "Android", "Jetpack Compose"],
 		featured: true,
 	},
