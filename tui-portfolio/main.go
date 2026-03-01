@@ -225,32 +225,37 @@ Conducted events including the flagship Google Week.
 	"Projects": `
 # 🛠️ Selected Projects
 
-## 1. **Jist**
+## 1. **Ryla**
+> *Stack: NextJS, Convex, Python*
+> An AI-powered Basecamp project management Slack bot that lets you control all your project management tasks on Basecamp using natural language.
+> [Live Demo](https://ryla.rcht.dev)
+
+## 2. **Jist**
 > *Stack: Kotlin, Android, Jetpack Compose*
 > An AI powered notification manager that intelligently organizes and summarizes your notifications.
 > [GitHub](https://github.com/notnotrachit/jist)
 
-## 2. **Owwn**
+## 3. **Owwn**
 > *Stack: Tanstack, Convex*
 > An expense splitting web app built with modern tech.
 > [Live Demo](https://owwn.rcht.dev/) | [GitHub](https://github.com/notnotrachit/owwn)
 
-## 3. **DevComplete**
+## 4. **DevComplete**
 > *Stack: Python, Django, Azure*
 > An AI powered 1v1 Coding Contest Platform with real-time code collaboration and auto evaluation.
 > [GitHub](https://github.com/notnotrachit/devcomplete)
 
-## 4. **ClubKonnect**
+## 5. **ClubKonnect**
 > *Stack: Python, Django, Tailwind*
 > A complete recruitment platform for university clubs with OAuth.
 > [GitHub](https://github.com/notnotrachit/ClubKonnect)
 
-## 5. **Sharepal**
+## 6. **Sharepal**
 > *Stack: GoLang, React Native, MongoDB*
 > Group expense splitting mobile application.
 > [GitHub](https://github.com/notnotrachit/sharepal)
 
-## 6. **Re-Dcrypt**
+## 7. **Re-Dcrypt**
 > *Stack: Python, Django, HTML, CSS, JS*
 > A full stack web platform for organising cryptic hunt.
 > [GitHub](https://github.com/Re-Dcrypt/redcrypt)
