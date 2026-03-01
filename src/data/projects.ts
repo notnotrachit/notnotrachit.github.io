@@ -12,6 +12,18 @@ export interface Project {
 
 export const projects: Project[] = [
 	{
+		id: 12,
+		title: "Ryla",
+		shortDescription: "AI-powered Basecamp project management Slack bot",
+		description:
+			"An AI-powered bot that lets you control all your project management tasks on Basecamp using natural language.",
+		image: "https://utfs.io/f/9O0rMFCPJMcpdYvlZHhBWDvgVprsALXlhuE26dznQfMiJkja",
+		link: "https://ryla.rcht.dev",
+		github: null,
+		techStack: ["NextJS", "Convex", "Python"],
+		featured: true,
+	},
+	{
 		id: 11,
 		title: "Jist",
 		shortDescription: "AI powered notification manager",
