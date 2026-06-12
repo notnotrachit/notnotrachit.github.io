@@ -718,6 +718,11 @@ func truncateToWidth(s string, w int) string {
 
 func (m *model) handleMouseEvent(msg tea.MouseMsg) (model, tea.Cmd) {
 	event := msg
+	if event.Type == tea.MouseWheelUp || event.Type == tea.MouseWheelDown {
+		var cmd tea.Cmd
+		m.viewport, cmd = m.viewport.Update(msg)
+		return *m, cmd
+	}
 
 	log.Printf("handleMouseEvent: X=%d, Y=%d, Type=%d, headerH=%d, tabsH=%d",
 		event.X, event.Y, event.Type, m.headerH, m.tabsH)
