@@ -14,6 +14,7 @@ import (
 	"os/signal"
 	"strconv"
 	"strings"
+	"sync"
 	"syscall"
 	"time"
 
@@ -50,6 +51,89 @@ func getPort() int {
 
 // --- Styling ---
 
+type themeIndex int
+
+const (
+	themeNeon themeIndex = iota
+	themeAmber
+	themeOcean
+	themeMono
+)
+
+type terminalTheme struct {
+	name       string
+	primary    lipgloss.Color
+	secondary  lipgloss.Color
+	accent     lipgloss.Color
+	highlight  lipgloss.Color
+	info       lipgloss.Color
+	text       lipgloss.Color
+	dim        lipgloss.Color
+	soft       lipgloss.Color
+	panel      lipgloss.Color
+	tagText    lipgloss.Color
+	background [3]uint8
+}
+
+var themes = []terminalTheme{
+	{
+		name:       "Neon",
+		primary:    lipgloss.Color("#00F260"),
+		secondary:  lipgloss.Color("#0575E6"),
+		accent:     lipgloss.Color("#8E2DE2"),
+		highlight:  lipgloss.Color("#FF0080"),
+		info:       lipgloss.Color("#00FFFF"),
+		text:       lipgloss.Color("#BDC3C7"),
+		dim:        lipgloss.Color("#777777"),
+		soft:       lipgloss.Color("#9AA0A6"),
+		panel:      lipgloss.Color("#34495E"),
+		tagText:    lipgloss.Color("#FFFFFF"),
+		background: [3]uint8{0x1f, 0x24, 0x2d},
+	},
+	{
+		name:       "Amber",
+		primary:    lipgloss.Color("#FBBF24"),
+		secondary:  lipgloss.Color("#F97316"),
+		accent:     lipgloss.Color("#7C2D12"),
+		highlight:  lipgloss.Color("#FB7185"),
+		info:       lipgloss.Color("#FDBA74"),
+		text:       lipgloss.Color("#F5E7C6"),
+		dim:        lipgloss.Color("#A1865E"),
+		soft:       lipgloss.Color("#C7A76C"),
+		panel:      lipgloss.Color("#5F4120"),
+		tagText:    lipgloss.Color("#111827"),
+		background: [3]uint8{0x22, 0x1a, 0x10},
+	},
+	{
+		name:       "Ocean",
+		primary:    lipgloss.Color("#7DD3FC"),
+		secondary:  lipgloss.Color("#38BDF8"),
+		accent:     lipgloss.Color("#14B8A6"),
+		highlight:  lipgloss.Color("#F0ABFC"),
+		info:       lipgloss.Color("#67E8F9"),
+		text:       lipgloss.Color("#D7F3FF"),
+		dim:        lipgloss.Color("#6B8FA3"),
+		soft:       lipgloss.Color("#9CC7D8"),
+		panel:      lipgloss.Color("#1E4E5F"),
+		tagText:    lipgloss.Color("#06202A"),
+		background: [3]uint8{0x0b, 0x19, 0x24},
+	},
+	{
+		name:       "Mono",
+		primary:    lipgloss.Color("#F5F5F5"),
+		secondary:  lipgloss.Color("#A3A3A3"),
+		accent:     lipgloss.Color("#525252"),
+		highlight:  lipgloss.Color("#D4D4D4"),
+		info:       lipgloss.Color("#E5E5E5"),
+		text:       lipgloss.Color("#D4D4D4"),
+		dim:        lipgloss.Color("#737373"),
+		soft:       lipgloss.Color("#A3A3A3"),
+		panel:      lipgloss.Color("#404040"),
+		tagText:    lipgloss.Color("#111111"),
+		background: [3]uint8{0x18, 0x18, 0x18},
+	},
+}
+
 var (
 	// Colors
 	cNeonGreen = lipgloss.Color("#00F260")
@@ -59,6 +143,8 @@ var (
 	cCyan      = lipgloss.Color("#00FFFF")
 	cGrey      = lipgloss.Color("#BDC3C7")
 	cDarkGrey  = lipgloss.Color("#34495E")
+	cTagText   = lipgloss.Color("#FFFFFF")
+	bgColor    = [3]uint8{0x1f, 0x24, 0x2d}
 
 	// Global
 	appStyle = lipgloss.NewStyle().Padding(0, 1)
@@ -102,6 +188,74 @@ var (
 		Foreground(cGrey)
 )
 
+func applyTheme(theme terminalTheme) {
+	cNeonGreen = theme.primary
+	cNeonBlue = theme.secondary
+	cPurple = theme.accent
+	cPink = theme.highlight
+	cCyan = theme.info
+	cGrey = theme.text
+	cDarkGrey = theme.panel
+	cTagText = theme.tagText
+	bgColor = theme.background
+	muted = theme.dim
+	soft = theme.soft
+	rebuildThemeStyles()
+}
+
+func rebuildThemeStyles() {
+	logoStyle = lipgloss.NewStyle().Foreground(cNeonGreen)
+	subHeaderStyle = lipgloss.NewStyle().Foreground(cNeonGreen).Bold(true)
+
+	footerStyle = lipgloss.NewStyle().Foreground(muted).PaddingTop(1)
+
+	activeTabStyle = lipgloss.NewStyle().
+		Border(activeTabBorder, true).
+		Foreground(cNeonGreen).
+		Bold(true).
+		Padding(0, 1)
+	inactiveTabStyle = lipgloss.NewStyle().
+		Border(tabBorder, true).
+		Foreground(cGrey).
+		Padding(0, 1)
+	tabGapStyle = lipgloss.NewStyle().
+		Border(lipgloss.Border{
+			Bottom: "─",
+		}, false, false, true, false).
+		Foreground(cGrey)
+
+	blogCardStyle = lipgloss.NewStyle().
+		BorderStyle(lipgloss.RoundedBorder()).
+		BorderForeground(cNeonBlue).
+		Padding(1, 2).
+		Width(100).
+		Height(7)
+
+	blogCardTitleStyle = lipgloss.NewStyle().
+		Bold(true).
+		Foreground(cNeonGreen).
+		Width(40)
+
+	blogCardDateStyle = lipgloss.NewStyle().
+		Foreground(cCyan).
+		Italic(true).
+		Width(20)
+
+	blogCardDescStyle = lipgloss.NewStyle().
+		Foreground(cGrey).
+		Width(55)
+
+	blogCardTagStyle = lipgloss.NewStyle().
+		Background(cPurple).
+		Foreground(cTagText).
+		Padding(0, 1).
+		MarginRight(1)
+
+	blogCardLinkStyle = lipgloss.NewStyle().
+		Foreground(cPink).
+		Underline(true)
+}
+
 func tabBorderWithBottom(left, middle, right string) lipgloss.Border {
 	border := lipgloss.RoundedBorder()
 	border.BottomLeft = left
@@ -135,25 +289,109 @@ type blogFetchMsg struct {
 	err   error
 }
 
-func fetchBlogPosts() tea.Msg {
+const blogFetchTimeout = 8 * time.Second
+
+var (
+	blogClient = &http.Client{Timeout: blogFetchTimeout}
+
+	blogCache = struct {
+		sync.RWMutex
+		posts      []BlogPost
+		err        error
+		updatedAt  time.Time
+		refreshing bool
+	}{}
+)
+
+func fetchBlogPostsFromRemote() ([]BlogPost, error) {
 	url := fmt.Sprintf("https://dev.to/api/articles?username=%s&per_page=10", devtoUsername)
-	resp, err := http.Get(url)
+	resp, err := blogClient.Get(url)
 	if err != nil {
-		return blogFetchMsg{err: err}
+		return nil, err
 	}
 	defer resp.Body.Close()
 
+	if resp.StatusCode < http.StatusOK || resp.StatusCode >= http.StatusMultipleChoices {
+		return nil, fmt.Errorf("dev.to returned %s", resp.Status)
+	}
+
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		return blogFetchMsg{err: err}
+		return nil, err
 	}
 
 	var posts []BlogPost
 	if err := json.Unmarshal(body, &posts); err != nil {
-		return blogFetchMsg{err: err}
+		return nil, err
 	}
 
-	return blogFetchMsg{posts: posts}
+	return posts, nil
+}
+
+func copyBlogPosts(posts []BlogPost) []BlogPost {
+	if len(posts) == 0 {
+		return nil
+	}
+	copied := make([]BlogPost, len(posts))
+	copy(copied, posts)
+	return copied
+}
+
+func cachedBlogPosts() (posts []BlogPost, fetchError error, refreshing bool) {
+	blogCache.RLock()
+	defer blogCache.RUnlock()
+	return copyBlogPosts(blogCache.posts), blogCache.err, blogCache.refreshing
+}
+
+func refreshBlogPosts() tea.Msg {
+	posts, err := fetchBlogPostsFromRemote()
+	if err == nil {
+		go warmBlogThumbnails(copyBlogPosts(posts))
+	}
+	return blogFetchMsg{posts: posts, err: err}
+}
+
+func startBlogRefresh() tea.Cmd {
+	blogCache.Lock()
+	if blogCache.refreshing {
+		blogCache.Unlock()
+		return nil
+	}
+	blogCache.refreshing = true
+	blogCache.Unlock()
+	return refreshBlogPosts
+}
+
+func finishBlogRefresh(posts []BlogPost, err error) {
+	blogCache.Lock()
+	defer blogCache.Unlock()
+
+	blogCache.refreshing = false
+	if err != nil {
+		blogCache.err = err
+		return
+	}
+
+	blogCache.posts = copyBlogPosts(posts)
+	blogCache.err = nil
+	blogCache.updatedAt = time.Now()
+}
+
+func warmBlogCacheOnStartup() {
+	cmd := startBlogRefresh()
+	if cmd == nil {
+		return
+	}
+
+	go func() {
+		msg := cmd()
+		if fetchMsg, ok := msg.(blogFetchMsg); ok {
+			finishBlogRefresh(fetchMsg.posts, fetchMsg.err)
+			if fetchMsg.err != nil {
+				log.Printf("initial blog cache warmup failed: %v", fetchMsg.err)
+			}
+		}
+	}()
 }
 
 // --- ASCII Art ---
@@ -166,7 +404,7 @@ const logoText = `██████╗  █████╗  ██████�
 ╚═╝  ╚═╝╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝    ╚═╝`
 
 const targetSubHeader = ">> Caffeine Powered BitFlipper <<"
-const helpText = "↑/↓: Navigate • Enter: Select • PgUp/PgDn: Scroll • Esc: Back"
+const helpText = "↑/↓: Navigate • ←/→: Tabs • t: Theme • PgUp/PgDn: Scroll • Esc: Back"
 
 // --- Content Data ---
 
@@ -354,6 +592,7 @@ type model struct {
 
 	tabs           []string
 	activeTabIndex int
+	themeIndex     themeIndex
 
 	// Animation
 	subHeaderIdx  int
@@ -391,6 +630,7 @@ func initialModel(r *glamour.TermRenderer) model {
 	return model{
 		tabs:           tabs,
 		activeTabIndex: 0,
+		themeIndex:     themeNeon,
 		renderer:       r,
 		activeItem:     tabs[0],
 		blogPosts:      []BlogPost{},
@@ -400,6 +640,35 @@ func initialModel(r *glamour.TermRenderer) model {
 
 func (m model) Init() tea.Cmd {
 	return tick()
+}
+
+func (m *model) syncBlogCache() {
+	posts, fetchError, refreshing := cachedBlogPosts()
+	m.blogPosts = posts
+	m.blogFetched = len(posts) > 0
+	m.blogFetchError = fetchError
+	m.blogLoading = refreshing
+}
+
+func (m *model) refreshBlogCacheInBackground() tea.Cmd {
+	m.syncBlogCache()
+	cmd := startBlogRefresh()
+	m.syncBlogCache()
+	m.updateViewportContent()
+	if cmd == nil && m.blogLoading {
+		return tick()
+	}
+	return cmd
+}
+
+func (m *model) cycleTheme() {
+	m.themeIndex = themeIndex((int(m.themeIndex) + 1) % len(themes))
+	applyTheme(themes[m.themeIndex])
+	m.recalcLayout()
+}
+
+func (m model) applyTheme() {
+	applyTheme(themes[m.themeIndex])
 }
 
 func clamp(min, v, max int) int {
@@ -447,6 +716,52 @@ func truncateToWidth(s string, w int) string {
 	return string(runes) + "…"
 }
 
+func (m *model) handleMouseEvent(msg tea.MouseMsg) (model, tea.Cmd) {
+	event := msg
+
+	log.Printf("handleMouseEvent: X=%d, Y=%d, Type=%d, headerH=%d, tabsH=%d",
+		event.X, event.Y, event.Type, m.headerH, m.tabsH)
+
+	// Check if click is in the tabs area
+	tabStartY := m.headerH
+	tabEndY := m.headerH + m.tabsH
+
+	log.Printf("Tab area: Y=%d to Y=%d", tabStartY, tabEndY)
+
+	// Check if click is within tab row
+	if event.Y < tabStartY || event.Y >= tabEndY {
+		log.Printf("Click outside tab area")
+		return *m, nil
+	}
+
+	// Find which tab was clicked by checking X position
+	currentX := 0
+	for i, tab := range m.tabs {
+		tabWidth := lipgloss.Width(tab) + 2
+		log.Printf("Tab %d: '%s' at X=%d to X=%d, clicked at X=%d", i, tab, currentX, currentX+tabWidth, event.X)
+		if event.X >= currentX && event.X < currentX+tabWidth {
+			log.Printf("Clicked on tab %d: %s", i, tab)
+			if i != m.activeTabIndex {
+				m.activeTabIndex = i
+				m.activeItem = m.tabs[i]
+				trackEvent(m.sessionID, "tab_switch", m.activeItem)
+				if !contains(m.tabsViewed, m.activeItem) {
+					m.tabsViewed = append(m.tabsViewed, m.activeItem)
+				}
+				m.updateViewportContent()
+				m.viewport.GotoTop()
+				if m.activeItem == "Blog" {
+					return *m, m.refreshBlogCacheInBackground()
+				}
+			}
+			return *m, nil
+		}
+		currentX += tabWidth + 1
+	}
+
+	return *m, nil
+}
+
 func (m model) headerView() string {
 	// Center the entire block manually to preserve internal alignment.
 	lines := strings.Split(logoText, "\n")
@@ -475,13 +790,14 @@ func (m model) headerView() string {
 
 func (m model) footerView() string {
 	// Global focus, no need to show specific focus area
-	right := lipgloss.NewStyle().Foreground(soft).Render("Section: " + m.activeItem)
+	themeName := themes[m.themeIndex].name
+	right := lipgloss.NewStyle().Foreground(soft).Render("Section: " + m.activeItem + " • Theme: " + themeName)
 
-	keys := "←/→:nav tabs  ↑/↓:scroll  q:quit"
+	keys := "←/→:nav tabs  ↑/↓:scroll  t:theme  q:quit"
 	if m.showHelp {
 		keys = "esc:close help"
 	} else if m.activeItem == "Blog" {
-		keys = "←/→:nav  ↑/↓:scroll  r:refresh  q:quit"
+		keys = "←/→:nav  ↑/↓:scroll  r:refresh  t:theme  q:quit"
 	}
 	keys = truncateToWidth(keys, m.width)
 
@@ -494,6 +810,7 @@ func (m *model) recalcLayout() {
 	if m.width <= 0 || m.height <= 0 {
 		return
 	}
+	m.applyTheme()
 
 	header := m.headerView()
 	footer := m.footerView()
@@ -529,6 +846,13 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 
 	switch msg := msg.(type) {
 	case tickMsg:
+		if m.activeItem == "Blog" && m.blogLoading {
+			m.syncBlogCache()
+			m.updateViewportContent()
+			if m.blogLoading {
+				return m, tick()
+			}
+		}
 		if m.subHeaderIdx < len(targetSubHeader) {
 			m.subHeaderIdx++
 			m.subHeaderShow = targetSubHeader[:m.subHeaderIdx]
@@ -556,6 +880,11 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			return m, tea.Quit
 		}
 
+		if msg.String() == "t" {
+			m.cycleTheme()
+			return m, nil
+		}
+
 		// Tab Navigation (Left/Right/h/l)
 		switch msg.String() {
 		case "left", "h":
@@ -574,11 +903,9 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			}
 			m.updateViewportContent()
 			m.viewport.GotoTop() // Reset scroll
-			// Fetch blog posts if switching to Blog tab
-			if m.activeItem == "Blog" && !m.blogFetched && !m.blogLoading {
-				m.blogLoading = true
-				m.updateViewportContent()
-				return m, fetchBlogPosts
+			// Show cached blog posts immediately and refresh in the background.
+			if m.activeItem == "Blog" {
+				return m, m.refreshBlogCacheInBackground()
 			}
 			return m, nil
 		case "right", "l":
@@ -597,21 +924,16 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			}
 			m.updateViewportContent()
 			m.viewport.GotoTop() // Reset scroll
-			// Fetch blog posts if switching to Blog tab
-			if m.activeItem == "Blog" && !m.blogFetched && !m.blogLoading {
-				m.blogLoading = true
-				m.updateViewportContent()
-				return m, fetchBlogPosts
+			// Show cached blog posts immediately and refresh in the background.
+			if m.activeItem == "Blog" {
+				return m, m.refreshBlogCacheInBackground()
 			}
 			return m, nil
 		}
 
-		// Refresh blog posts with 'r'
+		// Refresh blog posts with 'r' while continuing to show cached content.
 		if msg.String() == "r" && m.activeItem == "Blog" {
-			m.blogLoading = true
-			m.blogFetched = false
-			m.updateViewportContent()
-			return m, fetchBlogPosts
+			return m, m.refreshBlogCacheInBackground()
 		}
 
 		// Viewport Scrolling (Up/Down/j/k handled by viewport.Update)
@@ -626,16 +948,14 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		m.recalcLayout()
 
 	case blogFetchMsg:
-		m.blogLoading = false
-		if msg.err != nil {
-			m.blogFetchError = msg.err
-		} else {
-			m.blogPosts = msg.posts
-			m.blogFetched = true
-			m.blogFetchError = nil
-		}
+		finishBlogRefresh(msg.posts, msg.err)
+		m.syncBlogCache()
 		m.updateViewportContent()
 		return m, nil
+
+	case tea.MouseMsg:
+		log.Printf("Mouse event received: %+v", msg)
+		return m.handleMouseEvent(msg)
 	}
 
 	return m, tea.Batch(cmds...)
@@ -686,17 +1006,17 @@ func formatBlogPosts(posts []BlogPost, fetchError error, isLoading bool, width i
 		cardWidth = 60
 	}
 
-	if isLoading {
+	if isLoading && len(posts) == 0 {
 		var sb strings.Builder
 		sb.WriteString(headerStyle.Render("📝 Latest Blog Posts"))
 		sb.WriteString("\n\n")
-		sb.WriteString(subHeaderStyle.Render("⏳ Loading posts from dev.to..."))
+		sb.WriteString(subHeaderStyle.Render("⏳ Preparing cached posts from dev.to..."))
 		sb.WriteString("\n")
-		sb.WriteString(subHeaderStyle.Render("Please wait while I fetch the latest articles."))
+		sb.WriteString(subHeaderStyle.Render("You can keep navigating while this updates."))
 		return sb.String()
 	}
 
-	if fetchError != nil {
+	if fetchError != nil && len(posts) == 0 {
 		var sb strings.Builder
 		sb.WriteString(headerStyle.Render("📝 Latest Blog Posts"))
 		sb.WriteString("\n\n")
@@ -720,7 +1040,7 @@ func formatBlogPosts(posts []BlogPost, fetchError error, isLoading bool, width i
 	// Header with Lipgloss styles (not markdown)
 	sb.WriteString(headerStyle.Render("📝 Latest Blog Posts"))
 	sb.WriteString("\n")
-	sb.WriteString(subHeaderStyle.Render("Fetching articles from " + linkStyle.Render("dev.to/@"+devtoUsername)))
+	sb.WriteString(subHeaderStyle.Render("Cached articles from " + linkStyle.Render("dev.to/@"+devtoUsername)))
 	sb.WriteString("\n")
 
 	gap := 2
@@ -769,34 +1089,89 @@ func formatBlogPosts(posts []BlogPost, fetchError error, isLoading bool, width i
 
 // --- Thumbnails ---
 
-var thumbCache = map[string]string{}
+var (
+	thumbCache = struct {
+		sync.RWMutex
+		items map[string]string
+	}{items: map[string]string{}}
+
+	imageCache = struct {
+		sync.RWMutex
+		items map[string]image.Image
+	}{items: map[string]image.Image{}}
+)
 
 func blendOver(bg uint8, c uint8, a uint8) uint8 {
 	// (c*a + bg*(255-a)) / 255
 	return uint8((uint16(c)*uint16(a) + uint16(bg)*uint16(255-a)) / 255)
 }
 
+func cachedCoverImage(imageURL string) (image.Image, bool) {
+	imageCache.RLock()
+	defer imageCache.RUnlock()
+	img, ok := imageCache.items[imageURL]
+	return img, ok
+}
+
+func fetchAndCacheCoverImage(imageURL string) error {
+	if imageURL == "" {
+		return nil
+	}
+	if _, ok := cachedCoverImage(imageURL); ok {
+		return nil
+	}
+
+	resp, err := blogClient.Get(imageURL)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	if resp.StatusCode < http.StatusOK || resp.StatusCode >= http.StatusMultipleChoices {
+		return fmt.Errorf("image returned %s", resp.Status)
+	}
+
+	data, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return err
+	}
+	img, _, err := image.Decode(bytes.NewReader(data))
+	if err != nil {
+		return err
+	}
+
+	imageCache.Lock()
+	imageCache.items[imageURL] = img
+	imageCache.Unlock()
+	return nil
+}
+
+func warmBlogThumbnails(posts []BlogPost) {
+	for _, post := range posts {
+		if post.CoverImage == "" {
+			continue
+		}
+		if err := fetchAndCacheCoverImage(post.CoverImage); err != nil {
+			log.Printf("failed to warm blog cover image %q: %v", post.CoverImage, err)
+		}
+	}
+}
+
 func renderBlockThumbnail(imageURL string, cols, rows int) (string, error) {
 	if cols <= 0 || rows <= 0 {
 		return "", nil
 	}
-	key := fmt.Sprintf("%s|%dx%d", imageURL, cols, rows)
-	if v, ok := thumbCache[key]; ok {
+	key := fmt.Sprintf("%s|%dx%d|%02x%02x%02x", imageURL, cols, rows, bgColor[0], bgColor[1], bgColor[2])
+	thumbCache.RLock()
+	v, ok := thumbCache.items[key]
+	thumbCache.RUnlock()
+	if ok {
 		return v, nil
 	}
 
-	resp, err := http.Get(imageURL)
-	if err != nil {
-		return "", err
-	}
-	defer resp.Body.Close()
-	data, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return "", err
-	}
-	img, _, err := image.Decode(bytes.NewReader(data))
-	if err != nil {
-		return "", err
+	img, ok := cachedCoverImage(imageURL)
+	if !ok {
+		return "", nil
 	}
 
 	// Two vertical pixels per cell using the upper half-block character.
@@ -804,8 +1179,8 @@ func renderBlockThumbnail(imageURL string, cols, rows int) (string, error) {
 	rgba := image.NewRGBA(resized.Bounds())
 	draw.Draw(rgba, rgba.Bounds(), resized, resized.Bounds().Min, draw.Src)
 
-	// Blend transparent pixels over the app background.
-	bgR, bgG, bgB := uint8(0x1f), uint8(0x24), uint8(0x2d)
+	// Blend transparent pixels over the active app background.
+	bgR, bgG, bgB := bgColor[0], bgColor[1], bgColor[2]
 
 	var out bytes.Buffer
 	out.Grow((cols*rows)*24 + rows)
@@ -844,7 +1219,9 @@ func renderBlockThumbnail(imageURL string, cols, rows int) (string, error) {
 	}
 
 	res := out.String()
-	thumbCache[key] = res
+	thumbCache.Lock()
+	thumbCache.items[key] = res
+	thumbCache.Unlock()
 	return res, nil
 }
 
@@ -972,6 +1349,7 @@ func formatBlogCard(post BlogPost, cardWidth int) string {
 }
 
 func (m *model) updateViewportContent() {
+	m.applyTheme()
 	switch m.activeItem {
 	case "Blog":
 		content := formatBlogPosts(m.blogPosts, m.blogFetchError, m.blogLoading, m.viewport.Width)
@@ -1279,6 +1657,7 @@ func (m model) tabsView() string {
 }
 
 func (m model) View() string {
+	m.applyTheme()
 	if m.quitting {
 		msg := "Thanks for visiting!\n\nFeel free to check out the website: https://rcht.dev\n\nBye! 👋\n"
 		return lipgloss.NewStyle().
@@ -1340,6 +1719,12 @@ func teaHandler(s ssh.Session) (tea.Model, []tea.ProgramOption) {
 	// Track session start
 	trackSessionStart(sessionID, user, ip, clientVersion, terminalType, width, height)
 
+	// Enable mouse tracking - DECSET mode 1000 (basic), 1002 (cell motion), 1006 (SGR)
+	// These need to be sent to the PTY to enable mouse reporting in xterm-compatible terminals
+	fmt.Fprintf(pty.Slave, "\x1b[?1000h")
+	fmt.Fprintf(pty.Slave, "\x1b[?1002h")
+	fmt.Fprintf(pty.Slave, "\x1b[?1006h")
+
 	m := initialModel(r)
 	m.sessionID = sessionID
 	m.startTime = time.Now()
@@ -1353,7 +1738,7 @@ func teaHandler(s ssh.Session) (tea.Model, []tea.ProgramOption) {
 
 	return m, []tea.ProgramOption{
 		tea.WithAltScreen(),
-		// tea.WithMouseCellMotion(), // Disable mouse capture to allow native link clicking
+		tea.WithMouseCellMotion(),
 		tea.WithInput(pty.Slave),
 		tea.WithOutput(pty.Slave),
 	}
@@ -1462,6 +1847,7 @@ func trackEvent(sessionID, eventType, tabName string) {
 
 func main() {
 	initAnalytics()
+	warmBlogCacheOnStartup()
 
 	port := getPort()
 	s, err := wish.NewServer(

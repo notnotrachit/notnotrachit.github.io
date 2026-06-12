@@ -64,8 +64,7 @@ export const projects: Project[] = [
 		title: "Sharepal",
 		shortDescription: "Group Expense Splitting App",
 		description: "A simple group expense splitting platform.",
-		image:
-			"https://fra.cloud.appwrite.io/v1/storage/buckets/647080af0e056dcab189/files/687e7c4d002b3f558a00/view?project=64707ef1e67c12fddb64&mode=admin",
+		image: "https://utfs.io/f/9O0rMFCPJMcpFRi8Dglk5yu76GRCelsc8BANFhofn12vZJbx",
 		link: null,
 		github: "https://github.com/notnotrachit/sharepal",
 		techStack: ["GoLang", "React Native", "MongoDB", "S3"],
@@ -123,8 +122,7 @@ export const projects: Project[] = [
 		title: "DevCompete",
 		shortDescription: "1v1 Coding Contests",
 		description: "A 1v1 Coding Contest Platform.",
-		image:
-			"https://cloud.appwrite.io/v1/storage/buckets/647080af0e056dcab189/files/656f04bc080d4cf614d6/view?project=64707ef1e67c12fddb64&mode=admin",
+		image: "https://utfs.io/f/9O0rMFCPJMcpKjoG8Nd3gypkwqlJiHeG6ZDuzvbU2RdaofQF",
 		link: null,
 		github: "https://github.com/notnotrachit/devcompete",
 		techStack: ["Python", "Django", "Azure", "MySQL", "Redis"],
