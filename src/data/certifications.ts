@@ -22,6 +22,15 @@ export const certifications: Certification[] = [
 	},
 	{
 		id: 2,
+		name: "Microsoft Certified: Azure Fundamentals",
+		issuingAuthority: "Microsoft",
+		issuedOn: "2024-05-21",
+		credentialUrl:
+			"https://learn.microsoft.com/api/credentials/share/en-us/rachitkhurana/2F60BD77D3400407?sharingId=D0D3E854FCDD3D94",
+		verified: true,
+	},
+	{
+		id: 3,
 		name: "Google IT Automation with Python",
 		issuingAuthority: "Grow With Google",
 		issuedOn: "2023-04-04",
@@ -30,7 +39,7 @@ export const certifications: Certification[] = [
 		verified: true,
 	},
 	{
-		id: 3,
+		id: 4,
 		name: "Introduction to Computers and Operating Systems and Security",
 		issuingAuthority: "Microsoft",
 		issuedOn: "2024-02-19",
@@ -39,7 +48,7 @@ export const certifications: Certification[] = [
 		verified: true,
 	},
 	{
-		id: 4,
+		id: 5,
 		name: "The Bits and Bytes of Computer Networking",
 		issuingAuthority: "Google",
 		issuedOn: "2024-02-21",

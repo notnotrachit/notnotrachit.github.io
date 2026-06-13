@@ -32,7 +32,7 @@ export function Education() {
 		<section id="education" className="py-24 md:py-32 relative">
 			<div className="container mx-auto px-6 md:px-12 max-w-7xl">
 				<SectionHeader
-					number="05."
+					number="07."
 					label="LEARNING PATH"
 					title="Education"
 					description="Academic background and professional certifications."

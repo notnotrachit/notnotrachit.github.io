@@ -1,13 +1,13 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { BackgroundParallax } from "../components/ui/BackgroundParallax";
 import { About } from "../components/sections/About";
 import { Achievements } from "../components/sections/Achievements";
-import { Contact } from "../components/sections/Contact";
+import { CurrentWork } from "../components/sections/CurrentWork";
 import { Education } from "../components/sections/Education";
 import { Experience } from "../components/sections/Experience";
 import { Hero } from "../components/sections/Hero";
 import { Projects } from "../components/sections/Projects";
 import { Skills } from "../components/sections/Skills";
+import { BackgroundParallax } from "../components/ui/BackgroundParallax";
 import { Footer } from "../components/ui/Footer";
 
 export const Route = createFileRoute("/")({
@@ -21,6 +21,7 @@ function Home() {
 			<div className="relative z-10">
 				<Hero />
 				<About />
+				<CurrentWork />
 				<Skills />
 				<Experience />
 				<Projects />

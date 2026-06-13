@@ -110,11 +110,7 @@ export function Skills() {
 	return (
 		<section id="skills" className="py-8 md:py-24 relative">
 			<div className="container mx-auto px-6 md:px-12 max-w-7xl">
-				<SectionHeader
-					number="02."
-					label="SKILLS"
-					title="Skills & Tools"
-				/>
+				<SectionHeader number="03." label="SKILLS" title="Skills & Tools" />
 
 				<div className="grid lg:grid-cols-2 gap-16 items-center">
 					{/* Skill Lists */}

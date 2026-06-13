@@ -45,7 +45,7 @@ export function Projects() {
 
 			<div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
 				<SectionHeader
-					number="04."
+					number="05."
 					label="SELECTED WORKS"
 					title="Projects"
 					description="Featured projects showcasing my expertise in full-stack development, Web3, and building scalable solutions."

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Briefcase, Users } from "lucide-react";
-import { experience, type ExperienceItem } from "../../data/experience";
+import { type ExperienceItem, experience } from "../../data/experience";
 import { SectionHeader } from "../ui/SectionHeader";
 
 export function Experience() {
@@ -97,7 +97,7 @@ export function Experience() {
 
 			<div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
 				<SectionHeader
-					number="03."
+					number="04."
 					label="EXPERIENCE"
 					title="Experience"
 					description="My professional journey and community involvement, building scalable solutions and fostering tech communities."

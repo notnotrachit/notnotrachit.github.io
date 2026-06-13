@@ -34,7 +34,7 @@ export function Achievements() {
 		>
 			<div className="container mx-auto px-6 md:px-12 max-w-7xl relative z-10">
 				<SectionHeader
-					number="05."
+					number="06."
 					label="HALL OF FAME"
 					title="Achievements"
 					description="Recognition for my skills in competitive programming and hackathons."
@@ -83,14 +83,15 @@ export function Achievements() {
 										)}
 									</div>
 
-									{(achievement.teammates && achievement.teammates.length > 0) && (
-										<div className="flex items-start gap-2 pt-2 md:pt-3 border-t border-white/5 mt-1 md:mt-2 hidden md:flex">
-											<Users className="w-4 h-4 text-neutral-500 mt-0.5" />
-											<p className="text-xs text-neutral-400 leading-relaxed line-clamp-1">
-												with {achievement.teammates.join(", ")}
-											</p>
-										</div>
-									)}
+									{achievement.teammates &&
+										achievement.teammates.length > 0 && (
+											<div className="flex items-start gap-2 pt-2 md:pt-3 border-t border-white/5 mt-1 md:mt-2 hidden md:flex">
+												<Users className="w-4 h-4 text-neutral-500 mt-0.5" />
+												<p className="text-xs text-neutral-400 leading-relaxed line-clamp-1">
+													with {achievement.teammates.join(", ")}
+												</p>
+											</div>
+										)}
 								</div>
 							</div>
 						</motion.div>

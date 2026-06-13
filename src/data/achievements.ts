@@ -26,7 +26,6 @@ export const achievements: Achievement[] = [
 		id: 3,
 		title: "Hedera Hello Future Hackathon",
 		award: "2nd Runner Up in AI Track",
-		subAward: "Fuelling Women's Innovation in Web3",
 		image: "/achievements/hedera.png",
 		teammates: [
 			"Yash Raj",
