@@ -22,6 +22,7 @@ export function Navbar() {
 		{ name: "Skills", href: "#skills" },
 		{ name: "Experience", href: "#experience" },
 		{ name: "Work", href: "#projects" },
+		{ name: "Blogs", href: "https://blog.rachitkhurana.tech" },
 		// { name: "Contact", href: "#contact" },
 	];
 
@@ -29,12 +30,17 @@ export function Navbar() {
 		e: React.MouseEvent<HTMLAnchorElement>,
 		href: string,
 	) => {
-		e.preventDefault();
 		setIsOpen(false);
+
+		if (!href.startsWith("#")) {
+			return;
+		}
+
+		e.preventDefault();
 
 		// If not on home page, navigate to home with the hash
 		if (location.pathname !== "/") {
-			navigate({ to: "/" + href });
+			navigate({ to: `/${href}` });
 			return;
 		}
 
