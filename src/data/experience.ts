@@ -13,11 +13,30 @@ export const experience: ExperienceItem[] = [
 	{
 		id: 1,
 		company: "Hyathi Technologies",
-		role: "Full Stack & Web3 Developer Intern",
-		period: "Dec 2024 - Present",
+		role: "Full Stack & Innovations Engineer",
+		period: "Jul 2026 - Present",
 		logo: "/logos/hyathi.jpeg",
 		description:
-			"Working on a variety of projects involving Full Stack and Web3 technologies for enterprise clients.",
+			"Building innovative software solutions for enterprise clients, bringing ideas to life through full-stack engineering and emerging technologies.",
+		type: "work",
+		technologies: [
+			"React",
+			"Next.js",
+			"Node.js",
+			"Rust",
+			"Tauri",
+			"Solidity",
+			"Python",
+		],
+	},
+	{
+		id: 7,
+		company: "Hyathi Technologies",
+		role: "Full Stack & Web3 Developer Intern",
+		period: "Dec 2024 - Jul 2026",
+		logo: "/logos/hyathi.jpeg",
+		description:
+			"Worked on a variety of projects involving Full Stack and Web3 technologies for enterprise clients.",
 		type: "work",
 		technologies: [
 			"React",

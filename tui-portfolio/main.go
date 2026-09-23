@@ -427,8 +427,14 @@ I'm **Rachit Khurana**, a Full Stack Engineer passionate about building scalable
 ## 💼 Work Experience
 
 ### **Hyathi Technologies**
-*Full Stack & Web3 Developer Intern* (Dec 2024 - Present)
-Working on a variety of projects involving Full Stack and Web3 technologies for enterprise clients.
+*Full Stack & Innovations Engineer* (Jul 2026 - Present)
+Building innovative software solutions for enterprise clients, bringing ideas to life through full-stack engineering and emerging technologies.
+
+**Tech:** React, Next.js, Node.js, Rust, Tauri, Solidity, Python
+
+### **Hyathi Technologies**
+*Full Stack & Web3 Developer Intern* (Dec 2024 - Jul 2026)
+Worked on a variety of projects involving Full Stack and Web3 technologies for enterprise clients.
 
 **Tech:** React, Next.js, Node.js, Rust, Tauri, Solidity, Python
 
@@ -1400,9 +1406,16 @@ func formatExperienceContent(width int) string {
 	}{
 		{
 			company: "Hyathi Technologies",
+			role:    "Full Stack & Innovations Engineer",
+			period:  "Jul 2026 - Present",
+			desc:    "Building innovative software solutions for enterprise clients, bringing ideas to life through full-stack engineering and emerging technologies.",
+			tech:    []string{"React", "Next.js", "Node.js", "Rust", "Tauri", "Solidity", "Python"},
+		},
+		{
+			company: "Hyathi Technologies",
 			role:    "Full Stack & Web3 Developer Intern",
-			period:  "Dec 2024 - Present",
-			desc:    "Working on a variety of projects involving Full Stack and Web3 technologies for enterprise clients.",
+			period:  "Dec 2024 - Jul 2026",
+			desc:    "Worked on a variety of projects involving Full Stack and Web3 technologies for enterprise clients.",
 			tech:    []string{"React", "Next.js", "Node.js", "Rust", "Tauri", "Solidity", "Python"},
 		},
 		{

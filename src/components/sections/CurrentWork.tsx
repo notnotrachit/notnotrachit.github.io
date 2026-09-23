@@ -139,7 +139,7 @@ export function CurrentWork() {
 								</span>
 								<span className="h-px w-10 bg-cyan-500/40" />
 								<span className="font-mono text-xs uppercase tracking-[0.22em] text-neutral-500">
-									Internship project
+									Full-time role
 								</span>
 							</div>
 
